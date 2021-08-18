@@ -26,9 +26,9 @@ workflows:
           dockerfile: Dockerfile.alpine
           image: twdps/circleci-base-image
           tag: alpine-edge
+          cis-docker-image-scan: true
           docker-cve-scan: true
           snyk-organization: twdps
-          cis-docker-image-scan: true
           skip-base-image: true
           bats-test: true
           test-path: test/circleci_base_image_alpine.bats
@@ -59,8 +59,11 @@ workflows:
           dockerfile: Dockerfile.slim
           image: twdps/circleci-base-image
           tag: slim-edge
+          cis-docker-image-scan: true
           docker-cve-scan: true
+          severity-threshold: medium
           snyk-organization: twdps
+          skip-base-image: true
           bats-test: true
           test-path: test/circleci_base_image_slim.bats
           container-name: circleci-base-image-slim-edge
