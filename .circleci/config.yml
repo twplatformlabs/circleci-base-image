@@ -38,7 +38,7 @@ workflows:
                 name: inject environment variables
                 command: |
                   secrethub inject -i secrethub.env -o $BASH_ENV
-                  source $BASH_ENV  
+                  source $BASH_ENV
           filters: *on-push-main
           
       - executor-tools/publish:
