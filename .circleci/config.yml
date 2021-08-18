@@ -70,6 +70,9 @@ workflows:
                 command: |
                   secrethub inject -i secrethub.env -o $BASH_ENV
                   source $BASH_ENV
+            - run:
+                name: debug
+                command: echo ${SNYK_TOKEN:0:4}
           filters: *on-push-main
           
       - executor-tools/publish:
