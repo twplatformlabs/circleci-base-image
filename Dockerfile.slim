@@ -18,12 +18,12 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen && locale-gen && \
     useradd --uid=3434 --user-group --create-home circleci && usermod --shell /bin/bash circleci && \
     echo 'circleci ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
-    sudo -u circleci mkdir /home/circleci/project && \
+    sudo -u circleci mkdir /home/circleci/project
 
 ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
-	LANG=en_US.UTF-8 \
-	LANGUAGE=en_US:en \
-	LC_ALL=en_US.UTF-8
+	 LANG=en_US.UTF-8 \
+	 LANGUAGE=en_US:en \
+	 LC_ALL=en_US.UTF-8
 
 USER circleci
 
