@@ -69,7 +69,7 @@ workflows:
                 name: inject environment variables
                 command: |
                   secrethub inject -i secrethub.env >> $BASH_ENV
-                  ## source $BASH_ENV
+                  ## source $BASH_ENV  
           filters: *on-push-main
           
       - executor-tools/publish:
