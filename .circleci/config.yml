@@ -59,6 +59,8 @@ workflows:
           dockerfile: Dockerfile.slim
           image: twdps/circleci-base-image
           tag: slim-edge
+          docker-cve-scan: true
+          snyk-organization: twdps
           bats-test: true
           test-path: test/circleci_base_image_slim.bats
           container-name: circleci-base-image-slim-edge
