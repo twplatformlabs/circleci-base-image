@@ -85,49 +85,56 @@ workflows:
           release-tag: slim-stable
           filters: *on-tag-main  
 
-  # builds nightly from .unpinned Dockerfile in order to test the latest base image and installed packages
-  # di-circleci-base-image-nightly-build:
-  #   triggers:
-  #     - schedule:
-  #         cron: "0 0 * * 0"
-  #         filters:
-  #           branches:
-  #             only:
-  #               - master
-  #   jobs:
-  #     - executor-tools/machine-executor-dev-release:
-  #         name: nightly-alpine-build
-  #         context: twdps-di
-  #         dockerfile: Dockerfile.alpine.unpinned
-  #         image: twdps/di-circleci-base-image
-  #         tag: alpine-nightly
-  #         docker-cve-scan: false
-  #         snyk-organization: twdps
-  #         cis-docker-image-scan: true
-  #         skip-base-image: true
-  #         bats-test: true
-  #         test-path: test/di_circleci_base_image_alpine.bats
-  #         container-name: di-circleci-base-image-alpine-edge
-  #         after-checkout:
-  #           - run:
-  #               name: inject environment variables
-  #               command: |
-  #                 secrethub inject -i secrethub.env -o $BASH_ENV
-  #                 source $BASH_ENV
+  # builds once a month from .unpinned Dockerfile in order to test for new package releases
+  circleci-base-image-nightly-build:
+    triggers:
+      - schedule:
+          cron: "0 0 1 * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - executor-tools/machine-executor-dev-release:
+          name: alpine-nightly-build
+          context: twdps-di
+          dockerfile: Dockerfile.alpine
+          image: twdps/circleci-base-image
+          tag: alpine-nightly
+          cis-docker-image-scan: true
+          docker-cve-scan: true
+          snyk-organization: twdps
+          skip-base-image: true
+          bats-test: true
+          test-path: test/circleci_base_image_alpine.bats
+          container-name: circleci-base-image-alpine-edge
+          after-checkout:
+            - run:
+                name: inject environment variables
+                command: |
+                  secrethub inject -i secrethub.env -o $BASH_ENV
+                  source $BASH_ENV
+          filters: *on-push-main
 
-  #     - executor-tools/machine-executor-dev-release:
-  #         name: slim-nightly-build
-  #         context: twdps-di
-  #         dockerfile: Dockerfile.slim.unpinned
-  #         image: twdps/di-circleci-base-image
-  #         tag: slim-nightly
-  #         bats-test: true
-  #         test-path: test/di_circleci_base_image_slim.bats
-  #         container-name: di-circleci-base-image-slim-edge
-  #         after-checkout:
-  #           - run:
-  #               name: inject environment variables
-  #               command: |
-  #                 secrethub inject -i secrethub.env -o $BASH_ENV
-  #                 source $BASH_ENV
+      - executor-tools/machine-executor-dev-release:
+          name: slim-nightly-build
+          context: twdps-di
+          dockerfile: Dockerfile.slim
+          image: twdps/circleci-base-image
+          tag: slim-nightly
+          cis-docker-image-scan: true
+          docker-cve-scan: true
+          severity-threshold: medium
+          snyk-organization: twdps
+          skip-base-image: true
+          bats-test: true
+          test-path: test/circleci_base_image_slim.bats
+          container-name: circleci-base-image-slim-edge
+          after-checkout:
+            - run:
+                name: inject environment variables
+                command: |
+                  secrethub inject -i secrethub.env -o $BASH_ENV
+                  source $BASH_ENV  
+          filters: *on-push-main
 

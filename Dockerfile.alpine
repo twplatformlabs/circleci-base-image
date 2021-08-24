@@ -1,5 +1,5 @@
 FROM twdps/circleci-remote-docker:alpine-2021.08
-# hadolint ignore=DL3003,DL3004,DL4001,DL3047
+
 LABEL maintainer=<nchenewe@thoughtworks.com>
 
 # hadolint ignore=DL3044
