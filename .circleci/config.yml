@@ -93,7 +93,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
     jobs:
       - executor-tools/machine-executor-dev-release:
           name: alpine-nightly-build
@@ -107,7 +107,7 @@ workflows:
           skip-base-image: true
           bats-test: true
           test-path: test/circleci_base_image_alpine.bats
-          container-name: circleci-base-image-alpine-edge
+          container-name: circleci-base-image-alpine-nightly
           after-checkout:
             - run:
                 name: inject environment variables
@@ -129,7 +129,7 @@ workflows:
           skip-base-image: true
           bats-test: true
           test-path: test/circleci_base_image_slim.bats
-          container-name: circleci-base-image-slim-edge
+          container-name: circleci-base-image-slim-nightly
           after-checkout:
             - run:
                 name: inject environment variables
