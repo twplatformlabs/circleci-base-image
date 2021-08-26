@@ -31,7 +31,7 @@ RUN apk add --no-cache \
     make && make install && \
     cd .. && rm -r musl-locales-master && \
     apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted \
-        secrethub-cli==0.42.1-r0 && \
+        secrethub-cli==0.43.0-r0 && \
     addgroup --gid 3434 -S $USER && \
     adduser --uid 3434 --ingroup $USER --disabled-password $USER && \
     echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER && \

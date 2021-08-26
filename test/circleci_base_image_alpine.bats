@@ -17,7 +17,7 @@
 
 @test "secrethub version" {
   run bash -c "docker exec circleci-base-image-alpine-edge secrethub --version"
-  [[ "${output}" =~ "0.42.1" ]]
+  [[ "${output}" =~ "0.43.0" ]]
 }
 
 @test "describe user circleci" {

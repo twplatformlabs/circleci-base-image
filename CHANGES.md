@@ -1,3 +1,25 @@
+## 08-26-2021 package updates in circleci-base-image: 3.1.0
+
+^changes
+
+FROM twdps/circleci-remote-docker:alpine-2021.08  
+
+| package         | version      |
+|-----------------|--------------|
+| sudo            | 1.9.7_p1-r1  |
+| bash            | 5.1.4-r0     |
+| libintl         | 0.21-r0      |
+| musl-locales    | master       |
+| secrethub-cli   | 0.43.0-r0^   |
+
+FROM twdps/circleci-remote-docker:slim-2021.08    
+
+| package         | version      |
+|-----------------|--------------|
+| sudo            | 1.9.5p2-3    |
+| locales         | 2.31-13^     |
+| secrethub-cli   | 0.43.0       |
+
 ## 08-17-2021 convenience image organizational change in circleci-base-image:3.0.0
 
 Contents of base image reduced to strictly those things that must be part of every  
