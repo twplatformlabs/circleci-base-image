@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:alpine-2021.08.2
+FROM twdps/circleci-remote-docker:alpine-2021.09
 
 LABEL maintainer=<nchenewe@thoughtworks.com>
 
