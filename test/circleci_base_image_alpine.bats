@@ -7,7 +7,7 @@
 
 @test "bash version" {
   run bash -c "docker exec circleci-base-image-alpine-edge bash --version"
-  [[ "${output}" =~ "5.1.4" ]]
+  [[ "${output}" =~ "5.1.8" ]]
 }
 
 @test "check locale" {

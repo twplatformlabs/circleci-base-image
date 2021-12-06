@@ -1,4 +1,26 @@
-## 11-11-2021 base image and package updates in circleci-base-image: 3.1.4
+## 12-06-2021 base image and package updates in circleci-base-image: 3.1.4
+
+^changes
+
+FROM twdps/circleci-remote-docker:alpine-2021.12^  
+
+| package         | version      |
+|-----------------|--------------|
+| sudo            | 1.9.8_p2-r1^ |
+| bash            | 5.1.8-r0^    |
+| libintl         | 0.21-r0      |
+| musl-locales    | master       |
+| secrethub-cli   | 0.43.0-r0    |
+
+FROM twdps/circleci-remote-docker:slim-2021.12^    
+
+| package         | version      |
+|-----------------|--------------|
+| sudo            | 1.9.5p2-3    |
+| locales         | 2.32-5^      |
+| secrethub-cli   | 0.43.0       |
+
+## 11-11-2021 base image and package updates in circleci-base-image: 3.1.3
 
 ^changes
 
