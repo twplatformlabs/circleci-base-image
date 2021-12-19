@@ -22,4 +22,4 @@ The labs circleci-base-image is an example of such a common executor base. You w
 
 Keep in mind that the shared configuration made to the executor base is intended for configuration that must be available in every executor, regardless of the role or purpose of the executor.  
 
-See CHANGES.md for detailed version information.  
+See release notes for detailed version information.  

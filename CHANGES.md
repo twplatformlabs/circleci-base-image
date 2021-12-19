@@ -1,3 +1,7 @@
+## 12-19-2021 Add automated release note generation
+
+CHANGES.md deprecated. See release notes and Dockerfiles for current package versions and configuration.  
+
 ## 12-06-2021 base image and package updates in circleci-base-image: 3.1.4
 
 ^changes
