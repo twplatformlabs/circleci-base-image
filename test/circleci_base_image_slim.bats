@@ -2,7 +2,7 @@
 
 @test "sudo version" {
   run bash -c "docker exec circleci-base-image-slim-edge sudo --version"
-  [[ "${output}" =~ "1.9.9" ]]
+  [[ "${output}" =~ "1.9.10" ]]
 }
 
 @test "check locale" {
