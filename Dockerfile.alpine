@@ -15,7 +15,7 @@ SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3003,DL3004
 RUN apk add --no-cache \
         sudo==1.9.8_p2-r1 \
-        libintl==0.21-r1 \
+        libintl==0.21-r0 \
         bash==5.1.16-r0 && \
     apk --no-cache add --virtual build-dependencies \
         cmake==3.21.3-r0 \
