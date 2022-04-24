@@ -13,10 +13,10 @@
 Within most teams or organizations every executor image will require certain amount of configuration regardless of the build purpose for which it is designed.  
 
 Packages that typically fall into this set of shared executor requirements include things like:  
-- USER definition and filesystem customization
-- tool for accessing secrets (Vault, chamber, secrethub)
-- standard shell (bash, zsh)
-- multi-language support (locales)
+- USER definition and filesystem customization  
+- tool for accessing secrets (Vault, chamber, secrethub)  
+- standard shell (bash, zsh)  
+- multi-language support (locales)  
 
 The labs circleci-base-image is an example of such a common executor base. You will see the labs specific tools and configuration, but this can readily be adapted to any organizational requirements.  
 
