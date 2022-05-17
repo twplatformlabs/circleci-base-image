@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:slim-2022.04.1
+FROM twdps/circleci-remote-docker:slim-2022.05
 
 LABEL maintainer=<nchenewe@thoughtworks.com>
 
@@ -12,7 +12,16 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     apt-get install --no-install-recommends -y \
             sudo=1.9.10-3 \
             locales=2.33-7 \
+            curl=7.83.1-1+b1 \
+            gnupg=2.2.35-2 \
             secrethub-cli=0.44.0 && \
+    curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" | sudo tee /etc/apt/sources.list.d/1password.list && \
+    sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/ && \
+    curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol && \
+    sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22 && \
+    curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg && \
+    sudo apt update && sudo apt install 1password-cli=2.2.0 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen && locale-gen && \

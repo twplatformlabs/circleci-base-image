@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:alpine-2022.04.1
+FROM twdps/circleci-remote-docker:alpine-2022.05
 
 LABEL maintainer=<nchenewe@thoughtworks.com>
 
@@ -15,6 +15,7 @@ SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3003,DL3004
 RUN apk add --no-cache \
         sudo==1.9.8_p2-r1 \
+        wget==1.21.2-r2 \
         libintl==0.21-r0 \
         bash==5.1.16-r0 && \
     apk --no-cache add --virtual build-dependencies \
@@ -32,6 +33,9 @@ RUN apk add --no-cache \
     cd .. && rm -r musl-locales-master && \
     apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted \
         secrethub-cli==0.44.0-r0 && \
+    sudo bash -c "echo https://downloads.1password.com/linux/alpinelinux/stable/ >> /etc/apk/repositories" && \
+    sudo bash -c "wget https://downloads.1password.com/linux/keys/alpinelinux/support@1password.com-61ddfc31.rsa.pub -P /etc/apk/keys" && \
+    sudo apk update && sudo apk add --no-cache 1password-cli==2.2.0-r1 && \
     addgroup --gid 3434 -S $USER && \
     adduser --uid 3434 --ingroup $USER --disabled-password $USER && \
     echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER && \
