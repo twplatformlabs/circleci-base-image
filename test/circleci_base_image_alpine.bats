@@ -10,6 +10,16 @@
   [[ "${output}" =~ "5.1.16" ]]
 }
 
+@test "curl version" {
+  run bash -c "docker exec circleci-base-image-alpine-edge curl --version"
+  [[ "${output}" =~ "7.83.1" ]]
+}
+
+@test "wget version" {
+  run bash -c "docker exec circleci-base-image-alpine-edge wget --version"
+  [[ "${output}" =~ "1.21.3" ]]
+}
+
 @test "check locale" {
   run bash -c "docker exec circleci-base-image-alpine-edge locale"
   [[ "${output}" =~ "LC_ALL=en_US.UTF-8" ]]
@@ -18,6 +28,16 @@
 @test "secrethub version" {
   run bash -c "docker exec circleci-base-image-alpine-edge secrethub --version"
   [[ "${output}" =~ "0.44.0" ]]
+}
+
+@test "1password version" {
+  run bash -c "docker exec circleci-base-image-alpine-edge op --version"
+  [[ "${output}" =~ "2.4.0" ]]
+}
+
+@test "opw version" {
+  run bash -c "docker exec circleci-base-image-alpine-edge opw version"
+  [[ "${output}" =~ "0.0.5" ]]
 }
 
 @test "describe user circleci" {
