@@ -65,4 +65,8 @@ ignore:
     - gnupg2/gnupg@2.2.35-2 > gnupg2/dirmngr@2.2.35-2 > adduser@3.121 > shadow/passwd@1:4.11.1+dfsg1-2 > pam/libpam-modules@1.4.0-13 > db5.3/libdb5.3@5.3.28+dfsg1-0.8:
       reason: Out-of-bounds Read
       expires: '2022-08-01T14:26:34.404Z'
+  SNYK-DEBIANUNSTABLE-WGET-1277613:
+    - wget/wget@1.21.3-1+b2:
+      reason: Open Redirect
+      expires: '2022-08-01T14:26:34.404Z'
 patch: {}
