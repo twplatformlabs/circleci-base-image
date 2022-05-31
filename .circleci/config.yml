@@ -159,4 +159,3 @@ workflows:
                   op inject -i op.env -o $BASH_ENV
                   source $BASH_ENV  
           filters: *on-push-main
-
