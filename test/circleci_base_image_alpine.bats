@@ -37,7 +37,7 @@
 
 @test "opw version" {
   run bash -c "docker exec circleci-base-image-alpine-edge opw version"
-  [[ "${output}" =~ "0.0.5" ]]
+  [[ "${output}" =~ "0.0.7" ]]
 }
 
 @test "describe user circleci" {
