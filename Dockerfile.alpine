@@ -37,8 +37,8 @@ RUN apk add --no-cache \
     sudo bash -c "echo https://downloads.1password.com/linux/alpinelinux/stable/ >> /etc/apk/repositories" && \
     sudo bash -c "wget https://downloads.1password.com/linux/keys/alpinelinux/support@1password.com-61ddfc31.rsa.pub -P /etc/apk/keys" && \
     sudo apk update && sudo apk add --no-cache 1password-cli==2.4.0-r2 && \
-    curl -SLO https://github.com/ThoughtWorks-DPS/opw/releases/download/0.0.7/opw_0.0.7_Linux_x86_64.tar.gz && \
-    tar -xzf opw_0.0.7_Linux_x86_64.tar.gz && \
+    curl -SLO https://github.com/ThoughtWorks-DPS/opw/releases/latest/download/opw_Linux_x86_64.tar.gz && \
+    tar -xzf opw_Linux_x86_64.tar.gz && \
     sudo mv opw /usr/local/bin/opw && \
     addgroup --gid 3434 -S $USER && \
     adduser --uid 3434 --ingroup $USER --disabled-password $USER && \
