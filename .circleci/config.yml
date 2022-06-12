@@ -62,10 +62,6 @@ workflows:
           tag-annotation: alpine-
           image: twdps/circleci-base-image
           release-tag: alpine-stable
-          after-publish:
-            - do/slack-webhook:
-                message: circleci-base-image:alpine-$CIRCLE_TAG
-                webhook-url: $LAB_EVENTS_CHANNEL_WEBHOOK
           filters: *on-tag-main        
 
   slim-image-pipeline:
@@ -97,10 +93,6 @@ workflows:
           tag-annotation: slim-
           image: twdps/circleci-base-image
           release-tag: slim-stable
-          after-publish:
-            - do/slack-webhook:
-                message: circleci-base-image:slim-$CIRCLE_TAG
-                webhook-url: $LAB_EVENTS_CHANNEL_WEBHOOK
           filters: *on-tag-main  
 
   generate-release-notes:
