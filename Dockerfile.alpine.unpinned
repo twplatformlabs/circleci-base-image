@@ -12,9 +12,11 @@ ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
 ENV USER=circleci
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
-# hadolint ignore=DL3003,DL3004,DL3018
+# hadolint ignore=DL3003,DL3004,DL4001
 RUN apk add --no-cache \
         sudo \
+        wget \
+        curl \
         libintl \
         bash && \
     apk --no-cache add --virtual build-dependencies \
@@ -31,7 +33,13 @@ RUN apk add --no-cache \
     make && make install && \
     cd .. && rm -r musl-locales-master && \
     apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted \
-        secrethub-cli && \
+        secrethub-cli==0.44.0-r0 && \
+    sudo bash -c "echo https://downloads.1password.com/linux/alpinelinux/stable/ >> /etc/apk/repositories" && \
+    sudo bash -c "wget https://downloads.1password.com/linux/keys/alpinelinux/support@1password.com-61ddfc31.rsa.pub -P /etc/apk/keys" && \
+    sudo apk update && sudo apk add --no-cache 1password-cli && \
+    curl -SLO https://github.com/ThoughtWorks-DPS/opw/releases/latest/download/opw_Linux_x86_64.tar.gz && \
+    tar -xzf opw_Linux_x86_64.tar.gz && \
+    sudo mv opw /usr/local/bin/opw && \
     addgroup --gid 3434 -S $USER && \
     adduser --uid 3434 --ingroup $USER --disabled-password $USER && \
     echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER && \
