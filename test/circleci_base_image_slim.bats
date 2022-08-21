@@ -2,12 +2,12 @@
 
 @test "sudo version" {
   run bash -c "docker exec circleci-base-image-slim-edge sudo --version"
-  [[ "${output}" =~ "1.9.10" ]]
+  [[ "${output}" =~ "1.9.11" ]]
 }
 
 @test "curl version" {
   run bash -c "docker exec circleci-base-image-slim-edge curl --version"
-  [[ "${output}" =~ "7.83.1" ]]
+  [[ "${output}" =~ "7.84.0" ]]
 }
 
 @test "wget version" {
@@ -27,7 +27,7 @@
 
 @test "1password version" {
   run bash -c "docker exec circleci-base-image-slim-edge op --version"
-  [[ "${output}" =~ "2.4.1" ]]
+  [[ "${output}" =~ "2.6.2" ]]
 }
 
 @test "opw version" {
