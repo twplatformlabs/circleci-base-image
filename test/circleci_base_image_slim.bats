@@ -7,7 +7,7 @@
 
 @test "curl version" {
   run bash -c "docker exec circleci-base-image-slim-edge curl --version"
-  [[ "${output}" =~ "7.84.0" ]]
+  [[ "${output}" =~ "7.85.0" ]]
 }
 
 @test "wget version" {
@@ -20,14 +20,9 @@
   [[ "${output}" =~ "LC_ALL=en_US.UTF-8" ]]
 }
 
-@test "secrethub version" {
-  run bash -c "docker exec circleci-base-image-slim-edge secrethub --version"
-  [[ "${output}" =~ "0.44.0" ]]
-}
-
 @test "1password version" {
   run bash -c "docker exec circleci-base-image-slim-edge op --version"
-  [[ "${output}" =~ "2.6.2" ]]
+  [[ "${output}" =~ "2.7.1" ]]
 }
 
 @test "opw version" {

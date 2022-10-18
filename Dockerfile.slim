@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:slim-2022.08
+FROM twdps/circleci-remote-docker:slim-2022.10
 
 LABEL maintainer=<nchenewe@thoughtworks.com>
 
@@ -8,21 +8,19 @@ SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
 # hadolint ignore=DL4001,DL3004,DL3047
 RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90circleci && \
-    echo "deb [trusted=yes] https://apt.secrethub.io stable main" > /etc/apt/sources.list.d/secrethub.sources.list && apt-get update && \
     apt-get install --no-install-recommends -y \
             sudo=1.9.11p3-1 \
-            locales=2.34-4 \
-            curl=7.84.0-2 \
+            locales=2.35-3 \
+            curl=7.85.0-1 \
             wget=1.21.3-1+b2 \
-            gnupg=2.2.35-3 \
-            secrethub-cli=0.44.0 && \
+            gnupg=2.2.39-1 && \
     curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg && \
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" | sudo tee /etc/apt/sources.list.d/1password.list && \
     sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/ && \
     curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol && \
     sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22 && \
     curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg && \
-    sudo apt update && sudo apt install 1password-cli=2.6.2-1 && \
+    sudo apt update && sudo apt install 1password-cli=2.7.1-1 && \
     curl -SLO https://github.com/ThoughtWorks-DPS/opw/releases/latest/download/opw_Linux_x86_64.tar.gz && \
     tar -xzf opw_Linux_x86_64.tar.gz && \
     sudo mv opw /usr/local/bin/opw && \

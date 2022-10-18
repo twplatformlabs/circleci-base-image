@@ -25,14 +25,9 @@
   [[ "${output}" =~ "LC_ALL=en_US.UTF-8" ]]
 }
 
-@test "secrethub version" {
-  run bash -c "docker exec circleci-base-image-alpine-edge secrethub --version"
-  [[ "${output}" =~ "0.44.0" ]]
-}
-
 @test "1password version" {
   run bash -c "docker exec circleci-base-image-alpine-edge op --version"
-  [[ "${output}" =~ "2.6.2" ]]
+  [[ "${output}" =~ "2.7.1" ]]
 }
 
 @test "opw version" {

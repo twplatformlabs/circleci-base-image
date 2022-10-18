@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:alpine-2022.08
+FROM twdps/circleci-remote-docker:alpine-2022.10
 
 LABEL maintainer=<nchenewe@thoughtworks.com>
 
@@ -16,7 +16,7 @@ SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 RUN apk add --no-cache \
         sudo==1.9.10-r0 \
         wget==1.21.3-r0 \
-        curl==7.83.1-r2 \
+        curl==7.83.1-r3 \
         libintl==0.21-r2 \
         bash==5.1.16-r2 && \
     apk --no-cache add --virtual build-dependencies \
@@ -32,11 +32,9 @@ RUN apk add --no-cache \
     cmake -DLOCALE_PROFILE=OFF -D CMAKE_INSTALL_PREFIX:PATH=/usr . && \
     make && make install && \
     cd .. && rm -r musl-locales-master && \
-    apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted \
-        secrethub-cli==0.44.0-r0 && \
     sudo bash -c "echo https://downloads.1password.com/linux/alpinelinux/stable/ >> /etc/apk/repositories" && \
     sudo bash -c "wget https://downloads.1password.com/linux/keys/alpinelinux/support@1password.com-61ddfc31.rsa.pub -P /etc/apk/keys" && \
-    sudo apk update && sudo apk add --no-cache 1password-cli==2.6.2-r1 && \
+    sudo apk update && sudo apk add --no-cache 1password-cli==2.7.1-r1 && \
     curl -SLO https://github.com/ThoughtWorks-DPS/opw/releases/latest/download/opw_Linux_x86_64.tar.gz && \
     tar -xzf opw_Linux_x86_64.tar.gz && \
     sudo mv opw /usr/local/bin/opw && \
