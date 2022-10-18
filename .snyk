@@ -2,10 +2,10 @@
 version: v1.22.0
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-  # SNYK-DEBIANUNSTABLE-WGET-1277613:
-  #   - wget/wget@1.21.3-1+b2:
-  #     reason: Open Redirect
-  #     expires: '2022-10-01T14:26:34.404Z'
+  SNYK-DEBIANUNSTABLE-WGET-1277613:
+    - wget/wget@1.21.3-1+b2:
+      reason: Open Redirect
+      expires: '2022-10-01T14:26:34.404Z'
   # SNYK-DEBIANUNSTABLE-E2FSPROGS-2628472:
   #   - e2fsprogs@1.46.5-2 > e2fsprogs/libcom-err2@1.46.5-2:
   #     reason: Out-of-bounds Read
