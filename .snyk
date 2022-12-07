@@ -2,10 +2,10 @@
 version: v1.22.0
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-  SNYK-DEBIANUNSTABLE-WGET-1277613:
-    - wget/wget@1.21.3-1+b2:
-      reason: Open Redirect
-      expires: '2022-10-01T14:26:34.404Z'
+  # SNYK-DEBIANUNSTABLE-WGET-1277613:
+  #   - wget/wget@1.21.3-1+b2:
+  #     reason: Open Redirect
+  #     expires: '2022-10-01T14:26:34.404Z'
   # SNYK-DEBIANUNSTABLE-E2FSPROGS-2628472:
   #   - e2fsprogs@1.46.5-2 > e2fsprogs/libcom-err2@1.46.5-2:
   #     reason: Out-of-bounds Read
@@ -40,35 +40,35 @@ ignore:
   #   - curl@7.84.0-2 > curl/libcurl4@7.84.0-2 > krb5/libgssapi-krb5-2@1.20-1 > krb5/libkrb5-3@1.20-1 > e2fsprogs/libcom-err2@1.46.5-2:
   #     reason: Out-of-bounds Read
   #     expires: '2022-10-01T14:26:34.404Z'
-  SNYK-DEBIANUNSTABLE-OPENSSL-3042471:
-    - openssh/openssh-server@1:9.0p1-1+b2 > openssl/libssl3@3.0.5-4:
-      reason: NULL Pointer Dereference
-      expires: '2022-12-01T14:26:34.404Z'
-    - ca-certificates@20211016 > openssl@3.0.5-4 > openssl/libssl3@3.0.5-4:
-      reason: NULL Pointer Dereference
-      expires: '2022-12-01T14:26:34.404Z'
-    - openssh/openssh-server@1:9.0p1-1+b2 > openssh/openssh-client@1:9.0p1-1+b2 > openssl/libssl3@3.0.5-4:
-      reason: NULL Pointer Dereference
-      expires: '2022-12-01T14:26:34.404Z'
-    - openssh/openssh-server@1:9.0p1-1+b2 > openssh/openssh-sftp-server@1:9.0p1-1+b2 > openssl/libssl3@3.0.5-4:
-      reason: NULL Pointer Dereference
-      expires: '2022-12-01T14:26:34.404Z'
-    - git@1:2.37.2-1 > curl/libcurl3-gnutls@7.85.0-1 > libssh2/libssh2-1@1.10.0-3+b1 > openssl/libssl3@3.0.5-4:
-      reason: NULL Pointer Dereference
-      expires: '2022-12-01T14:26:34.404Z'
-    - openssh/openssh-server@1:9.0p1-1+b2 > openssh/openssh-client@1:9.0p1-1+b2 > libfido2/libfido2-1@1.12.0-1 > openssl/libssl3@3.0.5-4:
-      reason: NULL Pointer Dereference
-      expires: '2022-12-01T14:26:34.404Z'
-    - git@1:2.37.2-1 > curl/libcurl3-gnutls@7.85.0-1 > krb5/libgssapi-krb5-2@1.20-1+b1 > krb5/libkrb5-3@1.20-1+b1 > openssl/libssl3@3.0.5-4:
-      reason: NULL Pointer Dereference
-      expires: '2022-12-01T14:26:34.404Z'
-    - curl@7.85.0-1 > curl/libcurl4@7.85.0-1 > openssl/libssl3@3.0.5-4:
-      reason: NULL Pointer Dereference
-      expires: '2022-12-01T14:26:34.404Z'
-    - curl@7.85.0-1 > curl/libcurl4@7.85.0-1 > libssh2/libssh2-1@1.10.0-3+b1 > openssl/libssl3@3.0.5-4:
-      reason: NULL Pointer Dereference
-      expires: '2022-12-01T14:26:34.404Z'
-    - curl@7.85.0-1 > curl/libcurl4@7.85.0-1 > krb5/libgssapi-krb5-2@1.20-1+b1 > krb5/libkrb5-3@1.20-1+b1 > openssl/libssl3@3.0.5-4:
-      reason: NULL Pointer Dereference
-      expires: '2022-12-01T14:26:34.404Z'
+  # SNYK-DEBIANUNSTABLE-OPENSSL-3042471:
+  #   - openssh/openssh-server@1:9.0p1-1+b2 > openssl/libssl3@3.0.5-4:
+  #     reason: NULL Pointer Dereference
+  #     expires: '2022-12-01T14:26:34.404Z'
+  #   - ca-certificates@20211016 > openssl@3.0.5-4 > openssl/libssl3@3.0.5-4:
+  #     reason: NULL Pointer Dereference
+  #     expires: '2022-12-01T14:26:34.404Z'
+  #   - openssh/openssh-server@1:9.0p1-1+b2 > openssh/openssh-client@1:9.0p1-1+b2 > openssl/libssl3@3.0.5-4:
+  #     reason: NULL Pointer Dereference
+  #     expires: '2022-12-01T14:26:34.404Z'
+  #   - openssh/openssh-server@1:9.0p1-1+b2 > openssh/openssh-sftp-server@1:9.0p1-1+b2 > openssl/libssl3@3.0.5-4:
+  #     reason: NULL Pointer Dereference
+  #     expires: '2022-12-01T14:26:34.404Z'
+  #   - git@1:2.37.2-1 > curl/libcurl3-gnutls@7.85.0-1 > libssh2/libssh2-1@1.10.0-3+b1 > openssl/libssl3@3.0.5-4:
+  #     reason: NULL Pointer Dereference
+  #     expires: '2022-12-01T14:26:34.404Z'
+  #   - openssh/openssh-server@1:9.0p1-1+b2 > openssh/openssh-client@1:9.0p1-1+b2 > libfido2/libfido2-1@1.12.0-1 > openssl/libssl3@3.0.5-4:
+  #     reason: NULL Pointer Dereference
+  #     expires: '2022-12-01T14:26:34.404Z'
+  #   - git@1:2.37.2-1 > curl/libcurl3-gnutls@7.85.0-1 > krb5/libgssapi-krb5-2@1.20-1+b1 > krb5/libkrb5-3@1.20-1+b1 > openssl/libssl3@3.0.5-4:
+  #     reason: NULL Pointer Dereference
+  #     expires: '2022-12-01T14:26:34.404Z'
+  #   - curl@7.85.0-1 > curl/libcurl4@7.85.0-1 > openssl/libssl3@3.0.5-4:
+  #     reason: NULL Pointer Dereference
+  #     expires: '2022-12-01T14:26:34.404Z'
+  #   - curl@7.85.0-1 > curl/libcurl4@7.85.0-1 > libssh2/libssh2-1@1.10.0-3+b1 > openssl/libssl3@3.0.5-4:
+  #     reason: NULL Pointer Dereference
+  #     expires: '2022-12-01T14:26:34.404Z'
+  #   - curl@7.85.0-1 > curl/libcurl4@7.85.0-1 > krb5/libgssapi-krb5-2@1.20-1+b1 > krb5/libkrb5-3@1.20-1+b1 > openssl/libssl3@3.0.5-4:
+  #     reason: NULL Pointer Dereference
+  #     expires: '2022-12-01T14:26:34.404Z'
 patch: {}
