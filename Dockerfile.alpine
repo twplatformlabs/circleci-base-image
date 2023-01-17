@@ -1,6 +1,11 @@
-FROM twdps/circleci-remote-docker:alpine-2022.12
+FROM twdps/circleci-remote-docker:alpine-2023.01
 
-LABEL maintainer=<nchenewe@thoughtworks.com>
+LABEL org.opencontainers.image.authors="nic.cheneweth@thoughtworks.com" \
+      org.opencontainers.image.description="Alpine-based CircleCI executor image" \
+      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.source="https://github.com/ThoughtWorks-DPS/circleci-remote-docker" \
+      org.opencontainers.image.title="circleci-remote-docker" \
+      org.opencontainers.image.vendor="ThoughtWorks, Inc."
 
 # hadolint ignore=DL3044
 ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
@@ -16,9 +21,9 @@ SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 RUN apk add --no-cache \
         sudo==1.9.12_p1-r1 \
         wget==1.21.3-r2 \
-        curl==7.86.0-r1 \
+        curl==7.87.0-r1 \
         libintl==0.21.1-r1 \
-        bash==5.2.12-r0 && \
+        bash==5.2.15-r0 && \
     apk --no-cache add --virtual build-dependencies \
         cmake==3.24.3-r0 \
         make==4.3-r1 \
@@ -34,7 +39,7 @@ RUN apk add --no-cache \
     cd .. && rm -r musl-locales-master && \
     sudo bash -c "echo https://downloads.1password.com/linux/alpinelinux/stable/ >> /etc/apk/repositories" && \
     sudo bash -c "wget https://downloads.1password.com/linux/keys/alpinelinux/support@1password.com-61ddfc31.rsa.pub -P /etc/apk/keys" && \
-    sudo apk update && sudo apk add --no-cache 1password-cli==2.9.1-r1 && \
+    sudo apk update && sudo apk add --no-cache 1password-cli==2.12.0-r1 && \
     curl -SLO https://github.com/ThoughtWorks-DPS/opw/releases/latest/download/opw_Linux_x86_64.tar.gz && \
     tar -xzf opw_Linux_x86_64.tar.gz && \
     sudo mv opw /usr/local/bin/opw && \

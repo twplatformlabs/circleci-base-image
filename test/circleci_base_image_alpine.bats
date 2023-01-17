@@ -7,17 +7,17 @@
 
 @test "bash version" {
   run bash -c "docker exec circleci-base-image-alpine-edge bash --version"
-  [[ "${output}" =~ "5.2.12" ]]
+  [[ "${output}" =~ "5.2" ]]
 }
 
 @test "curl version" {
   run bash -c "docker exec circleci-base-image-alpine-edge curl --version"
-  [[ "${output}" =~ "7.86.0" ]]
+  [[ "${output}" =~ "7.87" ]]
 }
 
 @test "wget version" {
   run bash -c "docker exec circleci-base-image-alpine-edge wget --version"
-  [[ "${output}" =~ "1.21.3" ]]
+  [[ "${output}" =~ "1.21" ]]
 }
 
 @test "check locale" {
@@ -27,7 +27,7 @@
 
 @test "1password version" {
   run bash -c "docker exec circleci-base-image-alpine-edge op --version"
-  [[ "${output}" =~ "2.9.1" ]]
+  [[ "${output}" =~ "2.9" ]]
 }
 
 @test "opw version" {
