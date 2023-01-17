@@ -1,6 +1,11 @@
 FROM twdps/circleci-remote-docker:slim-stable
 
-LABEL maintainer=<nchenewe@thoughtworks.com>
+LABEL org.opencontainers.image.authors="nic.cheneweth@thoughtworks.com" \
+      org.opencontainers.image.description="Debain-based CircleCI executor image" \
+      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.source="https://github.com/ThoughtWorks-DPS/circleci-remote-docker" \
+      org.opencontainers.image.title="circleci-remote-docker" \
+      org.opencontainers.image.vendor="ThoughtWorks, Inc."
 
 ENV DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
