@@ -1,5 +1,4 @@
 #!/usr/bin/env bats
-
 @test "sudo version" {
   run bash -c "docker exec circleci-base-image-slim-edge sudo --version"
   [[ "${output}" =~ "1.9" ]]
