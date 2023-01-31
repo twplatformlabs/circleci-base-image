@@ -3,8 +3,8 @@ FROM twdps/circleci-remote-docker:alpine-stable
 LABEL org.opencontainers.image.authors="nic.cheneweth@thoughtworks.com" \
       org.opencontainers.image.description="Alpine-based CircleCI executor image" \
       org.opencontainers.image.licenses="MIT" \
-      org.opencontainers.image.source="https://github.com/ThoughtWorks-DPS/circleci-remote-docker" \
-      org.opencontainers.image.title="circleci-remote-docker" \
+      org.opencontainers.image.source="https://github.com/ThoughtWorks-DPS/circleci-base-iamge" \
+      org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.vendor="ThoughtWorks, Inc."
 
 # hadolint ignore=DL3044

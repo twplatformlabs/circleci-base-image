@@ -22,12 +22,17 @@
 
 @test "1password version" {
   run bash -c "docker exec circleci-base-image-slim-edge op --version"
-  [[ "${output}" =~ "2.12" ]]
+  [[ "${output}" =~ "2.13" ]]
 }
 
 @test "opw version" {
   run bash -c "docker exec circleci-base-image-slim-edge opw version"
   [[ "${output}" =~ "0.0.11" ]]
+}
+
+@test "teller version" {
+  run bash -c "docker exec circleci-base-image-slim-edge teller version"
+  [[ "${output}" =~ "1.5.6" ]]
 }
 
 @test "describe user circleci" {

@@ -14,7 +14,7 @@ SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
 RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90circleci && \
     apt-get update && apt-get install --no-install-recommends -y \
-            sudo=1.9.12p1-1 \
+            sudo=1.9.12p2-1 \
             locales=2.36-8 \
             curl=7.87.0-2 \
             wget=1.21.3-1+b2 \
@@ -25,10 +25,13 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol && \
     sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22 && \
     curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg && \
-    sudo apt update && sudo apt install 1password-cli=2.12.0-1 && \
+    sudo apt update && sudo apt install 1password-cli=2.13.1-1 && \
     curl -SLO https://github.com/ThoughtWorks-DPS/opw/releases/latest/download/opw_Linux_x86_64.tar.gz && \
     tar -xzf opw_Linux_x86_64.tar.gz && \
     sudo mv opw /usr/local/bin/opw && \
+    curl -L https://github.com/tellerops/teller/releases/download/v1.5.6/teller_1.5.6_Linux_x86_64.tar.gz --output teller_1.5.6_Linux_x86_64.tar.gz && \
+    tar -xzf teller_1.5.6_Linux_x86_64.tar.gz && \
+    sudo mv teller /usr/local/bin/teller && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen && locale-gen && \
