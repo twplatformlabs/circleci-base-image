@@ -31,7 +31,7 @@
 
 @test "opw version" {
   run bash -c "docker exec circleci-base-image-alpine-edge opw version"
-  [[ "${output}" =~ "0.0.11" ]]
+  [[ "${output}" =~ "0.1.0" ]]
 }
 
 @test "teller version" {
