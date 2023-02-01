@@ -27,7 +27,7 @@
 
 @test "1password version" {
   run bash -c "docker exec circleci-base-image-alpine-edge op --version"
-  [[ "${output}" =~ "2.12" ]]
+  [[ "${output}" =~ "2.13" ]]
 }
 
 @test "opw version" {
