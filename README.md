@@ -14,7 +14,7 @@ Within most teams or organizations every executor image will require certain amo
 
 Packages that typically fall into this set of shared executor requirements include things like:  
 - USER definition and filesystem customization  
-- tool for accessing secrets (such as Vault, chamber, 1password)  
+- tool for accessing secrets (such as Vault, chamber, 1password, teller)  
 - standard shell (bash, zsh)  
 - multi-language support (locales)  
 
