@@ -3,60 +3,60 @@ version: v1.25.0
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   # slim packages accepted
-  SNYK-DEBIANUNSTABLE-WGET-1277613:
-    - wget/wget@1.21.3-1+b2:
-      reason: Open Redirect
-      expires: '2023-03-01T14:26:34.404Z'
-  SNYK-DEBIANUNSTABLE-OPENSSL-3168235:
-    - ca-certificates@20211016 > openssl@3.0.7-1 > openssl/libssl3@3.0.7-1:
-      reason: Improper Locking
-      expires: '2023-03-01T14:26:34.404Z'
-    - openssh/openssh-server@1:9.1p1-2 > openssl/libssl3@3.0.7-1:
-      reason: Improper Locking
-      expires: '2023-03-01T14:26:34.404Z'
-    - curl@7.87.0-2 > curl/libcurl4@7.87.0-2 > openssl/libssl3@3.0.7-1:
-      reason: Improper Locking
-      expires: '2023-03-01T14:26:34.404Z'
-    - openssh/openssh-server@1:9.1p1-2 > openssh/openssh-client@1:9.1p1-2 > openssl/libssl3@3.0.7-1:
-      reason: Improper Locking
-      expires: '2023-03-01T14:26:34.404Z'
-    - curl@7.87.0-2 > curl/libcurl4@7.87.0-2 > libssh2/libssh2-1@1.10.0-3+b1 > openssl/libssl3@3.0.7-1:
-      reason: Improper Locking
-      expires: '2023-03-01T14:26:34.404Z'
-    - openssh/openssh-server@1:9.1p1-2 > openssh/openssh-client@1:9.1p1-2 > libfido2/libfido2-1@1.12.0-2 > openssl/libssl3@3.0.7-1:
-      reason: Improper Locking
-      expires: '2023-03-01T14:26:34.404Z'
-    - curl@7.87.0-2 > curl/libcurl4@7.87.0-2 > krb5/libgssapi-krb5-2@1.20.1-1 > krb5/libkrb5-3@1.20.1-1 > openssl/libssl3@3.0.7-1:
-      reason: Improper Locking
-      expires: '2023-03-01T14:26:34.404Z'
-  # ignore packages inside ./teller
-  SNYK-GOLANG-GOLANGORGXNETHTTP2-3160322:
-    - golang.org/x/net/http2@v0.0.0-20211112202133-69e39bad7dc2:
-      reason: Denial of Service (DoS)
-      expires: '2023-03-01T14:26:34.404Z'
-  SNYK-GOLANG-GOLANGORGXCRYPTOSSH-2429769:
-    - golang.org/x/crypto/ssh@v0.0.0-20211108221036-ceb1ce70b4fa:
-      reason: Denial of Service (DoS)
-      expires: '2023-03-01T14:26:34.404Z'
-  SNYK-GOLANG-GOPKGINYAMLV3-2841557:
-    - gopkg.in/yaml.v3@v3.0.0-20210107192922-496545a6307b:
-      reason: Denial of Service (DoS)
-      expires: '2023-03-01T14:26:34.404Z'
-  SNYK-GOLANG-GOPKGINYAMLV3-2952714:
-    - gopkg.in/yaml.v3@v3.0.0-20210107192922-496545a6307b:
-      reason: Denial of Service (DoS)
-      expires: '2023-03-01T14:26:34.404Z'
-  SNYK-GOLANG-GOLANGORGXNETHTTP2-2313688:
-    - golang.org/x/net/http2@v0.0.0-20211112202133-69e39bad7dc2:
-      reason: Denial of Service (DoS)
-      expires: '2023-03-01T14:26:34.404Z'
-  SNYK-GOLANG-GOLANGORGXNETHTTP2-3028257:
-    - golang.org/x/net/http2@v0.0.0-20211112202133-69e39bad7dc2:
-      reason: Denial of Service (DoS)
-      expires: '2023-03-01T14:26:34.404Z'
-  SNYK-GOLANG-GOLANGORGXCRYPTOSSH-3026972:
-    - golang.org/x/crypto/ssh@v0.0.0-20211108221036-ceb1ce70b4fa:
-      reason: Denial of Service (DoS)
-      expires: '2023-03-01T14:26:34.404Z'
+  # SNYK-DEBIANUNSTABLE-WGET-1277613:
+  #   - wget/wget@1.21.3-1+b2:
+  #     reason: Open Redirect
+  #     expires: '2023-03-01T14:26:34.404Z'
+  # SNYK-DEBIANUNSTABLE-OPENSSL-3168235:
+  #   - ca-certificates@20211016 > openssl@3.0.7-1 > openssl/libssl3@3.0.7-1:
+  #     reason: Improper Locking
+  #     expires: '2023-03-01T14:26:34.404Z'
+  #   - openssh/openssh-server@1:9.1p1-2 > openssl/libssl3@3.0.7-1:
+  #     reason: Improper Locking
+  #     expires: '2023-03-01T14:26:34.404Z'
+  #   - curl@7.87.0-2 > curl/libcurl4@7.87.0-2 > openssl/libssl3@3.0.7-1:
+  #     reason: Improper Locking
+  #     expires: '2023-03-01T14:26:34.404Z'
+  #   - openssh/openssh-server@1:9.1p1-2 > openssh/openssh-client@1:9.1p1-2 > openssl/libssl3@3.0.7-1:
+  #     reason: Improper Locking
+  #     expires: '2023-03-01T14:26:34.404Z'
+  #   - curl@7.87.0-2 > curl/libcurl4@7.87.0-2 > libssh2/libssh2-1@1.10.0-3+b1 > openssl/libssl3@3.0.7-1:
+  #     reason: Improper Locking
+  #     expires: '2023-03-01T14:26:34.404Z'
+  #   - openssh/openssh-server@1:9.1p1-2 > openssh/openssh-client@1:9.1p1-2 > libfido2/libfido2-1@1.12.0-2 > openssl/libssl3@3.0.7-1:
+  #     reason: Improper Locking
+  #     expires: '2023-03-01T14:26:34.404Z'
+  #   - curl@7.87.0-2 > curl/libcurl4@7.87.0-2 > krb5/libgssapi-krb5-2@1.20.1-1 > krb5/libkrb5-3@1.20.1-1 > openssl/libssl3@3.0.7-1:
+  #     reason: Improper Locking
+  #     expires: '2023-03-01T14:26:34.404Z'
+  # # ignore packages inside ./teller
+  # SNYK-GOLANG-GOLANGORGXNETHTTP2-3160322:
+  #   - golang.org/x/net/http2@v0.0.0-20211112202133-69e39bad7dc2:
+  #     reason: Denial of Service (DoS)
+  #     expires: '2023-03-01T14:26:34.404Z'
+  # SNYK-GOLANG-GOLANGORGXCRYPTOSSH-2429769:
+  #   - golang.org/x/crypto/ssh@v0.0.0-20211108221036-ceb1ce70b4fa:
+  #     reason: Denial of Service (DoS)
+  #     expires: '2023-03-01T14:26:34.404Z'
+  # SNYK-GOLANG-GOPKGINYAMLV3-2841557:
+  #   - gopkg.in/yaml.v3@v3.0.0-20210107192922-496545a6307b:
+  #     reason: Denial of Service (DoS)
+  #     expires: '2023-03-01T14:26:34.404Z'
+  # SNYK-GOLANG-GOPKGINYAMLV3-2952714:
+  #   - gopkg.in/yaml.v3@v3.0.0-20210107192922-496545a6307b:
+  #     reason: Denial of Service (DoS)
+  #     expires: '2023-03-01T14:26:34.404Z'
+  # SNYK-GOLANG-GOLANGORGXNETHTTP2-2313688:
+  #   - golang.org/x/net/http2@v0.0.0-20211112202133-69e39bad7dc2:
+  #     reason: Denial of Service (DoS)
+  #     expires: '2023-03-01T14:26:34.404Z'
+  # SNYK-GOLANG-GOLANGORGXNETHTTP2-3028257:
+  #   - golang.org/x/net/http2@v0.0.0-20211112202133-69e39bad7dc2:
+  #     reason: Denial of Service (DoS)
+  #     expires: '2023-03-01T14:26:34.404Z'
+  # SNYK-GOLANG-GOLANGORGXCRYPTOSSH-3026972:
+  #   - golang.org/x/crypto/ssh@v0.0.0-20211108221036-ceb1ce70b4fa:
+  #     reason: Denial of Service (DoS)
+  #     expires: '2023-03-01T14:26:34.404Z'
 
 patch: {}
