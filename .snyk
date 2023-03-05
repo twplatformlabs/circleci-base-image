@@ -62,6 +62,9 @@ ignore:
     - golang.org/x/net/http2@v0.5.0:
       reason: Denial of Service (DoS)
       expires: '2023-06-01T14:26:34.404Z'
+    - golang.org/x/net/http2@v0.0.0-20211112202133-69e39bad7dc2:
+      reason: Denial of Service (DoS)
+      expires: '2023-06-01T14:26:34.404Z'
   SNYK-GOLANG-GOLANGORGXSYSUNIX-3310442:
     - golang.org/x/sys/unix@v0.0.0-20211113001501-0c823b97ae02:
       reasion: Incorrect Privilege Assignment
