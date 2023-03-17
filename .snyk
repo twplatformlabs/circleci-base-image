@@ -95,5 +95,9 @@ ignore:
     - golang.org/x/sys/unix@v0.0.0-20211113001501-0c823b97ae02:
       reasion: Incorrect Privilege Assignment
       expires: '2023-06-01T14:26:34.404Z'
+  SNYK-GOLANG-GOLANGORGXNETHTTP2HPACK-3358253:
+    - golang.org/x/net/http2/hpack@v0.0.0-20211112202133-69e39bad7dc2:
+      reason: Denial of Service (DoS)
+      expires: '2023-06-01T14:26:34.404Z'
 
 patch: {}

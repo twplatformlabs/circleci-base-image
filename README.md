@@ -13,7 +13,7 @@
 </div>
 <br />
 
-Within most teams or organizations every executor image will require certain amount of configuration regardless of the build purpose for which it is designed.  
+Within most teams or organizations, every executor image will require a certain amount of common configuration regardless of the build purpose for which it is designed.  
 
 Packages that typically fall into this set of shared executor requirements include things like:  
 - USER definition and filesystem customization  
