@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:slim-2023.03
+FROM ghcr.io/thoughtworks-dps/twdps/circleci-remote-docker:slim-2023.03.1
 
 LABEL org.opencontainers.image.authors="nic.cheneweth@thoughtworks.com" \
       org.opencontainers.image.description="Debain-based CircleCI executor image" \
@@ -14,9 +14,9 @@ SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
 RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90circleci && \
     apt-get update && apt-get install --no-install-recommends -y \
-            sudo=1.9.13p1-1\
+            sudo=1.9.13p3-1\
             locales=2.36-8 \
-            curl=7.88.1-2 \
+            curl=7.88.1-6 \
             wget=1.21.3-1+b2 \
             gnupg=2.2.40-1 && \
     curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg && \
@@ -25,7 +25,7 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol && \
     sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22 && \
     curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg && \
-    sudo apt update && sudo apt install 1password-cli=2.14.0-1 && \
+    sudo apt update && sudo apt install 1password-cli=2.15.0-1 && \
     curl -SLO https://github.com/ThoughtWorks-DPS/opw/releases/latest/download/opw_Linux_x86_64.tar.gz && \
     tar -xzf opw_Linux_x86_64.tar.gz && \
     sudo mv opw /usr/local/bin/opw && \

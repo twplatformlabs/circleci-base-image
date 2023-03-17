@@ -3,9 +3,35 @@ version: v1.25.0
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   # slim packages accepted
-  SNYK-DEBIANUNSTABLE-WGET-1277613:
-    - wget/wget@1.21.3-1+b2:
-      reason: Open Redirect
+  SNYK-DEBIANUNSTABLE-NODEJS-3330758:
+    - meta-common-packages@meta > nodejs@18.13.0+dfsg1-1:
+      reason: Untrusted Search Path
+      expires: '2023-06-01T14:26:34.404Z'
+    - meta-common-packages@meta > nodejs/libnode108@18.13.0+dfsg1-1:
+      reason: Untrusted Search Path
+      expires: '2023-06-01T14:26:34.404Z'
+    - npm@9.2.0~ds1-1 > node-gyp@9.3.0-2 > nodejs/libnode-dev@18.13.0+dfsg1-1:
+      reason: Untrusted Search Path
+      expires: '2023-06-01T14:26:34.404Z'
+  SNYK-DEBIANUNSTABLE-NODEJS-3330752:
+    - meta-common-packages@meta > nodejs@18.13.0+dfsg1-1:
+      reason: Untrusted Search Path
+      expires: '2023-06-01T14:26:34.404Z'
+    - meta-common-packages@meta > nodejs/libnode108@18.13.0+dfsg1-1:
+      reason: Untrusted Search Path
+      expires: '2023-06-01T14:26:34.404Z'
+    - npm@9.2.0~ds1-1 > node-gyp@9.3.0-2 > nodejs/libnode-dev@18.13.0+dfsg1-1:
+      reason: Untrusted Search Path
+      expires: '2023-06-01T14:26:34.404Z'
+  SNYK-DEBIANUNSTABLE-NODEJS-3330761:
+    - meta-common-packages@meta > nodejs@18.13.0+dfsg1-1:
+      reason: Untrusted Search Path
+      expires: '2023-06-01T14:26:34.404Z'
+    - meta-common-packages@meta > nodejs/libnode108@18.13.0+dfsg1-1:
+      reason: Untrusted Search Path
+      expires: '2023-06-01T14:26:34.404Z'
+    - npm@9.2.0~ds1-1 > node-gyp@9.3.0-2 > nodejs/libnode-dev@18.13.0+dfsg1-1:
+      reason: Untrusted Search Path
       expires: '2023-06-01T14:26:34.404Z'
   SNYK-DEBIANUNSTABLE-OPENSSL-3168235:
     - ca-certificates@20211016 > openssl@3.0.7-1 > openssl/libssl3@3.0.7-1:
