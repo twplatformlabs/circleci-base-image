@@ -13,6 +13,10 @@ ignore:
     - npm@9.2.0~ds1-1 > node-gyp@9.3.0-2 > nodejs/libnode-dev@18.13.0+dfsg1-1:
       reason: Untrusted Search Path
       expires: '2023-06-01T14:26:34.404Z'
+  SNYK-DEBIANUNSTABLE-WGET-1277613:
+    - wget/wget@1.21.3-1+b2:
+      reason: Open Redirect
+      expires: '2023-06-01T14:26:34.404Z'
   SNYK-DEBIANUNSTABLE-NODEJS-3330752:
     - meta-common-packages@meta > nodejs@18.13.0+dfsg1-1:
       reason: Untrusted Search Path
@@ -97,6 +101,9 @@ ignore:
       expires: '2023-06-01T14:26:34.404Z'
   SNYK-GOLANG-GOLANGORGXNETHTTP2HPACK-3358253:
     - golang.org/x/net/http2/hpack@v0.0.0-20211112202133-69e39bad7dc2:
+      reason: Denial of Service (DoS)
+      expires: '2023-06-01T14:26:34.404Z'
+    - golang.org/x/net/http2/hpack@v0.5.0:
       reason: Denial of Service (DoS)
       expires: '2023-06-01T14:26:34.404Z'
 
