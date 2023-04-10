@@ -12,6 +12,15 @@ ignore:
     - curl@7.88.1-8 > curl/libcurl4@7.88.1-8 > openssl/libssl3@3.0.8-1:
       reason: Improper Certificate Validation
       expires: '2023-06-01T14:26:34.404Z'
+    - openssh/openssh-server@1:9.2p1-2 > openssh/openssh-client@1:9.2p1-2 > openssl/libssl3@3.0.8-1:
+      reason: Improper Certificate Validation
+      expires: '2023-06-01T14:26:34.404Z'
+    - curl@7.88.1-8 > curl/libcurl4@7.88.1-8 > libssh2/libssh2-1@1.10.0-3+b1 > openssl/libssl3@3.0.8-1:
+      reason: Improper Certificate Validation
+      expires: '2023-06-01T14:26:34.404Z'
+    - openssh/openssh-server@1:9.2p1-2 > openssh/openssh-client@1:9.2p1-2 > libfido2/libfido2-1@1.12.0-2+b1 > openssl/libssl3@3.0.8-1:
+      reason: Improper Certificate Validation
+      expires: '2023-06-01T14:26:34.404Z'
   SNYK-DEBIANUNSTABLE-OPENSSL-5291774:
     - openssh/openssh-server@1:9.2p1-2 > openssl/libssl3@3.0.8-1:
       reason: Improper Certificate Validation
@@ -22,6 +31,15 @@ ignore:
     - curl@7.88.1-8 > curl/libcurl4@7.88.1-8 > openssl/libssl3@3.0.8-1:
       reason: Improper Certificate Validation
       expires: '2023-06-01T14:26:34.404Z'
+    - openssh/openssh-server@1:9.2p1-2 > openssh/openssh-client@1:9.2p1-2 > openssl/libssl3@3.0.8-1:
+      reason: Improper Certificate Validation
+      expires: '2023-06-01T14:26:34.404Z'
+    - curl@7.88.1-8 > curl/libcurl4@7.88.1-8 > libssh2/libssh2-1@1.10.0-3+b1 > openssl/libssl3@3.0.8-1:
+      reason: Improper Certificate Validation
+      expires: '2023-06-01T14:26:34.404Z'
+    - openssh/openssh-server@1:9.2p1-2 > openssh/openssh-client@1:9.2p1-2 > libfido2/libfido2-1@1.12.0-2+b1 > openssl/libssl3@3.0.8-1:
+      reason: Improper Certificate Validation
+      expires: '2023-06-01T14:26:34.404Z'
   SNYK-DEBIANUNSTABLE-OPENSSL-3368734:
     - openssh/openssh-server@1:9.2p1-2 > openssl/libssl3@3.0.8-1:
       reason: Improper Certificate Validation
@@ -30,6 +48,15 @@ ignore:
       reason: Improper Certificate Validation
       expires: '2023-06-01T14:26:34.404Z'
     - curl@7.88.1-8 > curl/libcurl4@7.88.1-8 > openssl/libssl3@3.0.8-1:
+      reason: Improper Certificate Validation
+      expires: '2023-06-01T14:26:34.404Z'
+    - openssh/openssh-server@1:9.2p1-2 > openssh/openssh-client@1:9.2p1-2 > openssl/libssl3@3.0.8-1:
+      reason: Improper Certificate Validation
+      expires: '2023-06-01T14:26:34.404Z'
+    - curl@7.88.1-8 > curl/libcurl4@7.88.1-8 > libssh2/libssh2-1@1.10.0-3+b1 > openssl/libssl3@3.0.8-1:
+      reason: Improper Certificate Validation
+      expires: '2023-06-01T14:26:34.404Z'
+    - openssh/openssh-server@1:9.2p1-2 > openssh/openssh-client@1:9.2p1-2 > libfido2/libfido2-1@1.12.0-2+b1 > openssl/libssl3@3.0.8-1:
       reason: Improper Certificate Validation
       expires: '2023-06-01T14:26:34.404Z'
   SNYK-DEBIANUNSTABLE-NODEJS-3330758:
