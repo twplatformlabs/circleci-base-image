@@ -1,11 +1,18 @@
-FROM ghcr.io/thoughtworks-dps/twdps/circleci-remote-docker:alpine-2023.03.1
+FROM twdps/circleci-remote-docker:alpine-2023.04
 
-LABEL org.opencontainers.image.authors="nic.cheneweth@thoughtworks.com" \
+LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.description="Alpine-based CircleCI executor image" \
-      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.documentation="https://github.com/ThoughtWorks-DPS/circleci-base-image" \
       org.opencontainers.image.source="https://github.com/ThoughtWorks-DPS/circleci-base-image" \
-      org.opencontainers.image.title="circleci-base-image" \
-      org.opencontainers.image.vendor="ThoughtWorks, Inc."
+      org.opencontainers.image.url="https://github.com/ThoughtWorks-DPS/circleci-base-image" \
+      org.opencontainers.image.vendor="ThoughtWorks, Inc." \
+      org.opencontainers.image.authors="nic.cheneweth@thoughtworks.com" \
+      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.created="CREATED" \
+      org.opencontainers.image.version="VERSION"
+
+ENV ONEPASSWORD_VERSION=2.16.1-r1
+ENV TELLER_VERSION=1.5.6
 
 # hadolint ignore=DL3044
 ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
@@ -21,7 +28,7 @@ SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 RUN apk add --no-cache \
         sudo==1.9.12_p2-r1 \
         wget==1.21.3-r2 \
-        curl==7.88.1-r0 \
+        curl==7.88.1-r1 \
         libintl==0.21.1-r1 \
         bash==5.2.15-r0 && \
     apk --no-cache add --virtual build-dependencies \
@@ -39,12 +46,12 @@ RUN apk add --no-cache \
     cd .. && rm -r musl-locales-master && \
     sudo bash -c "echo https://downloads.1password.com/linux/alpinelinux/stable/ >> /etc/apk/repositories" && \
     sudo bash -c "wget https://downloads.1password.com/linux/keys/alpinelinux/support@1password.com-61ddfc31.rsa.pub -P /etc/apk/keys" && \
-    sudo apk update && sudo apk add --no-cache 1password-cli==2.15.0-r1 && \
+    sudo apk update && sudo apk add --no-cache 1password-cli==${ONEPASSWORD_VERSION} && \
     curl -SLO https://github.com/ThoughtWorks-DPS/opw/releases/latest/download/opw_Linux_x86_64.tar.gz && \
     tar -xzf opw_Linux_x86_64.tar.gz && \
     sudo mv opw /usr/local/bin/opw && \
-    curl -L https://github.com/tellerops/teller/releases/download/v1.5.6/teller_1.5.6_Linux_x86_64.tar.gz --output teller_1.5.6_Linux_x86_64.tar.gz && \
-    tar -xzf teller_1.5.6_Linux_x86_64.tar.gz && \
+    curl -L https://github.com/tellerops/teller/releases/download/v${TELLER_VERSION}/teller_${TELLER_VERSION}_Linux_x86_64.tar.gz --output teller_${TELLER_VERSION}_Linux_x86_64.tar.gz && \
+    tar -xzf teller_${TELLER_VERSION}_Linux_x86_64.tar.gz && \
     sudo mv teller /usr/local/bin/teller && \
     addgroup --gid 3434 -S $USER && \
     adduser --uid 3434 --ingroup $USER --disabled-password $USER && \
