@@ -10,16 +10,18 @@
 </div>
 <br />
 
-Within most teams or organizations, every executor image will require a certain amount of common configuration regardless of the build purpose for which it is designed.  
+Within most teams or organizations, every executor image will require a certain amount of common configuration regardless of the purpose for which it is built.  
 
 Packages that typically fall into this set of shared executor requirements include things like:  
-- USER definition and filesystem customization  
+- nonroot USER definition
 - tool for accessing secrets (such as Vault, chamber, 1password, teller)  
 - standard shell (bash, zsh)  
 - multi-language support (locales)  
 
-The labs circleci-base-image is an example of such a common executor base. You will see the labs specific tools and configuration, but this can readily be adapted to any organizational requirements.  
+The psk circleci-base-image is an example of such a common executor base. You will see the psk specific tools and configuration, but this can readily be adapted to any organizational requirements.  
 
 Keep in mind that the shared configuration made to the executor base is intended for configuration that must be available in every executor, regardless of the role or purpose of the executor.  
 
 See release notes for detailed version information.  
+
+See thet psk [circleci-remote-docker](https://github.com/ThoughtWorks-DPS/circleci-remote-docker) iamge repository for details image signing and sbom verification used by all twdps PSK executor images.  
