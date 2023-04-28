@@ -49,6 +49,7 @@ workflows:
           tag: alpine-edge
           cis-docker-image-scan: true
           docker-cve-scan: true
+          severity-threshold: medium
           snyk-organization: twdps
           skip-base-image: true
           bats-test: true
