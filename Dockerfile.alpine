@@ -11,7 +11,7 @@ LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.created="CREATED" \
       org.opencontainers.image.version="VERSION"
 
-ENV ONEPASSWORD_VERSION=2.16.1-r1
+ENV ONEPASSWORD_VERSION=2.18.0-beta.01
 ENV TELLER_VERSION=1.5.6
 ENV BUILDEVENTS_VERSION=0.13.0
 
@@ -45,12 +45,9 @@ RUN apk add --no-cache \
     cmake -DLOCALE_PROFILE=OFF -D CMAKE_INSTALL_PREFIX:PATH=/usr . && \
     make && make install && \
     cd .. && rm -r musl-locales-master && \
-    sudo bash -c "echo https://downloads.1password.com/linux/alpinelinux/stable/ >> /etc/apk/repositories" && \
-    sudo bash -c "wget https://downloads.1password.com/linux/keys/alpinelinux/support@1password.com-61ddfc31.rsa.pub -P /etc/apk/keys" && \
-    sudo apk update && sudo apk add --no-cache 1password-cli==${ONEPASSWORD_VERSION} && \
-    curl -SLO https://github.com/ThoughtWorks-DPS/opw/releases/latest/download/opw_Linux_x86_64.tar.gz && \
-    tar -xzf opw_Linux_x86_64.tar.gz && \
-    sudo mv opw /usr/local/bin/opw && \
+    curl -L https://cache.agilebits.com/dist/1P/op2/pkg/v${ONEPASSWORD_VERSION}/op_linux_amd64_v${ONEPASSWORD_VERSION}.zip -o op.zip && \
+    unzip op.zip -o && rm op.zip && rm op.sig && \
+    sudo mv op /usr/local/bin/op && \
     curl -L https://github.com/tellerops/teller/releases/download/v${TELLER_VERSION}/teller_${TELLER_VERSION}_Linux_x86_64.tar.gz --output teller_${TELLER_VERSION}_Linux_x86_64.tar.gz && \
     tar -xzf teller_${TELLER_VERSION}_Linux_x86_64.tar.gz && \
     sudo mv teller /usr/local/bin/teller && \
