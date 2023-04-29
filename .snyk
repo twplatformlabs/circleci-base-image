@@ -21,6 +21,15 @@ ignore:
     - openssh/openssh-server@1:9.2p1-2 > openssh/openssh-client@1:9.2p1-2 > libedit/libedit2@3.1-20221030-2 > ncurses/libtinfo6@6.4-2:
       reason: Out-of-bounds Write
       expires: '2023-06-01T14:26:34.404Z'
+    - gnupg2/gnupg@2.2.40-1.1 > gnupg2/dirmngr@2.2.40-1.1 > gnupg2/gpgconf@2.2.40-1.1 > readline/libreadline8@8.2-1.3 > ncurses/libtinfo6@6.4-2:
+      reason: Out-of-bounds Write
+      expires: '2023-06-01T14:26:34.404Z'
+    - gnupg2/gnupg@2.2.40-1.1 > gnupg2/gpg-agent@2.2.40-1.1 > pinentry/pinentry-curses@1.2.1-1 > ncurses/libncursesw6@6.4-2 > ncurses/libtinfo6@6.4-2:
+      reason: Out-of-bounds Write
+      expires: '2023-06-01T14:26:34.404Z'
+    - openssh/openssh-server@1:9.2p1-2 > procps@2:4.0.3-1 > ncurses/libncursesw6@6.4-2:
+      reason: Out-of-bounds Write
+      expires: '2023-06-01T14:26:34.404Z'
   SNYK-DEBIANUNSTABLE-OPENSSL-5291772:
     - openssh/openssh-server@1:9.2p1-2 > openssl/libssl3@3.0.8-1:
       reason: Improper Certificate Validation
