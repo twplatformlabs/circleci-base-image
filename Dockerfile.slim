@@ -26,6 +26,7 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
             locales=2.36-9 \
             curl=7.88.1-9 \
             wget=1.21.3-1+b2 \
+            zip=3.0-13 \
             gnupg=2.2.40-1.1 && \
     curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg && \
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" | sudo tee /etc/apt/sources.list.d/1password.list && \
@@ -46,7 +47,8 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     curl -L -o buildevents https://github.com/honeycombio/buildevents/releases/download/v${BUILDEVENTS_VERSION}/buildevents-linux-amd64 && \
     chmod +x buildevents && \
     sudo mv buildevents /usr/local/bin/buildevents && \
-    apt-get clean && \
+    sudo apt-get remove zip && \
+    sudo apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen && locale-gen && \
     useradd --uid=3434 --user-group --create-home circleci && usermod --shell /bin/bash circleci && \
