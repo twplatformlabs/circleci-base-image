@@ -25,3 +25,5 @@ Keep in mind that the shared configuration made to the executor base is intended
 See release notes for detailed version information.  
 
 See thet psk [circleci-remote-docker](https://github.com/ThoughtWorks-DPS/circleci-remote-docker) iamge repository for details image signing and sbom verification used by all twdps PSK executor images.  
+
+curl -L https://cache.agilebits.com/dist/1P/op2/pkg/v2.18.0-beta.01/op_linux_amd64_v2.18.0-beta.01.zip -o op.zip

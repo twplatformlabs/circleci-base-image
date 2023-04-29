@@ -27,6 +27,11 @@
 
 @test "1password version" {
   run bash -c "docker exec circleci-base-image-alpine-edge op --version"
+  [[ "${output}" =~ "2.17" ]]
+}
+
+@test "1password-beta version" {
+  run bash -c "docker exec circleci-base-image-alpine-edge op-beta --version"
   [[ "${output}" =~ "2.18" ]]
 }
 
