@@ -30,6 +30,11 @@
   [[ "${output}" =~ "1.5.6" ]]
 }
 
+@test "vault version" {
+  run bash -c "docker exec circleci-base-image-slim-edge vault -v"
+  [[ "${output}" =~ "1.13" ]]
+}
+
 @test "describe user circleci" {
   run bash -c "docker exec circleci-base-image-slim-edge getent passwd | grep circleci"
   [[ "${output}" =~ "circleci:x:3434:3434" ]]
