@@ -46,6 +46,31 @@ ignore:
     - '*':
       expires: 2023-06-01T14:26:34.404Z
       reason: Runs on ephemeral pipeline executor
+  SNYK-DEBIANUNSTABLE-WGET-1277613:
+    - '*':
+      expires: 2023-06-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
+  SNYK-DEBIANUNSTABLE-OPENSSL-5291772:
+    - '*':
+      expires: 2023-06-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
+  SNYK-DEBIANUNSTABLE-OPENSSL-5291774:
+    - '*':
+      expires: 2023-06-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
+  SNYK-DEBIANUNSTABLE-OPENSSL-5438690:
+    - '*':
+      expires: 2023-06-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
+  SNYK-DEBIANUNSTABLE-OPENSSL-3368734:
+    - '*':
+      expires: 2023-06-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
+  SNYK-DEBIANUNSTABLE-NCURSES-5421195:
+    - '*':
+      expires: 2023-06-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
+
 
 
   # SNYK-DEBIANUNSTABLE-NCURSES-5421195:
