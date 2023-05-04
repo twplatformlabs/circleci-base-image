@@ -2,17 +2,50 @@
 version: v1.25.0
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-  SNYK-ALPINE317-OPENSSL-5438697
-  SNYK-GOLANG-GOLANGORGXSYSUNIX-3310442
-  SNYK-GOLANG-GOLANGORGXNETHTTP2-3160322
-  SNYK-GOLANG-GOLANGORGXCRYPTOSSH-2429769
-  SNYK-GOLANG-GOPKGINYAMLV3-2841557
-  SNYK-GOLANG-GOPKGINYAMLV3-2952714
-  SNYK-GOLANG-GOLANGORGXNETHTTP2HPACK-3358253
-  SNYK-GOLANG-GOLANGORGXNETHTTP2-2313688
-  SNYK-GOLANG-GOLANGORGXNETHTTP2-3028257
-  SNYK-GOLANG-GOLANGORGXNETHTTP2-3323837
-  SNYK-GOLANG-GOLANGORGXCRYPTOSSH-3026972
+  SNYK-ALPINE317-OPENSSL-5438697:
+    - '*':
+      expires: 2023-06-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
+  SNYK-GOLANG-GOLANGORGXSYSUNIX-3310442:
+    - '*':
+      expires: 2023-06-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
+  SNYK-GOLANG-GOLANGORGXNETHTTP2-3160322:
+    - '*':
+      expires: 2023-06-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
+  SNYK-GOLANG-GOLANGORGXCRYPTOSSH-2429769:
+    - '*':
+      expires: 2023-06-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
+  SNYK-GOLANG-GOPKGINYAMLV3-2841557:
+    - '*':
+      expires: 2023-06-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
+  SNYK-GOLANG-GOPKGINYAMLV3-2952714:
+    - '*':
+      expires: 2023-06-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
+  SNYK-GOLANG-GOLANGORGXNETHTTP2HPACK-3358253:
+    - '*':
+      expires: 2023-06-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
+  SNYK-GOLANG-GOLANGORGXNETHTTP2-2313688:
+    - '*':
+      expires: 2023-06-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
+  SNYK-GOLANG-GOLANGORGXNETHTTP2-3028257:
+    - '*':
+      expires: 2023-06-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
+  SNYK-GOLANG-GOLANGORGXNETHTTP2-3323837:
+    - '*':
+      expires: 2023-06-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
+  SNYK-GOLANG-GOLANGORGXCRYPTOSSH-3026972:
+    - '*':
+      expires: 2023-06-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
 
 
   # SNYK-DEBIANUNSTABLE-NCURSES-5421195:
