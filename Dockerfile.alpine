@@ -31,9 +31,9 @@ SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 RUN apk add --no-cache \
         sudo==1.9.13_p3-r2 \
         wget==1.21.4-r0 \
-        curl==8.0.1-r2 \
+        curl==8.1.1-r1 \
         libintl==0.21.1-r7 \
-        bash==5.2.15-r3 && \
+        bash==5.2.15-r5 && \
     apk --no-cache add --virtual build-dependencies \
         cmake==3.26.3-r1 \
         make==4.4.1-r1 \
