@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:alpine-2023.05.1
+FROM twdps/circleci-remote-docker:alpine-2023.06
 
 LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.description="Alpine-based CircleCI executor image" \
@@ -12,10 +12,10 @@ LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.version="VERSION"
 
 ENV ONEPASSWORD_BETA_VERSION=2.18.0-beta.01
-ENV ONEPASSWORD_VERSION=2.17.0-r1
-ENV VAULT_VERSION=1.13.2
+ENV ONEPASSWORD_VERSION=2.18.0-r1
+ENV VAULT_VERSION=1.14.0
 ENV TELLER_VERSION=1.5.6
-ENV BUILDEVENTS_VERSION=0.13.0
+ENV BUILDEVENTS_VERSION=0.14.0
 
 # hadolint ignore=DL3044
 ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
@@ -31,7 +31,7 @@ SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 RUN apk add --no-cache \
         sudo==1.9.13_p3-r2 \
         wget==1.21.4-r0 \
-        curl==8.1.1-r1 \
+        curl==8.1.2-r0 \
         libintl==0.21.1-r7 \
         bash==5.2.15-r5 && \
     apk --no-cache add --virtual build-dependencies \

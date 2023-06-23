@@ -32,7 +32,7 @@
 
 @test "vault version" {
   run bash -c "docker exec circleci-base-image-slim-edge vault -v"
-  [[ "${output}" =~ "1.13" ]]
+  [[ "${output}" =~ "1.14" ]]
 }
 
 @test "describe user circleci" {
