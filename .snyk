@@ -2,6 +2,14 @@
 version: v1.25.0
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
+  SNYK-ALPINE318-OPENSSL-5776808:
+    - '*':
+      expires: 2023-09-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
+  SNYK-ALPINE318-OPENSSL-5788370:
+    - '*':
+      expires: 2023-09-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
   SNYK-GOLANG-GITHUBCOMSNOWFLAKEDBGOSNOWFLAKE-5673232:
     - '*':
       expires: 2023-09-01T14:26:34.404Z
