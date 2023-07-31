@@ -22,7 +22,7 @@
 
 @test "1password version" {
   run bash -c "docker exec circleci-base-image-slim-edge op --version"
-  [[ "${output}" =~ "2.18" ]]
+  [[ "${output}" =~ "2.19" ]]
 }
 
 @test "teller version" {

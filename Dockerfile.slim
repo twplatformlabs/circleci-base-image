@@ -23,13 +23,13 @@ SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
 RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90circleci && \
     apt-get update && apt-get install --no-install-recommends -y \
-            sudo=1.9.13p3-1\
-            locales=2.36-9 \
-            curl=7.88.1-10 \
+            sudo=1.9.14p2-1\
+            locales=2.37-6 \
+            curl=7.88.1-11 \
             wget=1.21.3-1+b2 \
             unzip=6.0-28 \
             gnupg=2.2.40-1.1 && \
-    curl -L https://cache.agilebits.com/dist/1P/op2/pkg/v${ONEPASSWORD_BETA_VERSION}/op_linux_amd64_v${ONEPASSWORD_BETA_VERSION}.zip -o op.zip && \
+    curl -L https://cache.agilebits.com/dist/1P/op2/pkg/v${ONEPASSWORD_VERSION}/op_linux_amd64_v${ONEPASSWORD_VERSION}.zip -o op.zip && \
     unzip -o op.zip && sudo mv op /usr/local/bin/op && \
     rm op.zip && rm op.sig && \
     curl -SLO https://github.com/ThoughtWorks-DPS/opw/releases/latest/download/opw_Linux_x86_64.tar.gz && \

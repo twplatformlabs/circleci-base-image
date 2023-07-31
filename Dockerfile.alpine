@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:alpine-2023.06
+FROM twdps/circleci-remote-docker:alpine-2023.07
 
 LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.description="Alpine-based CircleCI executor image" \
@@ -11,10 +11,9 @@ LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.created="CREATED" \
       org.opencontainers.image.version="VERSION"
 
-ENV ONEPASSWORD_BETA_VERSION=2.18.0-beta.01
-ENV ONEPASSWORD_VERSION=2.18.0-r1
-ENV VAULT_VERSION=1.14.0
+ENV ONEPASSWORD_VERSION=2.19.0-r4
 ENV TELLER_VERSION=1.5.6
+ENV VAULT_VERSION=1.14.0
 ENV BUILDEVENTS_VERSION=0.14.0
 
 # hadolint ignore=DL3044
@@ -25,29 +24,29 @@ ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
     LC_ALL="en_US.UTF-8"
 
 ENV USER=circleci
-SHELL ["/bin/ash", "-o", "pipefail", "-c"]
+SHELL ["/bin/ash", "-o", "pipefail", "-c"]   https://cache.agilebits.com/dist/1P/op2/pkg/v2.19.0/op_linux_amd64_v2.19.0.zip
 
 # hadolint ignore=DL3003,DL3004,DL4001
 RUN apk add --no-cache \
         sudo==1.9.13_p3-r2 \
         wget==1.21.4-r0 \
-        curl==8.1.2-r0 \
+        curl==8.2.1-r0 \
         libintl==0.21.1-r7 \
         bash==5.2.15-r5 && \
     apk --no-cache add --virtual build-dependencies \
-        cmake==3.26.4-r0 \
+        cmake==3.26.5-r0 \
         make==4.4.1-r1 \
-        musl==1.2.4-r0 \
-        musl-dev==1.2.4-r0 \
-        musl-utils==1.2.4-r0 \
-        gcc==12.2.1_git20220924-r10 \
+        musl==1.2.4-r1 \
+        musl-dev==1.2.4-r1 \
+        musl-utils==1.2.4-r1 \
+        gcc==12.2.1_git20220924-r4 \
         gettext-dev==0.21.1-r7 && \
     wget -q https://gitlab.com/rilian-la-te/musl-locales/-/archive/master/musl-locales-master.zip && \
     unzip musl-locales-master.zip && cd musl-locales-master && \
     cmake -DLOCALE_PROFILE=OFF -D CMAKE_INSTALL_PREFIX:PATH=/usr . && \
     make && make install && \
     cd .. && rm -r musl-locales-master && \
-    curl -L https://cache.agilebits.com/dist/1P/op2/pkg/v${ONEPASSWORD_BETA_VERSION}/op_linux_amd64_v${ONEPASSWORD_BETA_VERSION}.zip -o op.zip && \
+    curl -L https://cache.agilebits.com/dist/1P/op2/pkg/v${ONEPASSWORD_VERSION}/op_linux_amd64_v${ONEPASSWORD_VERSION}.zip -o op.zip && \
     unzip op.zip -o && sudo mv op /usr/local/bin/op && \
     rm op.zip && rm op.sig && \
     curl -SLO https://github.com/ThoughtWorks-DPS/opw/releases/latest/download/opw_Linux_x86_64.tar.gz && \
