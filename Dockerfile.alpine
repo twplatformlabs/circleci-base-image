@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:alpine-2023.07
+FROM twdps/circleci-remote-docker:alpine-2023.08
 
 LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.description="Alpine-based CircleCI executor image" \
@@ -11,10 +11,10 @@ LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.created="CREATED" \
       org.opencontainers.image.version="VERSION"
 
-ENV ONEPASSWORD_VERSION=2.19.0
+ENV ONEPASSWORD_VERSION=2.20.0
 ENV TELLER_VERSION=1.5.6
-ENV VAULT_VERSION=1.14.0
-ENV BUILDEVENTS_VERSION=0.14.0
+ENV VAULT_VERSION=1.14.1
+ENV BUILDEVENTS_VERSION=0.15.0
 
 # hadolint ignore=DL3044
 ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
@@ -23,7 +23,6 @@ ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
     LANGUAGE="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8"
 
-ENV USER=circleci
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
 # hadolint ignore=DL3003,DL3004,DL4001
@@ -61,10 +60,10 @@ RUN apk add --no-cache \
     curl -L -o buildevents https://github.com/honeycombio/buildevents/releases/download/v${BUILDEVENTS_VERSION}/buildevents-linux-amd64 && \
     chmod +x buildevents && \
     sudo mv buildevents /usr/local/bin/buildevents && \
-    addgroup --gid 3434 -S $USER && \
-    adduser --uid 3434 --ingroup $USER --disabled-password $USER && \
-    echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER && \
-    chmod 0440 /etc/sudoers.d/$USER && \
+    addgroup --gid 3434 -S circleci && \
+    adduser --uid 3434 --ingroup circleci --disabled-password circleci && \
+    echo "circleci ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/circleci && \
+    chmod 0440 /etc/sudoers.d/circleci && \
     sudo -u circleci mkdir /home/circleci/project && \
     apk del build-dependencies
 
