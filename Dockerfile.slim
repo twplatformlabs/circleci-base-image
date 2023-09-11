@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:slim-2023.08
+FROM twdps/circleci-remote-docker:slim-2023.09
 
 LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.description="Debian-based CircleCI executor image" \
@@ -12,9 +12,9 @@ LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.version="VERSION"
 
 
-ENV ONEPASSWORD_VERSION=2.20.0
+ENV ONEPASSWORD_VERSION=2.21.0
 ENV TELLER_VERSION=1.5.6
-ENV VAULT_VERSION=1.14.1
+ENV VAULT_VERSION=1.14.2
 ENV BUILDEVENTS_VERSION=0.15.0
 ENV DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
@@ -24,9 +24,9 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90circleci && \
     apt-get update && apt-get install --no-install-recommends -y \
             sudo=1.9.14p2-1\
-            locales=2.37-7 \
+            locales=2.37-8 \
             curl=8.2.1-2 \
-            wget=1.21.3-1+b2 \
+            wget=1.21.4-1+b1 \
             unzip=6.0-28 \
             gnupg=2.2.40-1.1 && \
     curl -L https://cache.agilebits.com/dist/1P/op2/pkg/v${ONEPASSWORD_VERSION}/op_linux_amd64_v${ONEPASSWORD_VERSION}.zip -o op.zip && \

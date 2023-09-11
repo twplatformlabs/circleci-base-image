@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:alpine-2023.08
+FROM twdps/circleci-remote-docker:alpine-2023.09
 
 LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.description="Alpine-based CircleCI executor image" \
@@ -11,9 +11,9 @@ LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.created="CREATED" \
       org.opencontainers.image.version="VERSION"
 
-ENV ONEPASSWORD_VERSION=2.20.0
+ENV ONEPASSWORD_VERSION=2.21.0
 ENV TELLER_VERSION=1.5.6
-ENV VAULT_VERSION=1.14.1
+ENV VAULT_VERSION=1.14.2
 ENV BUILDEVENTS_VERSION=0.15.0
 
 # hadolint ignore=DL3044
