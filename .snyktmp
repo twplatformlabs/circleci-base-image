@@ -2,60 +2,72 @@
 version: v1.25.0
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-  SNYK-GOLANG-GOLANGORGXNETHTML-5816820:
-    - '*':
-      expires: 2023-09-01T14:26:34.404Z
-      reason: Runs on ephemeral pipeline executor
-  SNYK-GOLANG-GITHUBCOMSNOWFLAKEDBGOSNOWFLAKE-5673232:
-    - '*':
-      expires: 2023-09-01T14:26:34.404Z
-      reason: Runs on ephemeral pipeline executor
   SNYK-GOLANG-GOLANGORGXSYSUNIX-3310442:
     - '*':
-      expires: 2023-09-01T14:26:34.404Z
+      expires: 2023-12-01T14:26:34.404Z
       reason: Runs on ephemeral pipeline executor
   SNYK-GOLANG-GOLANGORGXNETHTTP2-3160322:
     - '*':
-      expires: 2023-09-01T14:26:34.404Z
+      expires: 2023-12-01T14:26:34.404Z
       reason: Runs on ephemeral pipeline executor
   SNYK-GOLANG-GOLANGORGXCRYPTOSSH-2429769:
     - '*':
-      expires: 2023-09-01T14:26:34.404Z
+      expires: 2023-12-01T14:26:34.404Z
       reason: Runs on ephemeral pipeline executor
   SNYK-GOLANG-GOPKGINYAMLV3-2841557:
     - '*':
-      expires: 2023-09-01T14:26:34.404Z
+      expires: 2023-12-01T14:26:34.404Z
       reason: Runs on ephemeral pipeline executor
   SNYK-GOLANG-GOPKGINYAMLV3-2952714:
     - '*':
-      expires: 2023-09-01T14:26:34.404Z
+      expires: 2023-12-01T14:26:34.404Z
       reason: Runs on ephemeral pipeline executor
   SNYK-GOLANG-GOLANGORGXNETHTTP2HPACK-3358253:
     - '*':
-      expires: 2023-09-01T14:26:34.404Z
+      expires: 2023-12-01T14:26:34.404Z
       reason: Runs on ephemeral pipeline executor
   SNYK-GOLANG-GOLANGORGXNETHTTP2-2313688:
     - '*':
-      expires: 2023-09-01T14:26:34.404Z
+      expires: 2023-12-01T14:26:34.404Z
       reason: Runs on ephemeral pipeline executor
   SNYK-GOLANG-GOLANGORGXNETHTTP2-3028257:
     - '*':
-      expires: 2023-09-01T14:26:34.404Z
+      expires: 2023-12-01T14:26:34.404Z
       reason: Runs on ephemeral pipeline executor
   SNYK-GOLANG-GOLANGORGXNETHTTP2-3323837:
     - '*':
-      expires: 2023-09-01T14:26:34.404Z
+      expires: 2023-12-01T14:26:34.404Z
       reason: Runs on ephemeral pipeline executor
   SNYK-GOLANG-GOLANGORGXCRYPTOSSH-3026972:
     - '*':
-      expires: 2023-09-01T14:26:34.404Z
+      expires: 2023-12-01T14:26:34.404Z
       reason: Runs on ephemeral pipeline executor
-  SNYK-DEBIANUNSTABLE-OPENLDAP-5660619:
-    - '*':
-      expires: 2023-09-01T14:26:34.404Z
-      reason: Runs on ephemeral pipeline executor
-  SNYK-DEBIANUNSTABLE-WGET-1277613:
-    - '*':
-      expires: 2023-09-01T14:26:34.404Z
-      reason: Runs on ephemeral pipeline executor
+
+
+  # SNYK-GOLANG-GOLANGORGXNETHTML-5816820:
+  #   - '*':
+  #     expires: 2023-12-01T14:26:34.404Z
+  #     reason: Runs on ephemeral pipeline executor
+  # SNYK-GOLANG-GITHUBCOMSNOWFLAKEDBGOSNOWFLAKE-5673232:
+  #   - '*':
+  #     expires: 2023-12-01T14:26:34.404Z
+  #     reason: Runs on ephemeral pipeline executor
+
+
+
+
+
+
+
+
+
+
+  # SNYK-DEBIANUNSTABLE-OPENLDAP-5660619:
+  #   - '*':
+  #     expires: 2023-12-01T14:26:34.404Z
+  #     reason: Runs on ephemeral pipeline executor
+  # SNYK-DEBIANUNSTABLE-WGET-1277613:
+  #   - '*':
+  #     expires: 2023-12-01T14:26:34.404Z
+  #     reason: Runs on ephemeral pipeline executor
 patch: {}
