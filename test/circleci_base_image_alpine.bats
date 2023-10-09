@@ -12,7 +12,7 @@
 
 @test "curl version" {
   run bash -c "docker exec circleci-base-image-alpine-edge curl --version"
-  [[ "${output}" =~ "8.2" ]]
+  [[ "${output}" =~ "8.3" ]]
 }
 
 @test "wget version" {
@@ -42,7 +42,7 @@
 
 @test "vault version" {
   run bash -c "docker exec circleci-base-image-alpine-edge vault -v"
-  [[ "${output}" =~ "1.14" ]]
+  [[ "${output}" =~ "1.15" ]]
 }
 
 @test "describe user circleci" {
