@@ -2,3 +2,4 @@ local.env
 .venv
 package-lock.json
 package.json
+.python-version
