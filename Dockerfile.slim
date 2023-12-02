@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:slim-2023.10
+FROM twdps/circleci-remote-docker:slim-2023.11
 
 LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.description="Debian-based CircleCI executor image" \
@@ -12,9 +12,9 @@ LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.version="VERSION"
 
 
-ENV ONEPASSWORD_VERSION=2.21.0
+ENV ONEPASSWORD_VERSION=2.23.0
 ENV TELLER_VERSION=1.5.6
-ENV VAULT_VERSION=1.15.0
+ENV VAULT_VERSION=1.15.3
 ENV BUILDEVENTS_VERSION=0.15.0
 ENV DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
@@ -25,7 +25,7 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     apt-get update && apt-get install --no-install-recommends -y \
             sudo=1.9.14p2-1\
             locales=2.37-12 \
-            curl=8.3.0-3 \
+            curl=8.4.0-2 \
             wget=1.21.4-1+b1 \
             unzip=6.0-28 \
             gnupg=2.2.40-1.1 && \
