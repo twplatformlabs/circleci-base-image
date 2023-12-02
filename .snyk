@@ -2,6 +2,14 @@
 version: v1.25.0
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
+  SNYK-GOLANG-GOLANGORGXNETHTTP2-5958903:
+    - '*':
+      expires: 2023-12-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
+  SNYK-GOLANG-GOOGLEGOLANGORGGRPC-6085451:
+    - '*':
+      expires: 2023-12-01T14:26:34.404Z
+      reason: Runs on ephemeral pipeline executor
   SNYK-DEBIANUNSTABLE-NGHTTP2-5953388:
     - '*':
       expires: 2023-12-01T14:26:34.404Z
