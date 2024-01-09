@@ -17,6 +17,7 @@ Packages that typically fall into this set of shared executor requirements inclu
 - tool for accessing secrets (such as Vault, chamber, 1password, teller)  
 - standard shell (bash, zsh)  
 - multi-language support (locales)  
+- common dependencies for installing packages (curl, wget, unzip, build-base)
 
 The psk circleci-base-image is an example of such a common executor base. You will see the psk specific tools and configuration, but this can readily be adapted to any organizational requirements.  
 

@@ -5,19 +5,73 @@
   [[ "${output}" =~ "1.9" ]]
 }
 
-@test "bash version" {
-  run bash -c "docker exec circleci-base-image-alpine-edge bash --version"
-  [[ "${output}" =~ "5.2" ]]
+@test "gettext install" {
+  run bash -c "docker exec circleci-base-image-alpine-edge less --version"
+  [[ "${output}" =~ "643" ]]
+}
+
+@test "gcc version" {
+  run bash -c "docker exec circleci-base-image-alpine-edge gcc --version"
+  [[ "${output}" =~ "13.2" ]]
+}
+
+@test "cmake version" {
+  run bash -c "docker exec circleci-base-image-alpine-edge cmake --version"
+  [[ "${output}" =~ "3.27" ]]
+}
+@test "make version" {
+  run bash -c "docker exec circleci-base-image-alpine-edge make --version"
+  [[ "${output}" =~ "4.4" ]]
 }
 
 @test "curl version" {
   run bash -c "docker exec circleci-base-image-alpine-edge curl --version"
-  [[ "${output}" =~ "8.4" ]]
+  [[ "${output}" =~ "8.5" ]]
 }
 
 @test "wget version" {
   run bash -c "docker exec circleci-base-image-alpine-edge wget --version"
   [[ "${output}" =~ "1.21" ]]
+}
+
+@test "unzip version" {
+  run bash -c "docker exec circleci-base-image-alpine-edge unzip --version"
+  [[ "${output}" =~ "6.0" ]]
+}
+
+@test "gzip version" {
+  run bash -c "docker exec circleci-base-image-alpine-edge gzip --version"
+  [[ "${output}" =~ "1.13" ]]
+}
+
+@test "zip version" {
+  run bash -c "docker exec circleci-base-image-alpine-edge zip --version"
+  [[ "${output}" =~ "3.0" ]]
+}
+
+@test "bzip2 version" {
+  run bash -c "docker exec circleci-base-image-alpine-edge gzip2 --version"
+  [[ "${output}" =~ "1.08" ]]
+}
+
+@test "jq version" {
+  run bash -c "docker exec circleci-base-image-alpine-edge jq --version"
+  [[ "${output}" =~ "1.7" ]]
+}
+
+@test "gnupg version" {
+  run bash -c "docker exec circleci-base-image-alpine-edge gpg --version"
+  [[ "${output}" =~ "2.4" ]]
+}
+
+@test "docker version" {
+  run bash -c "docker exec circleci-base-image-alpine-edge docker --version"
+  [[ "${output}" =~ "24.0" ]]
+}
+
+@test "bash version" {
+  run bash -c "docker exec circleci-base-image-alpine-edge bash --version"
+  [[ "${output}" =~ "5.2" ]]
 }
 
 @test "check locale" {
@@ -27,12 +81,7 @@
 
 @test "1password version" {
   run bash -c "docker exec circleci-base-image-alpine-edge op --version"
-  [[ "${output}" =~ "2.23" ]]
-}
-
-@test "opw version" {
-  run bash -c "docker exec circleci-base-image-alpine-edge opw version"
-  [[ "${output}" =~ "0.1.0" ]]
+  [[ "${output}" =~ "2.24" ]]
 }
 
 @test "teller version" {
@@ -64,4 +113,9 @@
 @test "describe /home/circleci/project" {
   run bash -c "docker exec circleci-base-image-alpine-edge ls -ld /home/circleci/project"
   [[ "${output}" =~ "circleci circleci" ]]
+}
+
+@test "describe /home/circleci/.gnupg" {
+  run bash -c "docker exec circleci-base-image-alpine-edge ls -ld /home/circleci/.gnupg"
+  [[ "${output}" =~ "gpg.conf" ]]
 }

@@ -28,7 +28,6 @@ on-tag-main: &on-tag-main
 # ================================================================= workflows
 
 workflows:
-  version: 2
 
   alpine image build:
     jobs:

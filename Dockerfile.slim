@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:slim-2023.11
+FROM twdps/circleci-remote-docker:slim-2024.01
 
 LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.description="Debian-based CircleCI executor image" \
@@ -11,30 +11,58 @@ LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.created="CREATED" \
       org.opencontainers.image.version="VERSION"
 
-
+ENV DOCKER_VERSION=5:24.0.7-1~debian.12~bookworm
+ENV DOCKER_BUILDX_VERSION=0.11.2-1~debian.12~bookworm
+ENV DOCKER_COMPOSE_VERSION=2.21.0-1~debian.12~bookworm
+ENV CONTAINERD_VERSION=1.6.26-1
 ENV ONEPASSWORD_VERSION=2.23.0
 ENV TELLER_VERSION=1.5.6
 ENV VAULT_VERSION=1.15.3
 ENV BUILDEVENTS_VERSION=0.15.0
 ENV DEBIAN_FRONTEND=noninteractive
+
 SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
 
 # hadolint ignore=DL4001,DL3004,DL3047
 RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90circleci && \
     apt-get update && apt-get install --no-install-recommends -y \
-            sudo=1.9.14p2-1\
-            locales=2.37-12 \
-            curl=8.4.0-2 \
+            sudo=1.9.15p5-1 \
+            locales=2.37-13 \
+            tzdata=2023d-1 \
+            libcurl4-openssl-dev=8.5.0-2 \
+            apt-transport-https=2.7.8 \
+            lsb-release=12.0-2 \
+            gettext-base=0.21-14 \
+            build-essential=12.10 \
+            gcc=4:13.2.0-2 \
+            g++=4:13.2.0-2 \
+            cmake=3.28.1-1 \
+            make=4.3-4.1 \
+            curl=8.5.0-2 \
             wget=1.21.4-1+b1 \
             unzip=6.0-28 \
-            gnupg=2.2.40-1.1 && \
+            gzip=1.12-1 \
+            zip=3.0-13 \
+            bzip2=1.0.8-5+b2 \
+            jq=1.7.1-2 \
+            git-lfs=3.4.1-1 \
+            gnupg=2.2.40-1.1 \
+            gnupg-agent=2.2.40-1.1 && \
+    sudo install -m 0755 -d /etc/apt/keyrings && \
+    sudo bash -c "curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg" && \
+    sudo chmod a+r /etc/apt/keyrings/docker.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian bookworm stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+    sudo apt-get update && \
+    apt-get update && apt-get install --no-install-recommends -y \
+            docker-ce=${DOCKER_VERSION} \
+            docker-ce-cli=${DOCKER_VERSION} \
+            containerd.io=${CONTAINERD_VERSION} \
+            docker-buildx-plugin=${DOCKER_BUILDX_VERSION} \
+            docker-compose-plugin=${DOCKER_COMPOSE_VERSION} && \
     curl -L https://cache.agilebits.com/dist/1P/op2/pkg/v${ONEPASSWORD_VERSION}/op_linux_amd64_v${ONEPASSWORD_VERSION}.zip -o op.zip && \
     unzip -o op.zip && sudo mv op /usr/local/bin/op && \
     rm op.zip && rm op.sig && \
-    curl -SLO https://github.com/ThoughtWorks-DPS/opw/releases/latest/download/opw_Linux_x86_64.tar.gz && \
-    tar -xzf opw_Linux_x86_64.tar.gz && \
-    sudo mv opw /usr/local/bin/opw && \
     curl -L https://github.com/tellerops/teller/releases/download/v${TELLER_VERSION}/teller_${TELLER_VERSION}_Linux_x86_64.tar.gz --output teller_${TELLER_VERSION}_Linux_x86_64.tar.gz && \
     tar -xzf teller_${TELLER_VERSION}_Linux_x86_64.tar.gz && \
     sudo mv teller /usr/local/bin/teller && \
@@ -44,18 +72,24 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     curl -L -o buildevents https://github.com/honeycombio/buildevents/releases/download/v${BUILDEVENTS_VERSION}/buildevents-linux-amd64 && \
     chmod +x buildevents && \
     sudo mv buildevents /usr/local/bin/buildevents && \
-    sudo apt-get remove unzip && \
-    sudo apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
     sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen && locale-gen && \
-    useradd --uid=3434 --user-group --create-home circleci && usermod --shell /bin/bash circleci && \
+    useradd --uid=3434 --user-group --create-home circleci && \
+    usermod --shell /bin/bash circleci && \
     echo 'circleci ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
-    sudo -u circleci mkdir /home/circleci/project
+    sudo -u circleci mkdir -p /home/circleci/project && \
+    sudo -u circleci mkdir -p /home/circleci/bin && \
+	sudo -u circleci mkdir -p /home/circleci/.local/bin && \
+    sudo -u circleci mkdir /home/circleci/.gnupg && \
+    sudo -u circleci bash -c "echo 'allow-loopback-pinentry' > /home/circleci/.gnupg/gpg-agent.conf" && \
+    sudo -u circleci bash -c "echo 'pinentry-mode loopback' > /home/circleci/.gnupg/gpg.conf" && \
+    chmod 700 /home/circleci/.gnupg && chmod 600 /home/circleci/.gnupg/* && \
+    sudo apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
-	 LANG=en_US.UTF-8 \
-	 LANGUAGE=en_US:en \
-	 LC_ALL=en_US.UTF-8
+	LANG=en_US.UTF-8 \
+	LANGUAGE=en_US:en \
+	LC_ALL=en_US.UTF-8
 
 USER circleci
 
