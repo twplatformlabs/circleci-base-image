@@ -26,7 +26,7 @@ SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
 # hadolint ignore=DL4001,DL3004,DL3047
 RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90circleci && \
-    apt-get update && apt-get install --no-install-recommends -y \
+    apt update && apt-get install --no-install-recommends -y \
             sudo=1.9.15p5-1 \
             locales=2.37-13 \
             tzdata=2023d-1 \
