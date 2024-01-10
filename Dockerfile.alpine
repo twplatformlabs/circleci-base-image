@@ -54,7 +54,6 @@ RUN apk add --no-cache \
         docker==24.0.7-r0 \
         openrc==0.52.1-r1 \
         bash==5.2.21-r0 && \
-    sudo rc-update add docker boot && \
     wget -q https://gitlab.com/rilian-la-te/musl-locales/-/archive/master/musl-locales-master.zip && \
     unzip musl-locales-master.zip && cd musl-locales-master && \
     cmake -DLOCALE_PROFILE=OFF -D CMAKE_INSTALL_PREFIX:PATH=/usr . && \
@@ -81,7 +80,8 @@ RUN apk add --no-cache \
     sudo -u circleci mkdir /home/circleci/.gnupg && \
     sudo -u circleci bash -c "echo 'allow-loopback-pinentry' > /home/circleci/.gnupg/gpg-agent.conf" && \
     sudo -u circleci bash -c "echo 'pinentry-mode loopback' > /home/circleci/.gnupg/gpg.conf" && \
-    chmod 700 /home/circleci/.gnupg && chmod 600 /home/circleci/.gnupg/*
+    chmod 700 /home/circleci/.gnupg && chmod 600 /home/circleci/.gnupg/* && \
+    sudo rc-update add docker boot
 
 USER circleci
 
