@@ -106,16 +106,16 @@
 }
 
 @test "describe /home/circleci" {
-  run bash -c "docker exec circleci-base-image-alpine-edge ls -ld /home/circleci"
+  run bash -c "docker exec circleci-base-image-alpine-edge ls -la /home/circleci"
   [[ "${output}" =~ "circleci circleci" ]]
 }
 
 @test "describe /home/circleci/project" {
-  run bash -c "docker exec circleci-base-image-alpine-edge ls -ld /home/circleci/project"
+  run bash -c "docker exec circleci-base-image-alpine-edge ls -la /home/circleci/project"
   [[ "${output}" =~ "circleci circleci" ]]
 }
 
 @test "describe /home/circleci/.gnupg" {
-  run bash -c "docker exec circleci-base-image-alpine-edge ls -ld /home/circleci/.gnupg"
+  run bash -c "docker exec circleci-base-image-alpine-edge ls -la /home/circleci/.gnupg"
   [[ "${output}" =~ "gpg.conf" ]]
 }

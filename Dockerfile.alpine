@@ -59,7 +59,7 @@ RUN apk add --no-cache \
     unzip musl-locales-master.zip && cd musl-locales-master && \
     cmake -DLOCALE_PROFILE=OFF -D CMAKE_INSTALL_PREFIX:PATH=/usr . && \
     make && make install && \
-    cd .. && rm -r musl-locales-master* \
+    cd .. && rm -r musl-locales-master* && \
     curl -L https://cache.agilebits.com/dist/1P/op2/pkg/v${ONEPASSWORD_VERSION}/op_linux_amd64_v${ONEPASSWORD_VERSION}.zip -o op.zip && \
     unzip op.zip && sudo mv op /usr/local/bin/op && \
     rm op.zip && rm op.sig && \
