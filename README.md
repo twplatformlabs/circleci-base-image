@@ -17,7 +17,7 @@ Packages that typically fall into this set of shared executor requirements inclu
 - tool for accessing secrets (such as Vault, chamber, 1password, teller)  
 - standard shell (bash, zsh)  
 - multi-language support (locales)  
-- common dependencies for installing packages (curl, wget, unzip, build-base)
+- common dependencies for installing packages (curl, wget, unzip, common build dependencies)
 
 The psk circleci-base-image is an example of such a common executor base. You will see the psk specific tools and configuration, but this can readily be adapted to any organizational requirements.  
 
@@ -25,4 +25,4 @@ Keep in mind that the shared configuration made to the executor base is intended
 
 See release notes for detailed version information.  
 
-See thet psk [circleci-remote-docker](https://github.com/ThoughtWorks-DPS/circleci-remote-docker) iamge repository for details image signing and sbom verification used by all twdps PSK executor images.  
+See the psk [circleci-remote-docker](https://github.com/ThoughtWorks-DPS/circleci-remote-docker) iamge repository for details image signing and sbom verification used by all twdps PSK executor images.  
