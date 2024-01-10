@@ -50,7 +50,7 @@
 }
 
 @test "bzip2 version" {
-  run bash -c "docker exec circleci-base-image-alpine-edge gzip2 --version"
+  run bash -c "docker exec circleci-base-image-alpine-edge bzip2 --version"
   [[ "${output}" =~ "1.0" ]]
 }
 
