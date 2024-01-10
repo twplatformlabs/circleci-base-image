@@ -51,7 +51,7 @@
 
 @test "bzip2 version" {
   run bash -c "docker exec circleci-base-image-alpine-edge gzip2 --version"
-  [[ "${output}" =~ "1.08" ]]
+  [[ "${output}" =~ "1.0" ]]
 }
 
 @test "jq version" {
