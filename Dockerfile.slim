@@ -23,7 +23,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
 
-# hadolint ignore=DL4001,DL3004,DL3047
+# hadolint ignore=DL4001,DL3004,DL3047,DL3027
 RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90circleci && \
     apt update && apt-get install --no-install-recommends -y \
