@@ -2,6 +2,10 @@
 version: v1.25.0
 # Nearly all CVE's are remediated by virtue of the runtime context, e.g., on an ephemeral circleci executor.
 ignore:
+  SNYK-DEBIANUNSTABLE-OPENSSH-6139208:
+    - "*":
+      reason: CVE-2023-51767
+      expires: 2024-04-01T14:26:34.404Z
   SNYK-DEBIANUNSTABLE-SYSTEMD-6137711:
     - "*":
       reason: CVE-2023-7008
