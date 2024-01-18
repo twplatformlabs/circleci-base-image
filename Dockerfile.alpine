@@ -42,7 +42,7 @@ RUN apk add --no-cache \
         curl==8.5.0-r0 \
         libcurl==8.5.0-r0 \
         curl-dev==8.5.0-r0 \
-        openssl-dev==3.1.4-r3 \
+        openssl-dev==3.1.4-r4 \
         wget==1.21.4-r0 \
         unzip==6.0-r14 \
         gzip==1.13-r0 \
@@ -52,7 +52,7 @@ RUN apk add --no-cache \
         git-lfs==3.4.1-r0 \
         gnupg==2.4.3-r1 \
         docker==24.0.7-r0 \
-        openrc==0.52.1-r1 \
+        openrc==0.52.1-r2 \
         bash==5.2.21-r0 && \
     wget -q https://gitlab.com/rilian-la-te/musl-locales/-/archive/master/musl-locales-master.zip && \
     unzip musl-locales-master.zip && cd musl-locales-master && \
