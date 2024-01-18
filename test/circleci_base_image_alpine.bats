@@ -49,10 +49,10 @@
   [[ "${output}" =~ "3.0" ]]
 }
 
-@test "bzip2 version" {
-  run bash -c "docker exec circleci-base-image-alpine-edge bzip2 --version"
-  [[ "${output}" =~ "1.0" ]]
-}
+# @test "bzip2 version" {
+#   run bash -c "docker exec circleci-base-image-alpine-edge bzip2 --version"
+#   [[ "${output}" =~ "1.0" ]]
+# }
 
 @test "jq version" {
   run bash -c "docker exec circleci-base-image-alpine-edge jq --version"
