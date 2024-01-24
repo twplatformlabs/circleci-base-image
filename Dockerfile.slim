@@ -11,10 +11,10 @@ LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.created="CREATED" \
       org.opencontainers.image.version="VERSION"
 
-ENV DOCKER_VERSION=5:24.0.7-1~debian.12~bookworm
-ENV DOCKER_BUILDX_VERSION=0.11.2-1~debian.12~bookworm
-ENV DOCKER_COMPOSE_VERSION=2.21.0-1~debian.12~bookworm
-ENV CONTAINERD_VERSION=1.6.26-1
+ENV DOCKER_VERSION=5:25.0.1-1~debian.12~bookworm
+ENV DOCKER_BUILDX_VERSION=0.12.1-1~debian.12~bookworm
+ENV DOCKER_COMPOSE_VERSION=2.24.2-1~debian.12~bookworm
+ENV CONTAINERD_VERSION=1.6.27-1
 ENV ONEPASSWORD_VERSION=2.24.0
 ENV TELLER_VERSION=1.5.6
 ENV VAULT_VERSION=1.15.4
@@ -33,7 +33,7 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90circleci && \
     apt update && apt-get install --no-install-recommends -y \
             sudo=1.9.15p5-2 \
-            locales=2.37-13 \
+            locales=2.37-14 \
             tzdata=2023d-1 \
             libcurl4-openssl-dev=8.5.0-2 \
             apt-transport-https=2.7.10 \
