@@ -2,6 +2,10 @@
 version: v1.25.0
 # Nearly all CVE's are remediated by virtue of the runtime context, e.g., on an ephemeral circleci executor.
 ignore:
+  SNYK-DEBIANUNSTABLE-OPENSSL-6148844:
+    - "*":
+      reason: Out-of-bounds Write
+      expires: 2024-04-01T14:26:34.404Z
   SNYK-DEBIANUNSTABLE-PERL-5489187:
     - "*":
       reason: Improper Certificate Validation
@@ -54,18 +58,6 @@ ignore:
     - "*":
       reason: Allocation of Resources Without Limits or Throttling
       expires: 2023-12-01T14:26:34.404Z
-
-
-
-
-  # SNYK-GOLANG-GOOGLEGOLANGORGGRPC-6085451:
-  #   - "*":
-  #     expires: 2023-12-01T14:26:34.404Z
-  #     reason: Runs on ephemeral pipeline executor
-  # SNYK-DEBIANUNSTABLE-NGHTTP2-5953388:
-  #   - "*":
-  #     expires: 2023-12-01T14:26:34.404Z
-  #     reason: Runs on ephemeral pipeline executor
   SNYK-GOLANG-GOLANGORGXNETHTTP2-5953327:
     - "*":
       reason: Denial of Service (DoS)
@@ -74,10 +66,6 @@ ignore:
     - "*":
       reason: Denial of Service (DoS)
       expires: 2023-12-01T14:26:34.404Z
-  # SNYK-ALPINE318-NGHTTP2-5954768:
-  #   - "*":
-  #     expires: 2023-12-01T14:26:34.404Z
-  #     reason: Runs on ephemeral pipeline executor
   SNYK-GOLANG-GOLANGORGXSYSUNIX-3310442:
     - "*":
       reason: Incorrect Privilege Assignment
