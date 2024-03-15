@@ -66,7 +66,7 @@
 
 @test "docker version" {
   run bash -c "docker exec circleci-base-image-alpine-edge docker --version"
-  [[ "${output}" =~ "24.0" ]]
+  [[ "${output}" =~ "25.0" ]]
 }
 
 @test "bash version" {
@@ -81,7 +81,7 @@
 
 @test "1password version" {
   run bash -c "docker exec circleci-base-image-alpine-edge op --version"
-  [[ "${output}" =~ "2.24" ]]
+  [[ "${output}" =~ "2.25" ]]
 }
 
 @test "teller version" {
