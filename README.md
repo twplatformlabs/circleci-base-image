@@ -25,4 +25,22 @@ Keep in mind that the shared configuration made to the executor base is intended
 
 See release notes for detailed version information.  
 
-See the psk [circleci-remote-docker](https://github.com/ThoughtWorks-DPS/circleci-remote-docker) iamge repository for details image signing and sbom verification used by all twdps PSK executor images.  
+**signature**. Images are signed using `cosign`. You can verify an image using the twdps public key found [here](https://raw.githubusercontent.com/ThoughtWorks-DPS/static/master/cosign.pub).  
+```bash
+cosign verify --key cosign.pub twdps/circleci-base-image:alpine-2023.04
+```  
+
+**software bill of materials**. For each published image, an SBOM is generated using [syft](https://github.com/anchore/syft) and uploaded to the container registry tagged using the manifest id and .spdx extension. You can pull the sbom using the oras tool as follows:  
+
+fetch image manifest:  
+```
+docker image inspect --format='{{index .RepoDigests 0}}' twdps/circleci-base-image:alpine-2023.04
+```
+twdps/circleci-base-image@sha256:9d8e8eef60900fcf207e3b258b4ce13b4cdb1765f0f7ca3022fd685cd53b8a14
+
+download sbom:  
+```
+oras pull docker.io/twdps/circleci-base-image:sha256-9d8e8eef60900fcf207e3b258b4ce13b4cdb1765f0f7ca3022fd685cd53b8a14.spdx
+```
+
+Review `.snyk` for current vulnerability status.  
