@@ -22,7 +22,7 @@
 
 @test "curl version" {
   run bash -c "docker exec circleci-base-image-slim-edge curl --version"
-  [[ "${output}" =~ "8.6" ]]
+  [[ "${output}" =~ "8.7" ]]
 }
 
 @test "wget version" {
@@ -67,7 +67,7 @@
 
 @test "1password version" {
   run bash -c "docker exec circleci-base-image-slim-edge op --version"
-  [[ "${output}" =~ "2.25" ]]
+  [[ "${output}" =~ "2.26" ]]
 }
 
 @test "teller version" {
@@ -77,7 +77,7 @@
 
 @test "vault version" {
   run bash -c "docker exec circleci-base-image-slim-edge vault -v"
-  [[ "${output}" =~ "1.15" ]]
+  [[ "${output}" =~ "1.16" ]]
 }
 
 @test "describe user circleci" {

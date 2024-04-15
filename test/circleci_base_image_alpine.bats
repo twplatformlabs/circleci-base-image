@@ -49,11 +49,6 @@
   [[ "${output}" =~ "3.0" ]]
 }
 
-# @test "bzip2 version" {
-#   run bash -c "docker exec circleci-base-image-alpine-edge bzip2 --version"
-#   [[ "${output}" =~ "1.0" ]]
-# }
-
 @test "jq version" {
   run bash -c "docker exec circleci-base-image-alpine-edge jq --version"
   [[ "${output}" =~ "1.7" ]]
@@ -81,7 +76,7 @@
 
 @test "1password version" {
   run bash -c "docker exec circleci-base-image-alpine-edge op --version"
-  [[ "${output}" =~ "2.25" ]]
+  [[ "${output}" =~ "2.26" ]]
 }
 
 @test "teller version" {
@@ -91,7 +86,7 @@
 
 @test "vault version" {
   run bash -c "docker exec circleci-base-image-alpine-edge vault -v"
-  [[ "${output}" =~ "1.15" ]]
+  [[ "${output}" =~ "1.16" ]]
 }
 
 @test "describe user circleci" {
