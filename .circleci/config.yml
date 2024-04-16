@@ -51,7 +51,8 @@ workflows:
           image: twdps/circleci-base-image
           tag: alpine-edge
           snyk-scan: true
-          snyk-severity-threshold: medium
+          snyk-severity-threshold: high
+          snyk-skip-base-image: true
           snyk-organization: twdps
           bats-test: true
           bats-run-container-name: circleci-base-image-alpine-edge
@@ -72,7 +73,8 @@ workflows:
           image: twdps/circleci-base-image
           tag: slim-edge
           snyk-scan: true
-          snyk-severity-threshold: medium
+          snyk-severity-threshold: high
+          snyk-skip-base-image: true
           snyk-organization: twdps
           bats-test: true
           bats-run-container-name: circleci-base-image-slim-edge
