@@ -27,7 +27,7 @@
 
 @test "wget version" {
   run bash -c "docker exec circleci-base-image-slim-edge wget --version"
-  [[ "${output}" =~ "1.21" ]]
+  [[ "${output}" =~ "1.24" ]]
 }
 
 @test "unzip version" {
