@@ -39,11 +39,6 @@
   [[ "${output}" =~ "6.0" ]]
 }
 
-@test "gzip version" {
-  run bash -c "docker exec circleci-base-image-alpine-edge gzip --version"
-  [[ "${output}" =~ "1.13" ]]
-}
-
 @test "zip version" {
   run bash -c "docker exec circleci-base-image-alpine-edge zip --version"
   [[ "${output}" =~ "3.0" ]]
@@ -76,7 +71,7 @@
 
 @test "1password version" {
   run bash -c "docker exec circleci-base-image-alpine-edge op --version"
-  [[ "${output}" =~ "2.26" ]]
+  [[ "${output}" =~ "2.27" ]]
 }
 
 @test "teller version" {

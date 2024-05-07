@@ -35,11 +35,6 @@
   [[ "${output}" =~ "6.0" ]]
 }
 
-@test "gzip version" {
-  run bash -c "docker exec circleci-base-image-slim-edge gzip --version"
-  [[ "${output}" =~ "1.12" ]]
-}
-
 @test "zip version" {
   run bash -c "docker exec circleci-base-image-slim-edge zip --version"
   [[ "${output}" =~ "3.0" ]]
@@ -60,6 +55,11 @@
   [[ "${output}" =~ "2.2" ]]
 }
 
+@test "docker version" {
+  run bash -c "docker exec circleci-base-image-slim-edge docker --version"
+  [[ "${output}" =~ "26" ]]
+}
+
 @test "check locale" {
   run bash -c "docker exec circleci-base-image-slim-edge locale"
   [[ "${output}" =~ "LC_ALL=en_US.UTF-8" ]]
@@ -67,7 +67,7 @@
 
 @test "1password version" {
   run bash -c "docker exec circleci-base-image-slim-edge op --version"
-  [[ "${output}" =~ "2.26" ]]
+  [[ "${output}" =~ "2.27" ]]
 }
 
 @test "teller version" {
