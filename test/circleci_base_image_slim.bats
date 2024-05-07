@@ -12,7 +12,7 @@
 
 @test "cmake version" {
   run bash -c "docker exec circleci-base-image-slim-edge cmake --version"
-  [[ "${output}" =~ "3.28" ]]
+  [[ "${output}" =~ "3.29" ]]
 }
 
 @test "make version" {
