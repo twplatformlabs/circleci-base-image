@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:slim-2024.05
+FROM twdps/circleci-remote-docker:slim-2024.06
 
 LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.description="Debian-based CircleCI executor image" \
@@ -11,13 +11,12 @@ LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.created="CREATED" \
       org.opencontainers.image.version="VERSION"
 
-ENV DOCKER_VERSION=5:26.1.1-1~debian.12~bookworm
-ENV DOCKER_BUILDX_VERSION=0.14.0-1~debian.12~bookworm
-ENV DOCKER_COMPOSE_VERSION=2.27.0-1~debian.12~bookworm
-ENV CONTAINERD_VERSION=1.6.24~ds1-1
-ENV ONEPASSWORD_VERSION=2.28.0
-ENV TELLER_VERSION=1.5.6
-ENV VAULT_VERSION=1.16.2
+ENV DOCKER_VERSION=5:23.0.0-1~debian.12~bookworm
+ENV DOCKER_BUILDX_VERSION=0.15.1-1~debian.12~bookworm
+ENV DOCKER_COMPOSE_VERSION=2.28.1-1~debian.12~bookworm
+ENV ONEPASSWORD_VERSION=2.29.0
+ENV TELLER_VERSION=2.0.7
+ENV VAULT_VERSION=1.17.1
 ENV BUILDEVENTS_VERSION=0.16.0
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -33,18 +32,18 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90circleci && \
     apt update && apt-get install --no-install-recommends -y \
             sudo=1.9.15p5-3+b1 \
-            locales=2.38-11 \
+            locales=2.38-13 \
             tzdata=2024a-4 \
-            libcurl4-openssl-dev=8.7.1-5 \
-            apt-transport-https=2.9.2 \
-            lsb-release=12.0-2 \
-            gettext-base=0.21-14+b1 \
+            libcurl4-openssl-dev=8.8.0-1 \
+            apt-transport-https=2.9.5 \
+            lsb-release=12.1-1 \
+            gettext-base=0.22.5-1 \
             build-essential=12.10 \
             gcc=4:13.2.0-7 \
             g++=4:13.2.0-7 \
-            cmake=3.29.3-1+b1 \
+            cmake=3.29.6-1 \
             make=4.3-4.1 \
-            curl=8.7.1-5 \
+            curl=8.8.0-1 \
             wget=1.24.5-1 \
             unzip=6.0-28 \
             gzip=1.12-1.1 \
@@ -52,8 +51,8 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
             bzip2=1.0.8-5.1 \
             jq=1.7.1-3 \
             git-lfs=3.5.0-1 \
-            gnupg=2.2.43-6 \
-            gnupg-agent=2.2.43-6 && \
+            gnupg=2.2.43-7 \
+            gnupg-agent=2.2.43-7 && \
     sudo install -m 0755 -d /etc/apt/keyrings && \
     sudo bash -c "curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg" && \
     sudo chmod a+r /etc/apt/keyrings/docker.gpg && \
@@ -68,9 +67,10 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     curl -L https://cache.agilebits.com/dist/1P/op2/pkg/v${ONEPASSWORD_VERSION}/op_linux_amd64_v${ONEPASSWORD_VERSION}.zip -o op.zip && \
     unzip -o op.zip && sudo mv op /usr/local/bin/op && \
     rm op.zip && rm op.sig && \
-    curl -L https://github.com/tellerops/teller/releases/download/v${TELLER_VERSION}/teller_${TELLER_VERSION}_Linux_x86_64.tar.gz --output teller_${TELLER_VERSION}_Linux_x86_64.tar.gz && \
-    tar -xzf teller_${TELLER_VERSION}_Linux_x86_64.tar.gz && \
-    sudo mv teller /usr/local/bin/teller && \
+    curl -L https://github.com/tellerops/teller/releases/download/v${TELLER_VERSION}/teller-x86_64-linux.tar.xz --output teller-x86_64-linux.tar.xz && \
+    xz -d teller-x86_64-linux.tar.xz && \
+    tar -xf teller-x86_64-linux.tar && \
+    sudo mv teller-x86_64-linux/teller /usr/local/bin/teller && \
     curl -SLO "https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip" > "vault_${VAULT_VERSION}_linux_amd64.zip" && \
     sudo unzip "vault_${VAULT_VERSION}_linux_amd64.zip" -d /usr/local/bin && \
     sudo rm "vault_${VAULT_VERSION}_linux_amd64.zip" && \

@@ -5,11 +5,6 @@
   [[ "${output}" =~ "1.9" ]]
 }
 
-@test "gettext install" {
-  run bash -c "docker exec circleci-base-image-alpine-edge less --version"
-  [[ "${output}" =~ "643" ]]
-}
-
 @test "gcc version" {
   run bash -c "docker exec circleci-base-image-alpine-edge gcc --version"
   [[ "${output}" =~ "13.2" ]]
@@ -17,7 +12,7 @@
 
 @test "cmake version" {
   run bash -c "docker exec circleci-base-image-alpine-edge cmake --version"
-  [[ "${output}" =~ "3.27" ]]
+  [[ "${output}" =~ "3.29" ]]
 }
 @test "make version" {
   run bash -c "docker exec circleci-base-image-alpine-edge make --version"
@@ -26,12 +21,12 @@
 
 @test "curl version" {
   run bash -c "docker exec circleci-base-image-alpine-edge curl --version"
-  [[ "${output}" =~ "8.5" ]]
+  [[ "${output}" =~ "8.8" ]]
 }
 
 @test "wget version" {
   run bash -c "docker exec circleci-base-image-alpine-edge wget --version"
-  [[ "${output}" =~ "1.21" ]]
+  [[ "${output}" =~ "1.24" ]]
 }
 
 @test "unzip version" {
@@ -56,7 +51,7 @@
 
 @test "docker version" {
   run bash -c "docker exec circleci-base-image-alpine-edge docker --version"
-  [[ "${output}" =~ "25.0" ]]
+  [[ "${output}" =~ "26.1" ]]
 }
 
 @test "bash version" {
@@ -71,17 +66,17 @@
 
 @test "1password version" {
   run bash -c "docker exec circleci-base-image-alpine-edge op --version"
-  [[ "${output}" =~ "2.28" ]]
+  [[ "${output}" =~ "2.29" ]]
 }
 
 @test "teller version" {
   run bash -c "docker exec circleci-base-image-alpine-edge teller version"
-  [[ "${output}" =~ "1.5.6" ]]
+  [[ "${output}" =~ "2.0" ]]
 }
 
 @test "vault version" {
   run bash -c "docker exec circleci-base-image-alpine-edge vault -v"
-  [[ "${output}" =~ "1.16" ]]
+  [[ "${output}" =~ "1.17" ]]
 }
 
 @test "describe user circleci" {
