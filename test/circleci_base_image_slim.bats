@@ -70,11 +70,6 @@
   [[ "${output}" =~ "2.28" ]]
 }
 
-@test "teller version" {
-  run bash -c "docker exec circleci-base-image-slim-edge teller version"
-  [[ "${output}" =~ "2.0" ]]
-}
-
 @test "vault version" {
   run bash -c "docker exec circleci-base-image-slim-edge vault -v"
   [[ "${output}" =~ "1.17" ]]

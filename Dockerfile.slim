@@ -67,10 +67,6 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     curl -L https://cache.agilebits.com/dist/1P/op2/pkg/v${ONEPASSWORD_VERSION}/op_linux_amd64_v${ONEPASSWORD_VERSION}.zip -o op.zip && \
     unzip -o op.zip && sudo mv op /usr/local/bin/op && \
     rm op.zip && rm op.sig && \
-    curl -L https://github.com/tellerops/teller/releases/download/v${TELLER_VERSION}/teller-x86_64-linux.tar.xz --output teller-x86_64-linux.tar.xz && \
-    xz -d teller-x86_64-linux.tar.xz && \
-    tar -xf teller-x86_64-linux.tar && \
-    sudo mv teller-x86_64-linux/teller /usr/local/bin/teller && \
     curl -SLO "https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip" > "vault_${VAULT_VERSION}_linux_amd64.zip" && \
     sudo unzip "vault_${VAULT_VERSION}_linux_amd64.zip" -d /usr/local/bin && \
     sudo rm "vault_${VAULT_VERSION}_linux_amd64.zip" && \
