@@ -57,7 +57,7 @@
 
 @test "docker version" {
   run bash -c "docker exec circleci-base-image-slim-edge docker --version"
-  [[ "${output}" =~ "26" ]]
+  [[ "${output}" =~ "23" ]]
 }
 
 @test "check locale" {
@@ -67,7 +67,7 @@
 
 @test "1password version" {
   run bash -c "docker exec circleci-base-image-slim-edge op --version"
-  [[ "${output}" =~ "2.28" ]]
+  [[ "${output}" =~ "2.29" ]]
 }
 
 @test "vault version" {
