@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:slim-2024.06
+FROM twdps/circleci-remote-docker:slim-2024.08
 
 LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.description="Debian-based CircleCI executor image" \
@@ -14,7 +14,7 @@ LABEL org.opencontainers.image.title="circleci-base-image" \
 ENV DOCKER_VERSION=5:23.0.0-1~debian.12~bookworm
 ENV DOCKER_BUILDX_VERSION=0.15.1-1~debian.12~bookworm
 ENV DOCKER_COMPOSE_VERSION=2.28.1-1~debian.12~bookworm
-ENV ONEPASSWORD_VERSION=2.29.0
+ENV ONEPASSWORD_VERSION=2.30.0
 ENV TELLER_VERSION=2.0.7
 ENV VAULT_VERSION=1.17.1
 ENV BUILDEVENTS_VERSION=0.16.0
