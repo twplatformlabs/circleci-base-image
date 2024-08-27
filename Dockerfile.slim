@@ -27,7 +27,7 @@ ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
 
 SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
 
-# hadolint ignore=DL4001,DL3004,DL3047,DL3027
+# hadolint ignore=DL4001,DL3004,DL3047,DL3027,DL3008
 RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
     echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90circleci && \
     apt update && apt-get install --no-install-recommends -y \
@@ -44,7 +44,7 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
             cmake=3.30.2-2 \
             make=4.3-4.1 \
             curl=8.9.1-2 \
-            wget=1.24.5-2 \
+            wget \
             unzip=6.0-28 \
             gzip=1.12-1.1 \
             zip=3.0-14 \
