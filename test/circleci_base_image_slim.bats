@@ -7,12 +7,12 @@
 
 @test "gcc version" {
   run bash -c "docker exec circleci-base-image-slim-edge gcc --version"
-  [[ "${output}" =~ "13.3" ]]
+  [[ "${output}" =~ "14.1" ]]
 }
 
 @test "cmake version" {
   run bash -c "docker exec circleci-base-image-slim-edge cmake --version"
-  [[ "${output}" =~ "3.29" ]]
+  [[ "${output}" =~ "3.30" ]]
 }
 
 @test "make version" {
@@ -22,7 +22,7 @@
 
 @test "curl version" {
   run bash -c "docker exec circleci-base-image-slim-edge curl --version"
-  [[ "${output}" =~ "8.8" ]]
+  [[ "${output}" =~ "8.9" ]]
 }
 
 @test "wget version" {
@@ -57,7 +57,7 @@
 
 @test "docker version" {
   run bash -c "docker exec circleci-base-image-slim-edge docker --version"
-  [[ "${output}" =~ "23" ]]
+  [[ "${output}" =~ "27" ]]
 }
 
 @test "check locale" {
