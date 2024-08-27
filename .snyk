@@ -2,6 +2,10 @@
 version: v1.25.0
 # Nearly all CVE's are remediated by virtue of the runtime context, e.g., on an ephemeral circleci executor.
 ignore:
+  SNYK-DEBIANUNSTABLE-LIBARCHIVE-7224016:
+    - "*":
+      reason: Out-of-bounds Read
+      expires: 2024-06-01T14:26:34.404Z
   SNYK-GOLANG-GOLANGORGXNETHTTP2-6531285:
     - "*":
       reason: Allocation of Resources Without Limits or Throttling
