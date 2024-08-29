@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM twdps/circleci-remote-docker:alpine-2024.08.1
 
 LABEL org.opencontainers.image.title="gha-container-base-image" \
       org.opencontainers.image.description="Alpine-based github actions job container image" \
