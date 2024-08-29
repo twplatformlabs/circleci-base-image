@@ -58,7 +58,7 @@ RUN apk add --no-cache \
         protoc=24.4-r1 \
         cargo=1.78.0-r0
 
-    # Install teller
+# hadolint ignore=DL3044,DL3003
 RUN git clone --depth 1 --branch v${TELLER_VERSION} https://github.com/tellerops/teller.git && \
     sed -i 's/\.with_native_roots()/\.with_native_roots()?/g' teller/teller-providers/src/providers/google_secretmanager.rs && \
     cd teller/teller-cli && cargo install --path . && \
