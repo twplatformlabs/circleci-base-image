@@ -101,3 +101,10 @@ WORKDIR /home/circleci/project
 # tar -xf teller-x86_64-linux.tar && \
 # sudo mv teller-x86_64-linux/teller /usr/local/bin/teller && \
 ## rm teller-x86_64-linux.tar && rm -rf teller-x86_64-linux && \
+
+
+apt-get update && \
+apt-get install curl xz-utils -y && \
+curl -L https://github.com/tellerops/teller/releases/download/v2.0.7/teller-x86_64-linux.tar.xz --output teller-x86_64-linux.tar.xz && \
+xz -d teller-x86_64-linux.tar.xz && \
+tar -xf teller-x86_64-linux.tar 
