@@ -63,7 +63,7 @@ RUN apk add --no-cache \
     curl -L https://cache.agilebits.com/dist/1P/op2/pkg/v${ONEPASSWORD_VERSION}/op_linux_amd64_v${ONEPASSWORD_VERSION}.zip -o op.zip && \
     unzip op.zip && sudo mv op /usr/local/bin/op && \
     rm op.zip && rm op.sig && \
-    curl -SLO "https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip" > "vault_${VAULT_VERSION}_linux_amd64.zip" && \
+    curl -SLO "https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip" -o "vault_${VAULT_VERSION}_linux_amd64.zip" && \
     sudo unzip "vault_${VAULT_VERSION}_linux_amd64.zip" -d /usr/local/bin && \
     sudo rm "vault_${VAULT_VERSION}_linux_amd64.zip" && \
     git clone --depth 1 --branch v${TELLER_VERSION} https://github.com/tellerops/teller.git && \

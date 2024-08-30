@@ -11,6 +11,7 @@ LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.created="CREATED" \
       org.opencontainers.image.version="VERSION"
 
+ENV ONEPASSWORD_VERSION=2.30.0
 ENV TELLER_VERSION=2.0.7
 ENV VAULT_VERSION=1.16.2
 ENV BUILDEVENTS_VERSION=0.16.0
@@ -68,23 +69,19 @@ RUN git clone --depth 1 --branch v${TELLER_VERSION} https://github.com/tellerops
     rm -rf /root/.cargo
 
     # Install Vault
-RUN curl -sL "https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip" -o vault.zip && \
-    unzip vault.zip -d /usr/local/bin && \
-    rm vault.zip
+RUN curl -sL "https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip" -o "vault_${VAULT_VERSION}_linux_amd64.zip" && \
+    unzip "vault_${VAULT_VERSION}_linux_amd64.zip" -d /usr/local/bin && \
+    rm "vault_${VAULT_VERSION}_linux_amd64.zip"
 
     # Install BuildEvents
-RUN curl -sL "https://github.com/honeycombio/buildevents/releases/download/v${BUILDEVENTS_VERSION}/buildevents-linux-amd64" -o /usr/local/bin/buildevents && \
-    chmod +x /usr/local/bin/buildevents
+RUN curl -sL "https://github.com/honeycombio/buildevents/releases/download/v${BUILDEVENTS_VERSION}/buildevents-linux-amd64" -o buildevents && \
+    chmod +x buildevents && \
+    mv buildevents /usr/local/bin/buildevents
+
+RUN curl -sL https://cache.agilebits.com/dist/1P/op2/pkg/v${ONEPASSWORD_VERSION}/op_linux_amd64_v${ONEPASSWORD_VERSION}.zip -o op.zip && \
+    unzip op.zip && mv op /usr/local/bin/op && \
+    rm op.*
 
 RUN apk del build-dependencies && rm -rf /var/cache/apk/*
 
 RUN rc-update add docker boot
-    
-    # && \
-    # curl -sL "https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip" -o vault.zip && \
-    # unzip vault.zip -d /usr/local/bin && \
-    # rm vault.zip && \
-    # curl -sL "https://github.com/honeycombio/buildevents/releases/download/v${BUILDEVENTS_VERSION}/buildevents-linux-amd64" -o /usr/local/bin/buildevents && \
-    # chmod +x /usr/local/bin/buildevents && \
-    # apk del build-dependencies && rm -rf /var/cache/apk/* && \
-    # rc-update add docker boot
