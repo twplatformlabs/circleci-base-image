@@ -23,7 +23,7 @@ ENV MUSL_LOCPATH=/usr/share/i18n/locales/musl \
     LANGUAGE="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8"
 
-# hadolint ignore=DL3003,DL3004,DL4001,SC2035
+# hadolint ignore=DL3003,DL3004,DL4001,SC2035,DL3044
 RUN apk add --no-cache \
         github-cli=2.47.0-r4 \
         tzdata=2024a-r1 \
@@ -53,25 +53,17 @@ RUN apk add --no-cache \
         bash=5.2.26-r0 && \
     apk add --no-cache --virtual build-dependencies \
         protoc=24.4-r1 \
-        cargo=1.78.0-r0
-
-# hadolint ignore=DL3044,DL3003
-RUN git clone --depth 1 --branch v${TELLER_VERSION} https://github.com/tellerops/teller.git && \
+        cargo=1.78.0-r0 && \
+    git clone --depth 1 --branch v${TELLER_VERSION} https://github.com/tellerops/teller.git && \
     sed -i 's/\.with_native_roots()/\.with_native_roots()?/g' teller/teller-providers/src/providers/google_secretmanager.rs && \
     cd teller/teller-cli && cargo install --path . && \
     cp /root/.cargo/bin/teller /usr/local/bin/teller && \
     rm -rf /teller && \
-    rm -rf /root/.cargo
-
-    # Install Vault
-RUN curl -sL "https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip" -o vault.zip && \
+    rm -rf /root/.cargo && \
+    curl -sL "https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip" -o vault.zip && \
     unzip vault.zip -d /usr/local/bin && \
-    rm vault.zip
-
-    # Install BuildEvents
-RUN curl -sL "https://github.com/honeycombio/buildevents/releases/download/v${BUILDEVENTS_VERSION}/buildevents-linux-amd64" -o /usr/local/bin/buildevents && \
-    chmod +x /usr/local/bin/buildevents
-
-RUN apk del build-dependencies && rm -rf /var/cache/apk/*
-
-RUN rc-update add docker boot
+    rm vault.zip && \
+    curl -sL "https://github.com/honeycombio/buildevents/releases/download/v${BUILDEVENTS_VERSION}/buildevents-linux-amd64" -o /usr/local/bin/buildevents && \
+    chmod +x /usr/local/bin/buildevents && \
+    apk del build-dependencies && rm -rf /var/cache/apk/* && \
+    rc-update add docker boot
