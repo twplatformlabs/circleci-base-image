@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:alpine-2024.08.1
+FROM twdps/circleci-remote-docker:alpine-2024.08.2
 
 LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.description="Alpine-based CircleCI executor image" \
@@ -13,9 +13,8 @@ LABEL org.opencontainers.image.title="circleci-base-image" \
 
 ENV ONEPASSWORD_VERSION=2.30.0
 ENV TELLER_VERSION=2.0.7
-ENV VAULT_VERSION=1.16.2
+ENV VAULT_VERSION=1.17.5
 ENV BUILDEVENTS_VERSION=0.16.0
-# this is only for honeycomb, need an option for whatever the IDP solution will be
 
 # hadolint ignore=DL3044
 ENV MUSL_LOCPATH=/usr/share/i18n/locales/musl \
@@ -25,6 +24,7 @@ ENV MUSL_LOCPATH=/usr/share/i18n/locales/musl \
 
 # hadolint ignore=DL3003,DL3004,DL4001,SC2035
 RUN apk add --no-cache \
+        sudo==1.9.15_p5-r0 \
         github-cli=2.47.0-r4 \
         tzdata=2024a-r1 \
         gettext-dev=0.22.5-r0 \
@@ -51,24 +51,47 @@ RUN apk add --no-cache \
         docker=26.1.5-r0 \
         openrc=0.54-r1 \
         bash=5.2.26-r0 && \
-    apk add --no-cache --virtual build-dependencies \
-        protoc=24.4-r1 \
-        cargo=1.78.0-r0
-
-# hadolint ignore=DL3003
-RUN git clone --depth 1 --branch v${TELLER_VERSION} https://github.com/tellerops/teller.git && \
-    sed -i 's/\.with_native_roots()/\.with_native_roots()?/g' teller/teller-providers/src/providers/google_secretmanager.rs && \
-    cd teller/teller-cli && cargo install --path . && \
-    cp /root/.cargo/bin/teller /usr/local/bin/teller && \
-    rm -rf /teller && \
-    rm -rf /root/.cargo && \
+    wget -q https://gitlab.com/rilian-la-te/musl-locales/-/archive/master/musl-locales-master.zip && \
+    unzip musl-locales-master.zip && cd musl-locales-master && \
+    cmake -DLOCALE_PROFILE=OFF -D CMAKE_INSTALL_PREFIX:PATH=/usr . && \
+    make && make install && \
+    cd .. && rm -r musl-locales-master* && \
+    curl -sL https://cache.agilebits.com/dist/1P/op2/pkg/v${ONEPASSWORD_VERSION}/op_linux_amd64_v${ONEPASSWORD_VERSION}.zip -o op.zip && \
+    unzip op.zip && sudo mv op /usr/local/bin/op && \
+    rm op.zip && rm op.sig && \
     curl -sL "https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip" -o "vault_${VAULT_VERSION}_linux_amd64.zip" && \
     unzip "vault_${VAULT_VERSION}_linux_amd64.zip" -d /usr/local/bin && \
     rm "vault_${VAULT_VERSION}_linux_amd64.zip" && \
     curl -sL "https://github.com/honeycombio/buildevents/releases/download/v${BUILDEVENTS_VERSION}/buildevents-linux-amd64" -o buildevents && \
     chmod +x buildevents && \
     mv buildevents /usr/local/bin/buildevents && \
-    curl -sL https://cache.agilebits.com/dist/1P/op2/pkg/v${ONEPASSWORD_VERSION}/op_linux_amd64_v${ONEPASSWORD_VERSION}.zip -o op.zip && \
-    unzip op.zip && mv op /usr/local/bin/op && rm op.* && \
-    apk del build-dependencies && rm -rf /var/cache/apk/* && \
+    addgroup --gid 3434 -S circleci && \
+    adduser --uid 3434 --ingroup circleci --disabled-password circleci && \
+    echo "circleci ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/circleci && \
+    chmod 0440 /etc/sudoers.d/circleci && \
+    sudo -u circleci mkdir /home/circleci/project && \
+    sudo -u circleci mkdir /home/circleci/.gnupg && \
+    sudo -u circleci bash -c "echo 'allow-loopback-pinentry' > /home/circleci/.gnupg/gpg-agent.conf" && \
+    sudo -u circleci bash -c "echo 'pinentry-mode loopback' > /home/circleci/.gnupg/gpg.conf" && \
+    chmod 700 /home/circleci/.gnupg && chmod 600 /home/circleci/.gnupg/* && \
     rc-update add docker boot
+
+    USER circleci
+
+    WORKDIR /home/circleci/project
+    
+
+# it is possible to build Teller v2 and get a functioning install
+# still can't decide if this tool is imploading
+#
+# apk add --no-cache --virtual build-dependencies \
+#     protoc=24.4-r1 \
+#     cargo=1.78.0-r0
+
+# # hadolint ignore=DL3003
+# RUN git clone --depth 1 --branch v${TELLER_VERSION} https://github.com/tellerops/teller.git && \
+#     sed -i 's/\.with_native_roots()/\.with_native_roots()?/g' teller/teller-providers/src/providers/google_secretmanager.rs && \
+#     cd teller/teller-cli && cargo install --path . && \
+#     cp /root/.cargo/bin/teller /usr/local/bin/teller && \
+#     rm -rf /teller && \
+#     rm -rf /root/.cargo

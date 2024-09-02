@@ -1,0 +1,93 @@
+FROM twdps/circleci-remote-docker:ubuntu-2024.08.2
+
+LABEL org.opencontainers.image.title="circleci-base-image" \
+      org.opencontainers.image.description="Ubuntu-based CircleCI executor image" \
+      org.opencontainers.image.documentation="https://github.com/ThoughtWorks-DPS/circleci-base-image" \
+      org.opencontainers.image.source="https://github.com/ThoughtWorks-DPS/circleci-base-image" \
+      org.opencontainers.image.url="https://github.com/ThoughtWorks-DPS/circleci-base-image" \
+      org.opencontainers.image.vendor="ThoughtWorks, Inc." \
+      org.opencontainers.image.authors="nic.cheneweth@thoughtworks.com" \
+      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.created="CREATED" \
+      org.opencontainers.image.version="VERSION"
+
+ENV UBUNTU_CODENAME=Noble
+ENV DOCKER_VERSION=5:27.2.0-1~ubuntu.24.04~noble
+ENV DOCKER_BUILDX_VERSION=0.16.2-1~ubuntu.24.04~noble
+ENV DOCKER_COMPOSE_VERSION=2.29.2-1~ubuntu.24.04~noble
+ENV ONEPASSWORD_VERSION=2.30.0
+ENV TELLER_VERSION=2.0.7
+ENV VAULT_VERSION=1.17.3
+ENV BUILDEVENTS_VERSION=0.16.0
+ENV DEBIAN_FRONTEND=noninteractive
+
+ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
+	LANG=en_US.UTF-8 \
+	LANGUAGE=en_US:en \
+	LC_ALL=en_US.UTF-8
+
+SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
+
+# hadolint ignore=DL4001,DL3004,DL3047,DL3027,DL3008
+RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
+    echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90circleci && \
+    apt update && apt-get install --no-install-recommends -y \
+            sudo=1.9.15p5-3ubuntu5 \
+            locales=2.40-1ubuntu1 \
+            tzdata=2024a-4ubuntu1 \
+            libcurl4-openssl-dev=8.9.1-2ubuntu1 \
+            apt-transport-https=2.9.8 \
+            lsb-release=12.1-1 \
+            gettext-base=0.22.5-2 \
+            build-essential=12.10ubuntu1 \
+            gcc=4:14.1.0-2ubuntu1 \
+            g++=4:14.1.0-2ubuntu1 \
+            cmake=3.30.2-2 \
+            make=4.3-4.1build2 \
+            curl=8.9.1-2ubuntu1 \
+            wget=1.24.5-1ubuntu2 \
+            unzip=6.0-28ubuntu5 \
+            gzip=1.12-1.1ubuntu1 \
+            zip=3.0-14 \
+            bzip2=1.0.8-6 \
+            jq=1.7.1-3build1 \
+            git-lfs=3.5.0-1 \
+            gnupg=2.4.4-2ubuntu18 \
+            gnupg-agent=2.4.4-2ubuntu18 && \
+    sudo install -m 0755 -d /etc/apt/keyrings && \
+    sudo bash -c "curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc" && \
+    sudo chmod a+r /etc/apt/keyrings/docker.asc && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo noble) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+    sudo apt-get update && \
+    sudo apt-get install --no-install-recommends -y \
+            docker-ce=${DOCKER_VERSION} \
+            docker-ce-cli=${DOCKER_VERSION} \
+            containerd.io=1.7.21-1 \
+            docker-buildx-plugin=${DOCKER_BUILDX_VERSION} \
+            docker-compose-plugin=${DOCKER_COMPOSE_VERSION} && \
+    curl -L https://cache.agilebits.com/dist/1P/op2/pkg/v${ONEPASSWORD_VERSION}/op_linux_amd64_v${ONEPASSWORD_VERSION}.zip -o op.zip && \
+    unzip -o op.zip && sudo mv op /usr/local/bin/op && \
+    rm op.zip && rm op.sig && \
+    curl -SLO "https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip" > "vault_${VAULT_VERSION}_linux_amd64.zip" && \
+    sudo unzip "vault_${VAULT_VERSION}_linux_amd64.zip" -d /usr/local/bin && \
+    sudo rm "vault_${VAULT_VERSION}_linux_amd64.zip" && \
+    curl -L -o buildevents https://github.com/honeycombio/buildevents/releases/download/v${BUILDEVENTS_VERSION}/buildevents-linux-amd64 && \
+    chmod +x buildevents && \
+    sudo mv buildevents /usr/local/bin/buildevents && \
+    sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen && locale-gen && \
+    useradd --uid=3434 --user-group --create-home circleci && \
+    usermod --shell /bin/bash circleci && \
+    echo 'circleci ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
+    sudo -u circleci mkdir -p /home/circleci/project && \
+    sudo -u circleci mkdir -p /home/circleci/bin && \
+	  sudo -u circleci mkdir -p /home/circleci/.local/bin && \
+    sudo -u circleci mkdir /home/circleci/.gnupg && \
+    sudo -u circleci bash -c "echo 'allow-loopback-pinentry' > /home/circleci/.gnupg/gpg-agent.conf" && \
+    sudo -u circleci bash -c "echo 'pinentry-mode loopback' > /home/circleci/.gnupg/gpg.conf" && \
+    chmod 700 /home/circleci/.gnupg && chmod 600 /home/circleci/.gnupg/* && \
+    sudo apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+USER circleci
+
+WORKDIR /home/circleci/project
