@@ -7,7 +7,7 @@
 
 @test "gcc version" {
   run bash -c "docker exec circleci-base-image-ubuntu-edge gcc --version"
-  [[ "${output}" =~ "14.1" ]]
+  [[ "${output}" =~ "14.2" ]]
 }
 
 @test "cmake version" {
