@@ -12,9 +12,9 @@ LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.version="VERSION"
 
 ENV ONEPASSWORD_VERSION=2.30.0
-ENV TELLER_VERSION=2.0.7
 ENV VAULT_VERSION=1.17.5
 ENV BUILDEVENTS_VERSION=0.16.0
+# ENV TELLER_VERSION=2.0.7
 
 # hadolint ignore=DL3044
 ENV MUSL_LOCPATH=/usr/share/i18n/locales/musl \

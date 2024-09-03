@@ -11,15 +11,14 @@ LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.created="CREATED" \
       org.opencontainers.image.version="VERSION"
 
-ENV UBUNTU_CODENAME=Noble
 ENV DOCKER_VERSION=5:27.2.0-1~ubuntu.24.04~noble
 ENV DOCKER_BUILDX_VERSION=0.16.2-1~ubuntu.24.04~noble
 ENV DOCKER_COMPOSE_VERSION=2.29.2-1~ubuntu.24.04~noble
 ENV ONEPASSWORD_VERSION=2.30.0
-ENV TELLER_VERSION=2.0.7
 ENV VAULT_VERSION=1.17.3
 ENV BUILDEVENTS_VERSION=0.16.0
 ENV DEBIAN_FRONTEND=noninteractive
+# ENV TELLER_VERSION=2.0.7
 
 ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
 	LANG=en_US.UTF-8 \
@@ -28,9 +27,9 @@ ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
 
 SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
 
-# hadolint ignore=DL4001,DL3004,DL3047,DL3027,DL3008
-RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
-    echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90circleci && \
+# hadolint ignore=DL4001,DL3004,DL3047,DL3027,DL3008,SC1091
+RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90forceyes && \
+    echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90forceyes && \
     apt update && apt-get install --no-install-recommends -y \
             sudo=1.9.15p5-3ubuntu5 \
             locales=2.40-1ubuntu1 \
