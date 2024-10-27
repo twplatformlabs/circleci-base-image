@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:alpine-2024.08.2
+FROM twdps/circleci-remote-docker:alpine-2024.10
 
 LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.description="Alpine-based CircleCI executor image" \
@@ -12,8 +12,8 @@ LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.version="VERSION"
 
 ENV ONEPASSWORD_VERSION=2.30.0
-ENV VAULT_VERSION=1.17.5
-ENV BUILDEVENTS_VERSION=0.16.0
+ENV VAULT_VERSION=1.17.6
+ENV BUILDEVENTS_VERSION=0.17.0
 # ENV TELLER_VERSION=2.0.7
 
 # hadolint ignore=DL3044
@@ -26,7 +26,7 @@ ENV MUSL_LOCPATH=/usr/share/i18n/locales/musl \
 RUN apk add --no-cache \
         sudo==1.9.15_p5-r0 \
         github-cli=2.47.0-r4 \
-        tzdata=2024a-r1 \
+        tzdata=2024b-r0 \
         gettext-dev=0.22.5-r0 \
         libintl=0.22.5-r0 \
         build-base=0.5-r3 \
@@ -37,10 +37,10 @@ RUN apk add --no-cache \
         g++=13.2.1_git20240309-r0 \
         cmake=3.29.3-r0 \
         make=4.4.1-r2 \
-        curl=8.9.1-r1 \
-        libcurl=8.9.1-r1 \
-        curl-dev=8.9.1-r1 \
-        openssl-dev=3.3.1-r3 \
+        curl=8.10.1-r0 \
+        libcurl=8.10.1-r0 \
+        curl-dev=8.10.1-r0 \
+        openssl-dev=3.3.2-r1 \
         wget=1.24.5-r0 \
         unzip=6.0-r14 \
         zip=3.0-r12 \
