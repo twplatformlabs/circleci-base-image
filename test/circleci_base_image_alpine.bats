@@ -7,13 +7,14 @@
 
 @test "gcc version" {
   run bash -c "docker exec circleci-base-image-alpine-edge gcc --version"
-  [[ "${output}" =~ "13.2" ]]
+  [[ "${output}" =~ "14.2" ]]
 }
 
 @test "cmake version" {
   run bash -c "docker exec circleci-base-image-alpine-edge cmake --version"
-  [[ "${output}" =~ "3.29" ]]
+  [[ "${output}" =~ "3.31" ]]
 }
+
 @test "make version" {
   run bash -c "docker exec circleci-base-image-alpine-edge make --version"
   [[ "${output}" =~ "4.4" ]]
@@ -26,7 +27,7 @@
 
 @test "wget version" {
   run bash -c "docker exec circleci-base-image-alpine-edge wget --version"
-  [[ "${output}" =~ "1.24" ]]
+  [[ "${output}" =~ "1.25" ]]
 }
 
 @test "unzip version" {
@@ -51,7 +52,7 @@
 
 @test "docker version" {
   run bash -c "docker exec circleci-base-image-alpine-edge docker --version"
-  [[ "${output}" =~ "26.1" ]]
+  [[ "${output}" =~ "27.3" ]]
 }
 
 @test "bash version" {
@@ -71,7 +72,7 @@
 
 @test "vault version" {
   run bash -c "docker exec circleci-base-image-alpine-edge vault -v"
-  [[ "${output}" =~ "1.17" ]]
+  [[ "${output}" =~ "1.18" ]]
 }
 
 @test "describe user circleci" {

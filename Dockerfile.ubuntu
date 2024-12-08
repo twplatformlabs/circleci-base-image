@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:ubuntu-2024.10
+FROM twdps/circleci-remote-docker:ubuntu-2024.12
 
 LABEL org.opencontainers.image.title="circleci-base-image" \
       org.opencontainers.image.description="Ubuntu-based CircleCI executor image" \
@@ -14,8 +14,8 @@ LABEL org.opencontainers.image.title="circleci-base-image" \
 ENV DOCKER_VERSION=5:27.3.1-1~ubuntu.24.04~noble
 ENV CONTAINERD_VERSION=1.7.22-1
 ENV DOCKER_BUILDX_VERSION=0.17.1-1~ubuntu.24.04~noble
-ENV ONEPASSWORD_VERSION=2.30.0
-ENV VAULT_VERSION=1.17.6
+ENV ONEPASSWORD_VERSION=2.30.3
+ENV VAULT_VERSION=1.18.1
 ENV BUILDEVENTS_VERSION=0.17.0
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -45,7 +45,7 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90forceyes && \
             curl=8.9.1-2ubuntu2.1 \
             wget=1.24.5-1ubuntu2 \
             unzip=6.0-28ubuntu6 \
-            zip=3.0-14 \
+            zip=3.0-14ubuntu0.1 \
             bzip2=1.0.8-6 \
             jq=1.7.1-3build1 \
             git-lfs=3.5.0-1 \
