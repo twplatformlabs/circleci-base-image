@@ -33,7 +33,8 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90forceyes && \
             sudo=1.9.15p5-3ubuntu5 \
             locales=2.40-1ubuntu3 \
             tzdata=2024a-4ubuntu1 \
-            libcurl4-openssl-dev=8.9.1-2ubuntu2.1 \
+            curl=8.9.1-2ubuntu2.2 \
+            libcurl4-openssl-dev=8.9.1-2ubuntu2.2 \
             apt-transport-https=2.9.8 \
             lsb-release=12.1-1 \
             gettext-base=0.22.5-2 \
@@ -42,7 +43,6 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90forceyes && \
             g++=4:14.1.0-2ubuntu1 \
             cmake=3.30.3-1 \
             make=4.3-4.1build2 \
-            curl=8.9.1-2ubuntu2.1 \
             wget=1.24.5-1ubuntu2 \
             unzip=6.0-28ubuntu6 \
             zip=3.0-14ubuntu0.1 \
