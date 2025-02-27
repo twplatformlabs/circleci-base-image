@@ -1,12 +1,12 @@
 <div align="center">
 	<p>
-		<img alt="Thoughtworks Logo" src="https://raw.githubusercontent.com/ThoughtWorks-DPS/static/master/thoughtworks_flamingo_wave.png?sanitize=true" width=200 />
+		<img alt="Thoughtworks Logo" src="https://raw.githubusercontent.com/twplatformlabs/static/master/thoughtworks_flamingo_wave.png?sanitize=true" width=200 />
     <br />
-		<img alt="DPS Title" src="https://raw.githubusercontent.com/ThoughtWorks-DPS/static/master/EMPCPlatformStarterKitsImage.png" width=350/>
+		<img alt="DPS Title" src="https://raw.githubusercontent.com/twplatformlabs/static/master/EMPCPlatformStarterKitsImage.png" width=350/>
 	</p>
   <h3>PSK Convenience Images</h3>
   <h1>twdps/circleci-base-image</h1>
-  <a href="https://app.circleci.com/pipelines/github/ThoughtWorks-DPS/circleci-base-image"><img src="https://circleci.com/gh/ThoughtWorks-DPS/circleci-base-image.svg?style=shield"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/ThoughtWorks-DPS/circleci-base-image"></a>
+  <a href="https://app.circleci.com/pipelines/github/twplatformlabs/circleci-base-image"><img src="https://circleci.com/gh/twplatformlabs/circleci-base-image.svg?style=shield"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/twplatformlabs/circleci-base-image"></a>
 </div>
 <br />
 
@@ -14,7 +14,7 @@ Within most teams or organizations, every executor image will require a certain 
 
 Packages that typically fall into this set of shared executor requirements include things like:  
 - nonroot USER definition
-- tool for accessing secrets (such as Vault, chamber, 1password, teller)  
+- tool for accessing secrets (such as Vault, chamber, 1password)  
 - standard shell (bash, zsh)  
 - multi-language support (locales)  
 - common dependencies for installing packages (curl, wget, unzip, common build dependencies)
@@ -25,7 +25,7 @@ Keep in mind that the shared configuration made to the executor base is intended
 
 See release notes for detailed version information.  
 
-**signature**. Images are signed using `cosign`. You can verify an image using the twdps public key found [here](https://raw.githubusercontent.com/ThoughtWorks-DPS/static/master/cosign.pub).  
+**signature**. Images are signed using `cosign`. You can verify an image using the twdps public key found [here](https://raw.githubusercontent.com/twplatformlabs/static/master/cosign.pub).  
 ```bash
 cosign verify --key cosign.pub twdps/circleci-base-image:alpine-2023.04
 ```  
