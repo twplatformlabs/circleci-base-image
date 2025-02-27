@@ -57,7 +57,7 @@
 
 @test "docker version" {
   run bash -c "docker exec circleci-base-image-ubuntu-edge docker --version"
-  [[ "${output}" =~ "27" ]]
+  [[ "${output}" =~ "28" ]]
 }
 
 @test "check locale" {
