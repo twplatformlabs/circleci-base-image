@@ -1,10 +1,10 @@
-FROM twdps/circleci-remote-docker:ubuntu-2025.01
+FROM twdps/circleci-remote-docker:ubuntu-2025.02
 
 LABEL org.opencontainers.image.created="%%CREATED%%" \
       org.opencontainers.image.authors="nic.cheneweth@thoughtworks.com" \
-      org.opencontainers.image.documentation="https://github.com/ThoughtWorks-DPS/circleci-base-image" \
-      org.opencontainers.image.source="https://github.com/ThoughtWorks-DPS/circleci-base-image" \
-      org.opencontainers.image.url="https://github.com/ThoughtWorks-DPS/circleci-base-image" \
+      org.opencontainers.image.documentation="https://github.com/twplatformlabs/circleci-base-image" \
+      org.opencontainers.image.source="https://github.com/twplatformlabs/circleci-base-image" \
+      org.opencontainers.image.url="https://github.com/twplatformlabs/circleci-base-image" \
       org.opencontainers.image.version="%%VERSION%%" \
       org.opencontainers.image.vendor="ThoughtWorks, Inc." \
       org.opencontainers.image.licenses="MIT" \
@@ -12,11 +12,11 @@ LABEL org.opencontainers.image.created="%%CREATED%%" \
       org.opencontainers.image.description="Ubuntu-based CircleCI executor image containing organizational base packages" \
       org.opencontainers.image.base.name="%%BASE%%"
 
-ENV DOCKER_VERSION=5:27.5.1-1~ubuntu.24.04~noble
+ENV DOCKER_VERSION=5:28.0.1-1~ubuntu.24.04~noble
 ENV CONTAINERD_VERSION=1.7.25-1
-ENV DOCKER_BUILDX_VERSION=0.20.0-1~ubuntu.24.04~noble
+ENV DOCKER_BUILDX_VERSION=0.21.1-1~ubuntu.24.04~noble
 ENV ONEPASSWORD_VERSION=2.30.3
-ENV VAULT_VERSION=1.18.4
+ENV VAULT_VERSION=1.18.5
 ENV BUILDEVENTS_VERSION=0.17.0
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -33,7 +33,7 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90forceyes && \
     apt update && apt-get install --no-install-recommends -y \
             sudo=1.9.15p5-3ubuntu5 \
             locales=2.40-1ubuntu3 \
-            tzdata=2024b-1ubuntu2.1 \
+            tzdata=2024b-1ubuntu2.2 \
             curl=8.9.1-2ubuntu2.2 \
             libcurl4-openssl-dev=8.9.1-2ubuntu2.2 \
             apt-transport-https=2.9.8 \
@@ -46,7 +46,7 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90forceyes && \
             make=4.3-4.1build2 \
             wget=1.24.5-1ubuntu2 \
             unzip=6.0-28ubuntu6 \
-            zip=3.0-14ubuntu0.1 \
+            zip=3.0-14ubuntu0.2 \
             bzip2=1.0.8-6 \
             jq=1.7.1-3build1 \
             git-lfs=3.5.0-1 \
