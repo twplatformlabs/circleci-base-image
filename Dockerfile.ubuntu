@@ -33,7 +33,7 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90forceyes && \
     apt update && apt-get install --no-install-recommends -y \
             sudo=1.9.15p5-3ubuntu5 \
             locales=2.40-1ubuntu3 \
-            tzdata=2024b-1ubuntu2.2 \
+            tzdata=2025a-0ubuntu0.24.10 \
             curl=8.9.1-2ubuntu2.2 \
             libcurl4-openssl-dev=8.9.1-2ubuntu2.2 \
             apt-transport-https=2.9.8 \
