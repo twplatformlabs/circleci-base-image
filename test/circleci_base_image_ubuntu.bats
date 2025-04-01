@@ -45,6 +45,11 @@
   [[ "${output}" =~ "1.0" ]]
 }
 
+@test "github-cli version" {
+  run bash -c "docker exec circleci-base-image-ubuntu-edge gh version"
+  [[ "${output}" =~ "2.69" ]]
+}
+
 @test "jq version" {
   run bash -c "docker exec circleci-base-image-ubuntu-edge jq --version"
   [[ "${output}" =~ "1.7" ]]

@@ -12,18 +12,19 @@ LABEL org.opencontainers.image.created="%%CREATED%%" \
       org.opencontainers.image.description="Ubuntu-based CircleCI executor image containing organizational base packages" \
       org.opencontainers.image.base.name="%%BASE%%"
 
-ENV DOCKER_VERSION=5:28.0.1-1~ubuntu.24.04~noble
-ENV CONTAINERD_VERSION=1.7.25-1
-ENV DOCKER_BUILDX_VERSION=0.21.1-1~ubuntu.24.04~noble
+ENV GITHUB_CLI_VERSION=2.69.0
+ENV DOCKER_VERSION=5:28.0.4-1~ubuntu.24.04~noble
+ENV CONTAINERD_VERSION=1.7.27-1
+ENV DOCKER_BUILDX_VERSION=0.22.0-1~ubuntu.24.04~noble
 ENV ONEPASSWORD_VERSION=2.30.3
 ENV VAULT_VERSION=1.19.0
 ENV BUILDEVENTS_VERSION=0.17.0
 ENV DEBIAN_FRONTEND=noninteractive
 
 ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
-	LANG=en_US.UTF-8 \
-	LANGUAGE=en_US:en \
-	LC_ALL=en_US.UTF-8
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US:en \
+    LC_ALL=en_US.UTF-8
 
 SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
 
@@ -31,37 +32,41 @@ SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
 RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90forceyes && \
     echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90forceyes && \
     apt update && apt-get install --no-install-recommends -y \
-            sudo=1.9.15p5-3ubuntu5 \
-            locales=2.40-1ubuntu3 \
-            tzdata=2025a-0ubuntu0.24.10 \
-            curl=8.9.1-2ubuntu2.2 \
-            libcurl4-openssl-dev=8.9.1-2ubuntu2.2 \
-            apt-transport-https=2.9.8 \
-            lsb-release=12.1-1 \
-            gettext-base=0.22.5-2 \
-            build-essential=12.10ubuntu1 \
-            gcc=4:14.1.0-2ubuntu1 \
-            g++=4:14.1.0-2ubuntu1 \
-            cmake=3.30.3-1 \
-            make=4.3-4.1build2 \
-            wget=1.24.5-1ubuntu2 \
-            unzip=6.0-28ubuntu6 \
-            zip=3.0-14ubuntu0.2 \
-            bzip2=1.0.8-6 \
-            jq=1.7.1-3build1 \
-            git-lfs=3.5.0-1 \
-            gnupg=2.4.4-2ubuntu18 \
-            gnupg-agent=2.4.4-2ubuntu18 && \
+        sudo=1.9.15p5-3ubuntu5 \
+        locales=2.40-1ubuntu3 \
+        tzdata=2025a-0ubuntu0.24.10 \
+        curl=8.9.1-2ubuntu2.2 \
+        libcurl4-openssl-dev=8.9.1-2ubuntu2.2 \
+        apt-transport-https=2.9.8 \
+        lsb-release=12.1-1 \
+        gettext-base=0.22.5-2 \
+        build-essential=12.10ubuntu1 \
+        gcc=4:14.1.0-2ubuntu1 \
+        g++=4:14.1.0-2ubuntu1 \
+        cmake=3.30.3-1 \
+        make=4.3-4.1build2 \
+        wget=1.24.5-1ubuntu2 \
+        unzip=6.0-28ubuntu6 \
+        zip=3.0-14ubuntu0.2 \
+        bzip2=1.0.8-6 \
+        jq=1.7.1-3build1 \
+        git-lfs=3.5.0-1 \
+        gnupg=2.4.4-2ubuntu18 \
+        gnupg-agent=2.4.4-2ubuntu18 && \
     sudo install -m 0755 -d /etc/apt/keyrings && \
+    sudo bash -c "curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg -o /etc/apt/keyrings/githubcli-archive-keyring.gpg" && \
+    sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null && \
     sudo bash -c "curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc" && \
     sudo chmod a+r /etc/apt/keyrings/docker.asc && \
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo noble) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
     sudo apt-get update && \
     sudo apt-get install --no-install-recommends -y \
-            docker-ce=${DOCKER_VERSION} \
-            docker-ce-cli=${DOCKER_VERSION} \
-            containerd.io=${CONTAINERD_VERSION} \
-            docker-buildx-plugin=${DOCKER_BUILDX_VERSION} && \
+        gh=${GITHUB_CLI_VERSION} \
+        docker-ce=${DOCKER_VERSION} \
+        docker-ce-cli=${DOCKER_VERSION} \
+        containerd.io=${CONTAINERD_VERSION} \
+        docker-buildx-plugin=${DOCKER_BUILDX_VERSION} && \
     curl -L https://cache.agilebits.com/dist/1P/op2/pkg/v${ONEPASSWORD_VERSION}/op_linux_amd64_v${ONEPASSWORD_VERSION}.zip -o op.zip && \
     unzip -o op.zip && sudo mv op /usr/local/bin/op && \
     rm op.zip && rm op.sig && \
@@ -77,7 +82,7 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90forceyes && \
     echo 'circleci ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
     sudo -u circleci mkdir -p /home/circleci/project && \
     sudo -u circleci mkdir -p /home/circleci/bin && \
-	  sudo -u circleci mkdir -p /home/circleci/.local/bin && \
+    sudo -u circleci mkdir -p /home/circleci/.local/bin && \
     sudo -u circleci mkdir /home/circleci/.gnupg && \
     sudo -u circleci bash -c "echo 'allow-loopback-pinentry' > /home/circleci/.gnupg/gpg-agent.conf" && \
     sudo -u circleci bash -c "echo 'pinentry-mode loopback' > /home/circleci/.gnupg/gpg.conf" && \
