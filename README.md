@@ -1,11 +1,9 @@
 <div align="center">
 	<p>
-		<img alt="Thoughtworks Logo" src="https://raw.githubusercontent.com/twplatformlabs/static/master/thoughtworks_flamingo_wave.png?sanitize=true" width=200 />
-    <br />
-		<img alt="DPS Title" src="https://raw.githubusercontent.com/twplatformlabs/static/master/EMPCPlatformStarterKitsImage.png" width=350/>
+		<img alt="Thoughtworks Logo" src="https://raw.githubusercontent.com/twplatformlabs/static/master/psk_banner.png" width=800 />
 	</p>
-  <h3>PSK Convenience Images</h3>
   <h1>twdps/circleci-base-image</h1>
+  <h3>PSK Convenience Images</h3>
   <a href="https://app.circleci.com/pipelines/github/twplatformlabs/circleci-base-image"><img src="https://circleci.com/gh/twplatformlabs/circleci-base-image.svg?style=shield"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/twplatformlabs/circleci-base-image"></a>
 </div>
 <br />
@@ -17,13 +15,9 @@ Packages that typically fall into this set of shared executor requirements inclu
 - tool for accessing secrets (such as Vault, chamber, 1password)  
 - standard shell (bash, zsh)  
 - multi-language support (locales)  
-- common dependencies for installing packages (curl, wget, unzip, common build dependencies)
+- common dependencies for installing packages (curl, wget, unzip, common os build dependencies)
 
-The psk circleci-base-image is an example of such a common executor base. You will see the psk specific tools and configuration, but this can readily be adapted to any organizational requirements.  
-
-Keep in mind that the shared configuration made to the executor base is intended for configuration that must be available in every executor, regardless of the role or purpose of the executor.  
-
-See release notes for detailed version information.  
+_Review the build and CVE scan logs in the release artifacts for specific packages versions and known vulnerabilities (if any)._
 
 **signature**. Images are signed using `cosign`. You can verify an image using the twdps public key found [here](https://raw.githubusercontent.com/twplatformlabs/static/master/cosign.pub).  
 ```bash
@@ -35,12 +29,28 @@ cosign verify --key cosign.pub twdps/circleci-base-image:alpine-2023.04
 fetch image manifest:  
 ```
 docker image inspect --format='{{index .RepoDigests 0}}' twdps/circleci-base-image:alpine-2023.04
-```
+
 twdps/circleci-base-image@sha256:9d8e8eef60900fcf207e3b258b4ce13b4cdb1765f0f7ca3022fd685cd53b8a14
+```
 
 download sbom:  
 ```
 oras pull docker.io/twdps/circleci-base-image:sha256-9d8e8eef60900fcf207e3b258b4ce13b4cdb1765f0f7ca3022fd685cd53b8a14.spdx
 ```
+### Tagging Scheme
 
-Review `.snyk` for current vulnerability status.  
+This image has the following tagging scheme:
+
+```
+twdps/circleci-base-image:-<YYYY.MM>
+twdps/circleci-base-image:-stable
+twdps/circleci-base-image:-edge
+```
+
+`<YYYY.MM>` - Release version of the image, referred to by the 4 digit year, dot, and a 2 digit month. For example `2020.05` would be the monthly tag from May 2020. This image is generated monthly, based on the then current release of the base image and related os packages and provides a predictable fixed point for use in an executor Dockerfile. The purpose-specific packages can be pinned depending on theh type of package and organizational practices. Occasionally there will be interim patches released and you may see `2021.08.1` or addtional numbered versions.  
+
+`stable` - generic tag that always points to the latest, monthly release image. Provides a decent level of stability while recieving all software updates and recommended security patches.  
+
+`edge` - is the latest development of the Base image. Built from the `HEAD` of the `main` branch. Intended to be used as a testing version of the image with the most recent changes.  
+
+# hadolint ignore=DL3003,DL3004,DL4001,SC2035
