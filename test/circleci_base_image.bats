@@ -46,7 +46,7 @@
 }
 
 @test "github-cli version" {
-  run bash -c "docker exec container-test gh version"
+  run bash -c "docker exec container-test gh --help"
   [[ "${output}" =~ "GitHub from the command line" ]]
 }
 
@@ -76,12 +76,12 @@
 }
 
 @test "1password version" {
-  run bash -c "docker exec container-test op --version"
+  run bash -c "docker exec container-test op --help"
   [[ "${output}" =~ "Usage:  op" ]]
 }
 
 @test "vault version" {
-  run bash -c "docker exec container-test vault -v"
+  run bash -c "docker exec container-test vault --help"
   [[ "${output}" =~ "Usage: vault" ]]
 }
 
