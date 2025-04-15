@@ -3,7 +3,7 @@
 		<img alt="Thoughtworks Logo" src="https://raw.githubusercontent.com/twplatformlabs/static/master/psk_banner.png" width=800 />
 	</p>
   <h1>twdps/circleci-base-image</h1>
-  <h3>PSK Convenience Images</h3>
+  <h3>PSK CircleCI Convenience Images</h3>
   <a href="https://app.circleci.com/pipelines/github/twplatformlabs/circleci-base-image"><img src="https://circleci.com/gh/twplatformlabs/circleci-base-image.svg?style=shield"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/twplatformlabs/circleci-base-image"></a>
 </div>
 <br />
@@ -52,5 +52,3 @@ twdps/circleci-base-image:-edge
 `stable` - generic tag that always points to the latest, monthly release image. Provides a decent level of stability while recieving all software updates and recommended security patches.  
 
 `edge` - is the latest development of the Base image. Built from the `HEAD` of the `main` branch. Intended to be used as a testing version of the image with the most recent changes.  
-
-# hadolint ignore=DL3003,DL3004,DL4001,SC2035

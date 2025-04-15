@@ -165,5 +165,5 @@ workflows:
             Automatically build and release a current version of circleci-base-image
             using the YYYY.MM tag format.
           hours-of-day: "[11]" # 11 am UTC = 6am Central
-          days-of-month: "[6]" # 5th of each month
+          days-of-month: "[6]" # 6th of each month
           filters: *on-push-main
