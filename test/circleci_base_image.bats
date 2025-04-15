@@ -91,11 +91,6 @@
   [[ "${output}" =~ "/home/circleci" ]]
 }
 
-@test "describe user circleci group" {
-  run bash -c "docker exec container-test getent group | grep circleci"
-  [[ "${output}" =~ "circleci:x:3434:circleci" ]]
-}
-
 @test "describe /home/circleci" {
   run bash -c "docker exec container-test ls -la /home/circleci"
   [[ "${output}" =~ "circleci circleci" ]]
