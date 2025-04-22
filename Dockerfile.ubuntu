@@ -14,7 +14,6 @@ LABEL org.opencontainers.image.created="%%CREATED%%" \
 
 ENV VAULT_VERSION=1.19.0
 ENV BUILDEVENTS_VERSION=0.17.0
-
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
     LANG=en_US.UTF-8 \
@@ -23,6 +22,8 @@ ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
 
 SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
 
+# Configured for automatic, monthly build using current package repository release versions.
+# Pin downstream executor builds to specific OS and package versions using YYYY.MM tag.
 # hadolint ignore=DL3004,DL3008,DL3027,SC1091
 RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90forceyes && \
     echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90forceyes && \

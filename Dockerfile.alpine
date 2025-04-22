@@ -14,13 +14,15 @@ LABEL org.opencontainers.image.created="%%CREATED%%" \
 
 ENV VAULT_VERSION=1.19.0
 ENV BUILDEVENTS_VERSION=0.17.0
-
-# hadolint ignore=DL3044
 ENV MUSL_LOCPATH=/usr/share/i18n/locales/musl \
     LANG="C.UTF-8" \
     LANGUAGE="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8"
 
+SHELL ["/bin/ash", "-o", "pipefail", "-c"]
+
+# Configured for automatic, monthly build using current package repository release versions.
+# Pin downstream executor builds to specific OS and package versions using YYYY.MM tag.
 # hadolint ignore=DL3003,DL3004,DL3018
 RUN apk add --no-cache \
         musl \
@@ -46,8 +48,7 @@ RUN apk add --no-cache \
         jq \
         gnupg \
         github-cli \
-        git-lfs \
-        bash && \
+        git-lfs && \
     curl -s -o musl-locales-master.zip https://gitlab.com/rilian-la-te/musl-locales/-/archive/master/musl-locales-master.zip && \
     unzip musl-locales-master.zip && cd musl-locales-master && \
     cmake -DLOCALE_PROFILE=OFF -D CMAKE_INSTALL_PREFIX:PATH=/usr . && \

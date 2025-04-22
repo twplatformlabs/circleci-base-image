@@ -19,24 +19,24 @@ Packages that typically fall into this set of shared executor requirements inclu
 
 _Review the build and CVE scan logs in the release artifacts for specific packages versions and known vulnerabilities (if any)._
 
-**signature**. Images are signed using `cosign`. You can verify an image using the twdps public key found [here](https://raw.githubusercontent.com/twplatformlabs/static/master/cosign.pub).  
+
+**signature**. Images are signed using `cosign`. Verify images using the twplatformlabs [public key](https://raw.githubusercontent.com/twplatformlabs/static/master/cosign.pub).  
 ```bash
-cosign verify --key cosign.pub twdps/circleci-base-image:alpine-2023.04
+cosign verify --key cosign.pub twdps/circleci-base-image:alpine-2025.04
 ```  
+**software bill of materials**. For each published image, a _Software Bill of Materials_ is generated using [syft](https://github.com/anchore/syft) and added as an attestation.  
 
-**software bill of materials**. For each published image, an SBOM is generated using [syft](https://github.com/anchore/syft) and uploaded to the container registry tagged using the manifest id and .spdx extension. You can pull the sbom using the oras tool as follows:  
+validate attestation:  
+```bash
+cosign verify-attestation --type https://spdx.dev/Document --key cosign.pub twdps/circleci-base-image:alpine-2025.04
+```
+download manifest and extract bill of materials (sbom.spdx.json):  
+```
+cosign download attestation twdps/circleci-base-image:alpine-2025.04 > attestation.json  
+jq -r '.payload' attestation.json | base64 -d > envelope.json
+jq '.predicate' envelope.json > sbom.spdx.json
+```
 
-fetch image manifest:  
-```
-docker image inspect --format='{{index .RepoDigests 0}}' twdps/circleci-base-image:alpine-2023.04
-
-twdps/circleci-base-image@sha256:9d8e8eef60900fcf207e3b258b4ce13b4cdb1765f0f7ca3022fd685cd53b8a14
-```
-
-download sbom:  
-```
-oras pull docker.io/twdps/circleci-base-image:sha256-9d8e8eef60900fcf207e3b258b4ce13b4cdb1765f0f7ca3022fd685cd53b8a14.spdx
-```
 ### Tagging Scheme
 
 This image has the following tagging scheme:
