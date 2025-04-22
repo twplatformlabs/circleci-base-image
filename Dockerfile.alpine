@@ -14,6 +14,7 @@ LABEL org.opencontainers.image.created="%%CREATED%%" \
 
 ENV VAULT_VERSION=1.19.0
 ENV BUILDEVENTS_VERSION=0.17.0
+
 ENV MUSL_LOCPATH=/usr/share/i18n/locales/musl \
     LANG="C.UTF-8" \
     LANGUAGE="en_US.UTF-8" \

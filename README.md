@@ -19,7 +19,6 @@ Packages that typically fall into this set of shared executor requirements inclu
 
 _Review the build and CVE scan logs in the release artifacts for specific packages versions and known vulnerabilities (if any)._
 
-
 **signature**. Images are signed using `cosign`. Verify images using the twplatformlabs [public key](https://raw.githubusercontent.com/twplatformlabs/static/master/cosign.pub).  
 ```bash
 cosign verify --key cosign.pub twdps/circleci-base-image:alpine-2025.04
