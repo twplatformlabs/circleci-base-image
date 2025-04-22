@@ -36,6 +36,7 @@ cosign download attestation twdps/circleci-base-image:alpine-2025.04 > attestati
 jq -r '.payload' attestation.json | base64 -d > envelope.json
 jq '.predicate' envelope.json > sbom.spdx.json
 ```
+_Note. Dockerhub Scout does not appear to support non-docker attestations_  
 
 ### Tagging Scheme
 
