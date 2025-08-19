@@ -12,9 +12,6 @@ LABEL org.opencontainers.image.created="%%CREATED%%" \
       org.opencontainers.image.description="Alpine-based CircleCI executor image containing organizational base packages" \
       org.opencontainers.image.base.name="%%BASE%%"
 
-ENV VAULT_VERSION=1.19.0
-ENV BUILDEVENTS_VERSION=0.17.0
-
 ENV MUSL_LOCPATH=/usr/share/i18n/locales/musl \
     LANG="C.UTF-8" \
     LANGUAGE="en_US.UTF-8" \
@@ -58,14 +55,15 @@ RUN apk add --no-cache \
     echo https://downloads.1password.com/linux/alpinelinux/stable/ >> /etc/apk/repositories && \
     curl -o /etc/apk/keys/support@1password.com-61ddfc31.rsa.pub https://downloads.1password.com/linux/keys/alpinelinux/support@1password.com-61ddfc31.rsa.pub && \
     apk update && apk add --no-cache 1password-cli && \
-    curl -sL "https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip" -o "vault_${VAULT_VERSION}_linux_amd64.zip" && \
-    unzip "vault_${VAULT_VERSION}_linux_amd64.zip" -d /usr/local/bin && \
-    rm "vault_${VAULT_VERSION}_linux_amd64.zip" && \
+    download_version=$(curl -s https://api.releases.hashicorp.com/v1/releases/vault | jq -r '.[].version' | sort -Vr | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1) && \
+    curl -sL "https://releases.hashicorp.com/vault/${download_version}/vault_${download_version}_linux_amd64.zip" -o "vault_${download_version}_linux_amd64.zip" && \
+    unzip "vault_${download_version}_linux_amd64.zip" -d /usr/local/bin && \
+    rm "vault_${download_version}_linux_amd64.zip" && \
     curl -SLO "https://github.com/tellerops/teller/releases/download/v1.5.6/teller_1.5.6_Linux_x86_64.tar.gz" && \
     sudo tar -xvf teller_1.5.6_Linux_x86_64.tar.gz teller && \
     sudo mv ./teller /usr/local/bin/teller && \
     rm teller_1.5.6_Linux_x86_64.tar.gz && \
-    curl -sL "https://github.com/honeycombio/buildevents/releases/download/v${BUILDEVENTS_VERSION}/buildevents-linux-amd64" -o buildevents && \
+    curl -sL "https://github.com/honeycombio/buildevents/releases/download/v0.17.0/buildevents-linux-amd64" -o buildevents && \
     chmod +x buildevents && \
     mv buildevents /usr/local/bin/buildevents && \
     addgroup --gid 3434 -S circleci && \

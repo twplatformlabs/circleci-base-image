@@ -12,9 +12,6 @@ LABEL org.opencontainers.image.created="%%CREATED%%" \
       org.opencontainers.image.description="Ubuntu-based CircleCI executor image containing organizational base packages" \
       org.opencontainers.image.base.name="%%BASE%%"
 
-ENV VAULT_VERSION=1.19.0
-ENV BUILDEVENTS_VERSION=0.17.0
-
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
     LANG=en_US.UTF-8 \
@@ -68,14 +65,11 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90forceyes && \
         docker-buildx-plugin && \
     OP_VERSION="v$(curl https://app-updates.agilebits.com/check/1/0/CLI2/en/2.0.0/N -s | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')"; curl -sSfo op.zip https://cache.agilebits.com/dist/1P/op2/pkg/"$OP_VERSION"/op_linux_amd64_"$OP_VERSION".zip && \
     sudo unzip -od /usr/local/bin/ op.zip && rm op.zip && \
-    curl -SLO "https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip" > "vault_${VAULT_VERSION}_linux_amd64.zip" && \
-    sudo unzip "vault_${VAULT_VERSION}_linux_amd64.zip" -d /usr/local/bin && \
-    sudo rm "vault_${VAULT_VERSION}_linux_amd64.zip" && \
     curl -SLO "https://github.com/tellerops/teller/releases/download/v1.5.6/teller_1.5.6_Linux_x86_64.tar.gz" && \
     sudo tar -xvf teller_1.5.6_Linux_x86_64.tar.gz teller && \
     sudo mv ./teller /usr/local/bin/teller && \
     rm teller_1.5.6_Linux_x86_64.tar.gz && \
-    curl -L -o buildevents https://github.com/honeycombio/buildevents/releases/download/v${BUILDEVENTS_VERSION}/buildevents-linux-amd64 && \
+    curl -L -o buildevents https://github.com/honeycombio/buildevents/releases/download/v0.17.0/buildevents-linux-amd64 && \
     chmod +x buildevents && \
     sudo mv buildevents /usr/local/bin/buildevents && \
     sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen && locale-gen && \
