@@ -7,6 +7,7 @@ orbs:
   do: twdps/pipeline-events@5.2.0
 
 globals:
+  - &image twdps/circleci-base-image
   - &context platform
   - &shell op run --env-file op.env -- /bin/bash -eo pipefail
 
@@ -30,9 +31,8 @@ on-tag-main: &on-tag-main
 
 commands:
 
-  set-environment:
+  set-signing-keys:
     steps:
-      - op/env
       - op/write-to-file:
           op-value: platform/svc-cosign-private-key/notesPlain
           out-file: cosign.key
@@ -48,8 +48,8 @@ workflows:
           name: alpine image build
           context: *context
           shell: *shell
+          image: *image
           dockerfile: Dockerfile.alpine
-          image: twdps/circleci-base-image
           tag: alpine-edge
           snyk-scan: true
           snyk-severity-threshold: high
@@ -57,19 +57,16 @@ workflows:
           snyk-organization: twplatformlabs
           bats-test: true
           bats-entry-point: /bin/ash
-          bats-test-path: test/circleci_base_image.bats
           opencontainer-labels: true
           security-scan-nofail: true
-          after-checkout:
-            - op/env
           filters: *on-each-run
 
       - executor-tools/dev-release:
           name: ubuntu image build
           context: *context
           shell: *shell
+          image: *image
           dockerfile: Dockerfile.ubuntu
-          image: twdps/circleci-base-image
           tag: ubuntu-edge
           snyk-scan: true
           snyk-severity-threshold: high
@@ -77,25 +74,22 @@ workflows:
           snyk-organization: twplatformlabs
           bats-test: true
           bats-entry-point: /bin/bash
-          bats-test-path: test/circleci_base_image.bats
           opencontainer-labels: true
           security-scan-nofail: true
-          after-checkout:
-            - op/env
           filters: *on-each-run
 
       - executor-tools/publish:
           name: alpine release
           context: *context
           shell: *shell
-          image: twdps/circleci-base-image
+          image: *image
           pull-tag: alpine-edge
           tag-annotation: alpine-
           release-tag: alpine-stable
           sign-image: true
           sbom: true
           after-checkout:
-            - set-environment
+            - set-signing-keys
           requires:
             - alpine image build
             - ubuntu image build
@@ -105,14 +99,14 @@ workflows:
           name: ubuntu release
           context: *context
           shell: *shell
-          image: twdps/circleci-base-image
+          image: *image
           pull-tag: ubuntu-edge
           tag-annotation: ubuntu-
           release-tag: ubuntu-stable
           sign-image: true
           sbom: true
           after-checkout:
-            - set-environment
+            - set-signing-keys
           requires:
             - alpine image build
             - ubuntu image build
@@ -126,24 +120,10 @@ workflows:
           include-commit-msg: true
           upload-artifacts: true
           artifact-folder: workspace
-          before-release:
-            - set-environment
           requires:
             - alpine release
             - ubuntu release
           filters: *on-tag-main
-
-      - do/slack:
-          context: *context
-          channel: lab-events
-          message: "New twdps/circleci-base-image release"
-          include-tag: true
-          filters: *on-tag-main
-          before-message:
-            - op/env
-          requires:
-            - alpine release
-            - ubuntu release
 
   monthly build:
     when:
@@ -162,7 +142,7 @@ workflows:
           context: *context
           scheduled-pipeline-name: Monthly update release
           scheduled-pipeline-description: |
-            Automatically build and release a current version of circleci-base-image
+            Automatically build and release a current version of excuctor image
             using the YYYY.MM tag format.
           hours-of-day: "[11]" # 11 am UTC = 6am Central
           days-of-month: "[6]" # 6th of each month
