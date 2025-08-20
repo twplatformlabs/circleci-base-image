@@ -17,7 +17,6 @@ ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
     LC_ALL=en_US.UTF-8
-
 SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
 
 # Configured for automatic, monthly build using current package repository release versions.

@@ -16,7 +16,6 @@ ENV MUSL_LOCPATH=/usr/share/i18n/locales/musl \
     LANG="C.UTF-8" \
     LANGUAGE="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8"
-
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
 # Configured for automatic, monthly build using current package repository release versions.
