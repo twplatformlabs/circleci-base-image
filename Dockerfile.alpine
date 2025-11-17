@@ -54,7 +54,7 @@ RUN apk add --no-cache \
     echo https://downloads.1password.com/linux/alpinelinux/stable/ >> /etc/apk/repositories && \
     curl -o /etc/apk/keys/support@1password.com-61ddfc31.rsa.pub https://downloads.1password.com/linux/keys/alpinelinux/support@1password.com-61ddfc31.rsa.pub && \
     apk update && apk add --no-cache 1password-cli && \
-    download_version=$(curl -s https://api.releases.hashicorp.com/v1/releases/vault | jq -r '.[].version' | sort -Vr | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1) && \
+    download_version=$(curl -s https://api.releases.hashicorp.com/v1/releases/vault/latest | jq -r '.version') && \
     curl -sL "https://releases.hashicorp.com/vault/${download_version}/vault_${download_version}_linux_amd64.zip" -o "vault_${download_version}_linux_amd64.zip" && \
     unzip "vault_${download_version}_linux_amd64.zip" -d /usr/local/bin && \
     rm "vault_${download_version}_linux_amd64.zip" && \
