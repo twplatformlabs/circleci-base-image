@@ -27,6 +27,7 @@ RUN apk add --no-cache \
         musl-utils \
         build-base \
         tzdata \
+        musl-locales \
         libintl \
         gettext-dev \
         gcc \
@@ -46,11 +47,6 @@ RUN apk add --no-cache \
         gnupg \
         github-cli \
         git-lfs && \
-    curl -s -o musl-locales-master.zip https://gitlab.com/rilian-la-te/musl-locales/-/archive/master/musl-locales-master.zip && \
-    unzip musl-locales-master.zip && cd musl-locales-master && \
-    cmake -DLOCALE_PROFILE=OFF -D CMAKE_INSTALL_PREFIX:PATH=/usr . && \
-    make && make install && \
-    cd .. && rm -r musl-locales-master* && \
     echo https://downloads.1password.com/linux/alpinelinux/stable/ >> /etc/apk/repositories && \
     curl -o /etc/apk/keys/support@1password.com-61ddfc31.rsa.pub https://downloads.1password.com/linux/keys/alpinelinux/support@1password.com-61ddfc31.rsa.pub && \
     apk update && apk add --no-cache 1password-cli && \
