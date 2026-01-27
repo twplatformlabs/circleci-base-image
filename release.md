@@ -1,2 +1,2 @@
-**Review os build.out log for detailed base image and package version information**  
-**Review os snyk.out log for CVE**
+**Package version information below**  
+**Detailed build logs and CVE scan output in Job artifact store for 30 days following release**
