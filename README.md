@@ -16,6 +16,7 @@ Packages that typically fall into this set of shared executor requirements inclu
 - standard shell (bash, zsh)  
 - multi-language support (locales)  
 - common dependencies for installing packages (curl, wget, unzip, common os build dependencies)
+- Dependencies for common interaction with observability toling (buildevents)
 
 >**Note:** This image was previously published to Dockerhub as twdps/circleci-base-image. For 2026, semantic release version will continue to be mirrored to Dockerhub. Starting in 2027, the PSK Circleci convenience images will only by published to ghcr.io.  
 

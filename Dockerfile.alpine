@@ -46,9 +46,6 @@ RUN apk add --no-cache \
     sudo tar -xvf teller_1.5.6_Linux_x86_64.tar.gz teller && \
     sudo mv ./teller /usr/local/bin/teller && \
     rm teller_1.5.6_Linux_x86_64.tar.gz && \
-    curl -sL "https://github.com/honeycombio/buildevents/releases/download/v0.17.0/buildevents-linux-amd64" -o buildevents && \
-    chmod +x buildevents && \
-    mv buildevents /usr/local/bin/buildevents && \
     addgroup --gid 3434 -S circleci && \
     adduser --uid 3434 --ingroup circleci --disabled-password circleci && \
     echo "circleci ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/circleci && \
@@ -63,3 +60,7 @@ RUN apk add --no-cache \
 USER circleci
 
 WORKDIR /home/circleci/project
+
+    # curl -sL "https://github.com/honeycombio/buildevents/releases/download/v0.17.0/buildevents-linux-amd64" -o buildevents && \
+    # chmod +x buildevents && \
+    # mv buildevents /usr/local/bin/buildevents && \
