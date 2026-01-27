@@ -34,10 +34,11 @@ RUN apk add --no-cache \
         jq \
         gnupg \
         github-cli \
-        git-lfs && \
-    echo https://downloads.1password.com/linux/alpinelinux/stable/ >> /etc/apk/repositories && \
-    curl -o /etc/apk/keys/support@1password.com-61ddfc31.rsa.pub https://downloads.1password.com/linux/keys/alpinelinux/support@1password.com-61ddfc31.rsa.pub && \
-    apk update && apk add --no-cache 1password-cli && \
+        git-lfs
+
+RUN current_version="v$(curl https://app-updates.agilebits.com/check/1/0/CLI2/en/2.0.0/N -s | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')" && \
+    curl -sSfo op.zip "https://cache.agilebits.com/dist/1P/op2/pkg/$current_version/op_linux_amd64_$current_version.zip" && \
+    unzip -od /usr/local/bin/ op.zip && rm op.zip && \
     download_version=$(curl -s https://api.releases.hashicorp.com/v1/releases/vault/latest | jq -r '.version') && \
     curl -sL "https://releases.hashicorp.com/vault/${download_version}/vault_${download_version}_linux_amd64.zip" -o "vault_${download_version}_linux_amd64.zip" && \
     unzip "vault_${download_version}_linux_amd64.zip" -d /usr/local/bin && \
