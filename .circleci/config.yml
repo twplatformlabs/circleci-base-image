@@ -4,7 +4,7 @@ version: 2.1
 orbs:
   executor-tools: twdps/executor-tools@dev:alpha
   op: twdps/onepassword@3.0.0
-  do: twdps/pipeline-events@5.3.0
+  do: twdps/pipeline-events@dev:alpha
 
 globals:
   - &context platform
@@ -80,7 +80,8 @@ workflows:
             - do/gh-buildx-image-release-notes:
                 notes-from-file: release.md
                 include-commit-msg: true
-                include-sbom: true
+                include-sbom-guidance: true
+                test-path: test/package_version.sh
                 verify-tag: true
           requires:
             - development build
