@@ -8,7 +8,7 @@ SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
 # Configured for automatic, monthly build using current package repository release versions.
 # Pin downstream executor builds to specific OS and package versions using YYYY.MM tag.
-# hadolint ignore=DL3003,DL3004,DL3018
+# hadolint ignore=DL3004,DL3018
 RUN apk add --no-cache \
         musl \
         musl-dev \
@@ -34,9 +34,8 @@ RUN apk add --no-cache \
         jq \
         gnupg \
         github-cli \
-        git-lfs
-
-RUN current_version="v$(curl https://app-updates.agilebits.com/check/1/0/CLI2/en/2.0.0/N -s | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')" && \
+        git-lfs && \
+    current_version="v$(curl https://app-updates.agilebits.com/check/1/0/CLI2/en/2.0.0/N -s | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')" && \
     curl -sSfo op.zip "https://cache.agilebits.com/dist/1P/op2/pkg/$current_version/op_linux_amd64_$current_version.zip" && \
     unzip -od /usr/local/bin/ op.zip && rm op.zip && \
     download_version=$(curl -s https://api.releases.hashicorp.com/v1/releases/vault/latest | jq -r '.version') && \
