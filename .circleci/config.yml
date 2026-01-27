@@ -2,14 +2,15 @@
 version: 2.1
 
 orbs:
-  executor-tools: twdps/executor-tools@5.0.0
+  executor-tools: twdps/executor-tools@dev:alpha
   op: twdps/onepassword@3.0.0
-  do: twdps/pipeline-events@5.2.0
+  do: twdps/pipeline-events@5.3.0
 
 globals:
-  - &image twdps/circleci-base-image
   - &context platform
   - &shell op run --env-file op.env -- /bin/bash -eo pipefail
+  - &registry ghcr.io
+  - &executor-name twdps/circleci-executor-builder:alpine-stable
 
 on-push-main: &on-push-main
   branches:
@@ -45,85 +46,126 @@ workflows:
   build and publish:
     jobs:
       - executor-tools/dev-release:
-          name: alpine image build
+          name: development build
           context: *context
           shell: *shell
-          image: *image
-          dockerfile: Dockerfile.alpine
-          tag: alpine-edge
-          snyk-scan: true
-          snyk-severity-threshold: high
-          snyk-skip-base-image: true
-          snyk-organization: twplatformlabs
-          bats-test: true
-          bats-entry-point: /bin/ash
-          opencontainer-labels: true
-          security-scan-nofail: true
-          filters: *on-each-run
-
-      - executor-tools/dev-release:
-          name: ubuntu image build
-          context: *context
-          shell: *shell
-          image: *image
-          dockerfile: Dockerfile.ubuntu
-          tag: ubuntu-edge
-          snyk-scan: true
-          snyk-severity-threshold: high
-          snyk-skip-base-image: true
-          snyk-organization: twplatformlabs
+          executor-image-name: *executor-name
+          registry: *registry
+          registry-login: GHCR_LOGIN
+          registry-password: GHCR_PASSWORD
+          scout-scan: true
           bats-test: true
           bats-entry-point: /bin/bash
-          opencontainer-labels: true
-          security-scan-nofail: true
+          bats-test-path: test/circleci_base_image.bats
           filters: *on-each-run
 
       - executor-tools/publish:
-          name: alpine release
+          name: Publish release version
           context: *context
           shell: *shell
-          image: *image
-          pull-tag: alpine-edge
-          tag-annotation: alpine-
-          release-tag: alpine-stable
+          executor-image-name: *executor-name
+          registry: *registry
+          registry-login: GHCR_LOGIN
+          registry-password: GHCR_PASSWORD
+          include-latest: "true"
           sign-image: true
-          sbom: true
           after-checkout:
-            - set-signing-keys
+            - op/write-to-file:
+                op-value: platform/svc-cosign-private-key/notesPlain
+                out-file: cosign.key
+            - op/write-to-file:
+                op-value: platform/svc-cosign-public-key/notesPlain
+                out-file: cosign.pub
+          after-publish:
+            - do/gh-buildx-image-release-notes:
+                notes-from-file: release.md
+                include-commit-msg: true
+                include-sbom: true
+                verify-tag: true
           requires:
-            - alpine image build
-            - ubuntu image build
+            - development build
           filters: *on-tag-main
 
-      - executor-tools/publish:
-          name: ubuntu release
-          context: *context
-          shell: *shell
-          image: *image
-          pull-tag: ubuntu-edge
-          tag-annotation: ubuntu-
-          release-tag: ubuntu-stable
-          sign-image: true
-          sbom: true
-          after-checkout:
-            - set-signing-keys
-          requires:
-            - alpine image build
-            - ubuntu image build
-          filters: *on-tag-main
+      # - executor-tools/dev-release:
+      #     name: alpine image build
+      #     context: *context
+      #     shell: *shell
+      #     image: *image
+      #     dockerfile: Dockerfile.alpine
+      #     tag: alpine-edge
+      #     snyk-scan: true
+      #     snyk-severity-threshold: high
+      #     snyk-skip-base-image: true
+      #     snyk-organization: twplatformlabs
+      #     bats-test: true
+      #     bats-entry-point: /bin/ash
+      #     opencontainer-labels: true
+      #     security-scan-nofail: true
+      #     filters: *on-each-run
 
-      - do/gh-release:
-          name: generate release notes
-          shell: *shell
-          context: *context
-          notes-from-file: release.md
-          include-commit-msg: true
-          upload-artifacts: true
-          artifact-folder: workspace
-          requires:
-            - alpine release
-            - ubuntu release
-          filters: *on-tag-main
+      # - executor-tools/dev-release:
+      #     name: ubuntu image build
+      #     context: *context
+      #     shell: *shell
+      #     image: *image
+      #     dockerfile: Dockerfile.ubuntu
+      #     tag: ubuntu-edge
+      #     snyk-scan: true
+      #     snyk-severity-threshold: high
+      #     snyk-skip-base-image: true
+      #     snyk-organization: twplatformlabs
+      #     bats-test: true
+      #     bats-entry-point: /bin/bash
+      #     opencontainer-labels: true
+      #     security-scan-nofail: true
+      #     filters: *on-each-run
+
+      # - executor-tools/publish:
+      #     name: alpine release
+      #     context: *context
+      #     shell: *shell
+      #     image: *image
+      #     pull-tag: alpine-edge
+      #     tag-annotation: alpine-
+      #     release-tag: alpine-stable
+      #     sign-image: true
+      #     sbom: true
+      #     after-checkout:
+      #       - set-signing-keys
+      #     requires:
+      #       - alpine image build
+      #       - ubuntu image build
+      #     filters: *on-tag-main
+
+      # - executor-tools/publish:
+      #     name: ubuntu release
+      #     context: *context
+      #     shell: *shell
+      #     image: *image
+      #     pull-tag: ubuntu-edge
+      #     tag-annotation: ubuntu-
+      #     release-tag: ubuntu-stable
+      #     sign-image: true
+      #     sbom: true
+      #     after-checkout:
+      #       - set-signing-keys
+      #     requires:
+      #       - alpine image build
+      #       - ubuntu image build
+      #     filters: *on-tag-main
+
+      # - do/gh-release:
+      #     name: generate release notes
+      #     shell: *shell
+      #     context: *context
+      #     notes-from-file: release.md
+      #     include-commit-msg: true
+      #     upload-artifacts: true
+      #     artifact-folder: workspace
+      #     requires:
+      #       - alpine release
+      #       - ubuntu release
+      #     filters: *on-tag-main
 
   monthly build:
     when:
