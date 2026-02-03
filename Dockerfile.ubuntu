@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:ubuntu-latest
+FROM ghcr.io/twplatformlabs/circleci-remote-docker:ubuntu-latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
@@ -73,7 +73,3 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90forceyes && \
 USER circleci
 
 WORKDIR /home/circleci/project
-
-    # curl -L -o buildevents https://github.com/honeycombio/buildevents/releases/download/v0.17.0/buildevents-linux-amd64 && \
-    # chmod +x buildevents && \
-    # sudo mv buildevents /usr/local/bin/buildevents && \

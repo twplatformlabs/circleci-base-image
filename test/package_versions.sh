@@ -5,6 +5,7 @@ if [[ -z "${TEST_CONTAINER}" ]]; then
   exit 1
 fi
 
+bash -c "docker exec ${TEST_CONTAINER} gh --version"
 bash -c "docker exec ${TEST_CONTAINER} docker --version"
 bash -c "docker exec ${TEST_CONTAINER} op --version"
 bash -c "docker exec ${TEST_CONTAINER} vault --version"

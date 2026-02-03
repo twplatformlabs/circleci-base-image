@@ -1,4 +1,4 @@
-FROM twdps/circleci-remote-docker:alpine-latest
+FROM ghcr.io/twplatformlabs/circleci-remote-docker:alpine-latest
 
 ENV MUSL_LOCPATH=/usr/share/i18n/locales/musl \
     LANG="C.UTF-8" \
@@ -60,7 +60,3 @@ RUN apk add --no-cache \
 USER circleci
 
 WORKDIR /home/circleci/project
-
-    # curl -sL "https://github.com/honeycombio/buildevents/releases/download/v0.17.0/buildevents-linux-amd64" -o buildevents && \
-    # chmod +x buildevents && \
-    # mv buildevents /usr/local/bin/buildevents && \
