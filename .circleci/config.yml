@@ -81,7 +81,7 @@ workflows:
                 notes-from-file: release.md
                 include-commit-msg: true
                 include-sbom-guidance: true
-                guidance-path: test/package_version.sh
+                guidance-path: test/package_versions.sh
                 verify-tag: true
           requires:
             - development build
