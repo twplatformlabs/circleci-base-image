@@ -10,6 +10,7 @@
 
 Within most teams or organizations, every executor image will require a certain amount of common configuration regardless of the purpose for which it is built.  
 
+
 Packages that typically fall into this set of shared executor requirements include things like:  
 - nonroot USER definition
 - tool for accessing secrets (such as Vault, chamber, 1password)  
