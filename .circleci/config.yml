@@ -2,9 +2,9 @@
 version: 2.1
 
 orbs:
-  executor-tools: twdps/executor-tools@dev:alpha
+  executor-tools: twdps/executor-tools@6.0.0
   op: twdps/onepassword@3.0.0
-  do: twdps/pipeline-events@dev:alpha
+  do: twdps/pipeline-events@5.3.1
 
 globals:
   - &context platform
@@ -83,22 +83,14 @@ workflows:
                 include-sbom-guidance: true
                 guidance-path: test/package_versions.sh
                 verify-tag: true
+            - do/slack-bot:
+                channel: lab-events
+                message: "new release circeci-base-image"
+                include-link: true
+                include-tag: true
           requires:
             - development build
           filters: *on-tag-main
-
-      # - do/gh-release:
-      #     name: generate release notes
-      #     shell: *shell
-      #     context: *context
-      #     notes-from-file: release.md
-      #     include-commit-msg: true
-      #     upload-artifacts: true
-      #     artifact-folder: workspace
-      #     requires:
-      #       - alpine release
-      #       - ubuntu release
-      #     filters: *on-tag-main
 
   monthly build:
     when:

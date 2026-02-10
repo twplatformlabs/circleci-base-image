@@ -8,8 +8,9 @@
 </div>
 <br />
 
-Within most teams or organizations, every executor image will require a certain amount of common configuration regardless of the purpose for which it is built.  
+**New for 2026: Image now published from ghcr.io**  
 
+Within most teams or organizations, every executor image will require a certain amount of common configuration regardless of the purpose for which it is built. The PSK base image, `ghcr.io/twplatformlabs/circleci-base-image`, is an example of such an image.  
 
 Packages that typically fall into this set of shared executor requirements include things like:  
 - nonroot USER definition
@@ -19,7 +20,7 @@ Packages that typically fall into this set of shared executor requirements inclu
 - common dependencies for installing packages (curl, wget, unzip, common os build dependencies)
 - Dependencies for common interaction with observability toling (buildevents)
 
->**Note:** This image was previously published to Dockerhub as twdps/circleci-base-image. For 2026, semantic release version will continue to be mirrored to Dockerhub. Starting in 2027, the PSK Circleci convenience images will only by published to ghcr.io.  
+>**Note:** This image was previously published to Dockerhub as twdps/circleci-base-image. Beginning in February 2026, circleci-base-image is now release from ghcr.io/twplatformlabs.  
 
 _Review the build and CVE scan logs in the release artifacts for specific packages versions and known vulnerabilities (if any)._
 
@@ -36,12 +37,12 @@ Or, use the [from-manifest.sh](from-manifest.sh) script from this repository to 
 This image has the following tagging scheme:
 
 ```
-twdps/circleci-base-image:[alpine | ubuntu]-<YYYY.MM>
-twdps/circleci-base-image:[alpine | ubuntu]-latest
-twdps/circleci-base-image:[alpine | ubuntu]-dev.SHA:0:7
+ghcr.io/twplatformlabs/circleci-base-image:[alpine | ubuntu]-<YYYY.MM>
+ghcr.io/twplatformlabs/circleci-base-image:[alpine | ubuntu]-latest
+ghcr.io/twplatformlabs/circleci-base-image:[alpine | ubuntu]-dev.SHA:0:7
 ```
 
-`-<YYYY.MM>` - Release version of the image, referred to by the 4 digit year, dot, and a 2 digit month. For example `2025.04` would be the monthly tag from April 2025. This image is generated monthly, based on the then current release of the base image and related packages and provides a predictable fixed point for use in an executor Dockerfile. Review the build log in the pipeline artifacts for the specific image and package versions. Occasionally there will be interim patches released and you may see `2025.04.1` or addtional numbered versions.  
+`-<YYYY.MM>` - Release version of the image, referred to by the 4 digit year, dot, and a 2 digit month. For example `2026.02` would be the monthly tag from April 2025. This image is generated monthly, based on the then current release of the base image and related packages and provides a predictable fixed point for use in an executor Dockerfile. Review the build log in the pipeline artifacts for the specific image and package versions. Occasionally there will be interim patches released and you may see `2026.02.1` or addtional numbered versions.  
 
 `-latest` - generic tag that always points to the latest, monthly release image. Typically used by other recurring builds and not recommended for pipeline usage. Pin pipelines to specific month-tagged builds.  
 
