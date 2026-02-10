@@ -45,7 +45,7 @@ workflows:
 
   build and publish:
     jobs:
-      - executor-tools/dev-build:
+      - executor-tools/dev-buildx:
           name: development build
           context: *context
           shell: *shell
@@ -59,7 +59,7 @@ workflows:
           bats-test-path: test/circleci_base_image.bats
           filters: *on-each-run
 
-      - executor-tools/release:
+      - executor-tools/releasex:
           name: Publish release version
           context: *context
           shell: *shell
