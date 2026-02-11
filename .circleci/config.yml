@@ -4,7 +4,7 @@ version: 2.1
 orbs:
   executor-tools: twdps/executor-tools@6.0.1
   op: twdps/onepassword@3.0.0
-  do: twdps/pipeline-events@5.3.1
+  do: twdps/pipeline-events@dev:alpha
 
 globals:
   - &context platform
@@ -89,12 +89,7 @@ workflows:
           include-latest: "true"
           sign-image: true
           after-checkout:
-            - op/write-to-file:
-                op-value: platform/svc-cosign-private-key/notesPlain
-                out-file: cosign.key
-            - op/write-to-file:
-                op-value: platform/svc-cosign-public-key/notesPlain
-                out-file: cosign.pub
+            - set-signing-keys
           after-publish:
             - release-notes
           requires:
