@@ -1,2 +1,3 @@
-**Package version information below**  
-**Detailed build logs and CVE scan output in Job artifact store for 30 days following release**
+**ghcr.io/twplatformlabs/circleci-base-image:**:label:  
+
+Detailed build logs and CVE scan output included in release assets.  

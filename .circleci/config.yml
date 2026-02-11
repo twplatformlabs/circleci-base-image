@@ -41,6 +41,27 @@ commands:
           op-value: platform/svc-cosign-public-key/notesPlain
           out-file: cosign.pub
 
+  release-notes:
+    steps:
+      - do/gh-buildx-image-release-notes:
+          notes-from-file: release.md
+          include-commit-msg: true
+          include-sbom-guidance: true
+          guidance-path: test/package_versions.sh
+          verify-tag: true
+      - attach_workspace:
+          at: workspace
+      - run:
+          name: include build logs in release assets
+          command: |
+            gh release upload $CIRCLE_TAG workspace/docker-bake.json.executors.build.out
+            gh release upload $CIRCLE_TAG workspace/scout.out
+      - do/slack-bot:
+          channel: lab-events
+          message: "new release circeci-base-image"
+          include-link: true
+          include-tag: true
+
 workflows:
 
   build and publish:
@@ -77,17 +98,7 @@ workflows:
                 op-value: platform/svc-cosign-public-key/notesPlain
                 out-file: cosign.pub
           after-publish:
-            - do/gh-buildx-image-release-notes:
-                notes-from-file: release.md
-                include-commit-msg: true
-                include-sbom-guidance: true
-                guidance-path: test/package_versions.sh
-                verify-tag: true
-            - do/slack-bot:
-                channel: lab-events
-                message: "new release circeci-base-image"
-                include-link: true
-                include-tag: true
+            - release-notes
           requires:
             - development build
           filters: *on-tag-main
