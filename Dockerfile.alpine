@@ -57,7 +57,7 @@ RUN apk add --no-cache \
     chmod 700 /home/circleci/.gnupg && chmod 600 /home/circleci/.gnupg/* && \
     rc-update add docker boot
 
-# hadolint DL3066
+# hadolint ignore=DL3066
 USER circleci
 
 WORKDIR /home/circleci/project
